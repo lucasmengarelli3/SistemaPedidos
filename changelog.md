@@ -24,6 +24,8 @@
 
 - [feature/doc-coord-update-code-reviews] P1 - Documentador: `ia/primer-parcial/documentador-coordinador.md` registra la verificación de las correcciones de la PR #148 (ISP) y la segunda revisión, las correcciones y la aprobación de la PR #150 (DIP). Issue: [#152](https://github.com/lucasmengarelli3/SistemaPedidos/issues/152) PR: [#153](https://github.com/lucasmengarelli3/SistemaPedidos/pull/153). @santimarM (Documentador y Coordinador de Repositorio + SRP).
 
+- [feature/doc-coord-update-code-reviews-ocp-lsp] P1 - Documentador: `ia/primer-parcial/documentador-coordinador.md` registra la aprobación de la PR #146 (OCP), las correcciones aplicadas en la PR #157 y la revisión de la PR #155 (LSP). Issue: [#158](https://github.com/lucasmengarelli3/SistemaPedidos/issues/158) PR: [#159](https://github.com/lucasmengarelli3/SistemaPedidos/pull/159). @santimarM (Documentador y Coordinador de Repositorio + SRP).
+
 - [backport/release-actividad-obligatoria-2] Backport de la release de la Actividad Obligatoria N°2: establecer la base en develop del Primer Parcial. Issue: [#138](https://github.com/lucasmengarelli3/SistemaPedidos/issues/138) PR: [#139](https://github.com/lucasmengarelli3/SistemaPedidos/pull/139). @santimarM (Documentador y coordinador).
 
 ### Fixed
