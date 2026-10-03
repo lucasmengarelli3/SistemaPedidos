@@ -34,7 +34,7 @@ Se revisó críticamente la propuesta inicial y se ajustó para que encaje con e
 
 - Se priorizó la relación `Pedido -> EstadoPedido` como una abstracción de contrato y no como una herencia de `Pedido` en cada estado.
 - Se evitó considerar a `PedidoListo`, `PedidoEntregado` o `PedidoCancelado` como subclases de `Pedido`, porque eso traería varios problemas de LSP y contradicciones de negocio.
-- Se validó la jerarquía de pagos como una estrategia común (`MetodoPago`) con subclases sustituibles (`Efectivo`, `Tarjeta`, `QR`, `Puntos`).
+- Se validó la jerarquía de pagos como una estrategia común (`MetodoPago`) con subclases sustituibles (`Efectivo`, `Tarjeta`, `PagoQR`, `PagoPuntos`).
 - Se mantuvo la idea de que el cliente solo debe depender de la superclase abstracta, no de la implementación concreta.
 - Se reforzó la explicación para que quede claro que LSP no consiste en “heredar por heredar”, sino en preservar el comportamiento del contrato.
 

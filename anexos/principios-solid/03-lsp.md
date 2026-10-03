@@ -55,7 +55,7 @@ La idea correcta es definir jerarquías con contrato cohesivo y reglas invariant
 
 ## Estructura de Clases
 
-El siguiente diagrama muestra una jerarquía compatible con LSP: cada subtipo de `EstadoPedido` mantiene el mismo contrato observable del estado del pedido y puede ser reemplazado por la superclase sin alterar el comportamiento del sistema. También se muestra la estrategia de pago, que cumple el mismo principio de sustitución.
+El siguiente diagrama muestra una jerarquía compatible con LSP: cada subtipo de `EstadoPedido` mantiene el mismo contrato observable del estado del pedido y puede usarse en lugar de la superclase sin alterar el comportamiento del sistema. También se muestra la estrategia de pago, que cumple el mismo principio de sustitución.
 
 [![Diagrama UML - LSP](../../diagramas/01-diagrama-clases/01-solid-03-lsp.png)](../../diagramas/01-diagrama-clases/01-solid-03-lsp.png)
 
@@ -75,7 +75,7 @@ Cada subclase de `EstadoPedido` cumple la misma interfaz pública:
 
 Los valores devueltos pueden diferir por estado, pero el contrato no cambia. Por ejemplo:
 
-- `Recibido` permite modificar y cancelar.
+- `Recibido` permite modificar, cancelar y priorizar.
 - `EnPreparacion` bloquea la modificación, pero sigue permitiendo cancelar y priorizar.
 - `Listo` permite entrega, pero no modificación.
 - `Entregado` y `Cancelado` son de consulta histórica y no deberían permitir nuevas transiciones de negocio.

@@ -57,7 +57,7 @@ PagoQR --|> MetodoPago
 PagoPuntos --|> MetodoPago
 
 Pedido --> EstadoPedido : usa / delega
-RegistradorPago ..> Pedido : recibe el pedido a cobrar
+RegistradorPago ..> Pedido : registra el pago de
 RegistradorPago --> MetodoPago : selecciona estrategia
 GestorPedidos ..> Pedido : crea y coordina
 

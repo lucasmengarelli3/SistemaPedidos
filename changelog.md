@@ -34,6 +34,8 @@
 
 - [feature/esp-extension-ocp-fix-hallazgos-pr-146] P1 - Principio Abierto/Cerrado (OCP): resolución de los hallazgos pendientes de la revisión de la PR #146 en el anexo `02-ocp.md`, el diagrama de clases `01-solid-02-ocp` y el documento de IA. Issue: [#156](https://github.com/lucasmengarelli3/SistemaPedidos/issues/156) PR: [#157](https://github.com/lucasmengarelli3/SistemaPedidos/pull/157). @santimarM (Documentador y Coordinador de Repositorio + SRP).
 
+- [feature/doc-coord-repo-fix-estructura-entrega] P1 - Documentador: alinear la estructura con la consigna (boceto renombrado a `01-boceto-inicial.excalidraw` y `.png`, `ia/a2/disenador-tarjetas-crc.md`), corregir el título de `05-dip.md`, los índices `diagramasUML.md` y `herramientas_agile.md`, las entradas duplicadas del changelog y los hallazgos pendientes de la PR #155 en `03-lsp.md`, el diagrama de clases `01-solid-03-lsp` y el documento de IA. Issue: [#160](https://github.com/lucasmengarelli3/SistemaPedidos/issues/160) PR: [#161](https://github.com/lucasmengarelli3/SistemaPedidos/pull/161). @santimarM (Documentador y Coordinador de Repositorio + SRP).
+
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
 ### Added
