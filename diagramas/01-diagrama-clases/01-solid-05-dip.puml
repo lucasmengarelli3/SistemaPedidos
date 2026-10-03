@@ -1,0 +1,159 @@
+@startuml solid05dip
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide empty members
+hide circle
+
+title Principio de Inversión de Dependencias (DIP) - Sistema de Pedidos "Sabor Kiosco"
+
+interface IRepositorioPedidos {
+  + guardar(pedido : Pedido) : void
+  + buscarPorNumero(numero : int) : Pedido
+  + listarActivos() : List<Pedido>
+  + actualizar(pedido : Pedido) : void
+}
+
+interface ICatalogoProductos {
+  + buscarPorCodigo(codigo : String) : Producto
+}
+
+interface IRecepcionPedidos {
+  + recibirPedido(pedido : Pedido) : void
+}
+
+interface IProcesadorPago {
+  + procesarPago(monto : Decimal, formaPago : String) : ResultadoPago
+}
+
+class PersonalAtencion {
+  - nombre : String
+  - rol : String
+  + registrarPedido() : Pedido
+  + modificarPedido() : void
+  + enviarPedidoACocina() : void
+  .. Constructor ..
+  + PersonalAtencion(repositorio : IRepositorioPedidos, catalogo : ICatalogoProductos, recepcion : IRecepcionPedidos)
+}
+
+class Cocina {
+  + recibirPedido(pedido : Pedido) : void
+  + prepararPedido() : void
+  + marcarPedidoListo() : void
+  .. Constructor ..
+  + Cocina(repositorio : IRepositorioPedidos)
+}
+
+class Pedido {
+  - numero : int
+  - referenciaRetiro : String
+  - estado : EstadoPedido
+  - total : Decimal
+  - prioritario : boolean
+  + agregarItem(item : ItemPedido) : void
+  + quitarItem(item : ItemPedido) : void
+  + modificarItem(item : ItemPedido) : void
+  + calcularTotal() : Decimal
+  + cambiarEstado(nuevo : EstadoPedido) : void
+  + cancelar() : void
+}
+
+class ItemPedido {
+  - cantidad : int
+  - precioUnitario : Decimal
+  - subtotal : Decimal
+  + calcularSubtotal() : Decimal
+}
+
+class Producto {
+  - codigo : String
+  - descripcion : String
+  - precioBase : Decimal
+  + obtenerPrecio() : Decimal
+}
+
+class Personalizacion {
+  - tipo : String
+  - descripcion : String
+  - precioAdicional : Decimal
+  + calcularAdicional() : Decimal
+}
+
+class Pago {
+  - monto : Decimal
+  - fechaHora : DateTime
+  - formaPago : String
+}
+
+class Encargado
+class Cliente
+
+class RegistradorPago {
+  + registrarPago(pedido : Pedido, monto : Decimal, formaPago : String) : Pago
+  .. Constructor ..
+  + RegistradorPago(procesador : IProcesadorPago, repositorio : IRepositorioPedidos)
+}
+
+class RepositorioPedidosMemoria
+class RepositorioPedidosBaseDatos
+class CatalogoProductos
+class ProcesadorEfectivo
+class ProcesadorQR
+
+enum ResultadoPago {
+  APROBADO
+  RECHAZADO
+}
+
+enum EstadoPedido {
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+RepositorioPedidosMemoria ..|> IRepositorioPedidos
+RepositorioPedidosBaseDatos ..|> IRepositorioPedidos
+CatalogoProductos ..|> ICatalogoProductos
+Cocina ..|> IRecepcionPedidos
+ProcesadorEfectivo ..|> IProcesadorPago
+ProcesadorQR ..|> IProcesadorPago
+
+PersonalAtencion --> IRepositorioPedidos : consulta / guarda
+PersonalAtencion --> ICatalogoProductos : busca productos
+PersonalAtencion --> IRecepcionPedidos : envía pedido
+Cocina --> IRepositorioPedidos : consulta / actualiza
+RegistradorPago --> IProcesadorPago : procesa cobro
+RegistradorPago --> IRepositorioPedidos : guarda pago
+
+Pedido "1" *-- "1..*" ItemPedido : contiene
+ItemPedido --> Producto : corresponde a
+ItemPedido "1" o-- "0..*" Personalizacion : incluye
+Pedido "1" o-- "0..*" Pago : registra
+Pedido --> EstadoPedido : mantiene
+RegistradorPago ..> Pedido : coordina registro
+Encargado --> Pedido : supervisa / cambia estado
+Cliente --> Pedido : solicita / retira
+Cliente --> Pago : abona
+
+note bottom of Pedido
+  Las dependencias a ItemPedido, Personalizacion
+  y Pago pertenecen al dominio. Pedido conserva
+  sus reglas y no depende de infraestructura.
+end note
+
+note bottom of Pago
+  Pago conserva monto, fechaHora y formaPago.
+  No depende de la pasarela concreta.
+end note
+
+note right of RegistradorPago
+  Servicio de aplicación alineado con SRP/OCP
+  para coordinar el cobro mediante contratos abstractos.
+end note
+
+note bottom of IRepositorioPedidos
+  Abstracción de persistencia para activos
+  e historial de pedidos.
+end note
+@enduml
