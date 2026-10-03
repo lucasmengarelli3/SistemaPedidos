@@ -1,0 +1,81 @@
+@startuml
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide empty members
+hide circle
+
+title Principio de Sustitución de Liskov (LSP) - Sistema de Pedidos "Sabor Kiosco"
+
+abstract class EstadoPedido {
+  + puedeModificar() : boolean
+  + puedeCancelar() : boolean
+  + puedePriorizar() : boolean
+  + puedeEntregar() : boolean
+}
+
+class Recibido
+class EnPreparacion
+class Listo
+class Entregado
+class Cancelado
+
+abstract class MetodoPago {
+  + registrar(pedido : Pedido, monto : Decimal) : Pago
+}
+
+class Efectivo
+class Tarjeta
+class PagoQR
+class PagoPuntos
+
+class Pedido {
+  - numero : int
+  - nombreRetiro : String
+  - estado : EstadoPedido
+  + cambiarEstado(nuevo : EstadoPedido) : void
+  + marcarPrioritario() : void
+}
+
+class RegistradorPago {
+  + registrar(pedido : Pedido, metodo : MetodoPago, monto : Decimal) : Pago
+}
+
+class GestorPedidos {
+  + registrarPedido() : Pedido
+  + cambiarEstadoPedido(pedido : Pedido, nuevo : EstadoPedido) : void
+}
+
+Recibido --|> EstadoPedido
+EnPreparacion --|> EstadoPedido
+Listo --|> EstadoPedido
+Entregado --|> EstadoPedido
+Cancelado --|> EstadoPedido
+
+Efectivo --|> MetodoPago
+Tarjeta --|> MetodoPago
+PagoQR --|> MetodoPago
+PagoPuntos --|> MetodoPago
+
+Pedido --> EstadoPedido : usa / delega
+Pedido ..> RegistradorPago : recibe Pedido para registrar pago
+RegistradorPago --> MetodoPago : selecciona estrategia
+GestorPedidos ..> Pedido : crea y coordina
+
+note top of Pedido
+  LSP: el pedido depende del contrato de EstadoPedido.
+  Cualquier estado concreto puede sustituir a la superclase
+  sin romper el comportamiento esperado del sistema.
+end note
+
+note bottom of EstadoPedido
+  Cada subclase mantiene el mismo contrato:
+  la misma interfaz de consulta y validación del dominio.
+end note
+
+note bottom of RegistradorPago
+  La estrategia de pago cumple LSP:
+  cada MetodoPago concreto es sustituible por la abstracción
+  sin cambiar el flujo principal del cobro.
+end note
+
+@enduml
