@@ -1,4 +1,4 @@
-# Anexo 05: Principio de Inversión de Dependencias (DIP)
+# Principio de Inversión de Dependencias (DIP)
 
 ## Propósito y Tipo del Principio SOLID
 El Principio de Inversión de Dependencias (DIP) es un principio de **diseño estructural y arquitectónico**. Su propósito principal es desacoplar los módulos de alto nivel (la lógica de negocio o de dominio) de los módulos de bajo nivel (los detalles de implementación, como persistencia o pasarelas de pago). 

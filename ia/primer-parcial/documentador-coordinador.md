@@ -90,7 +90,7 @@ No completes la sección "DECISIÓN DEL REVISOR HUMANO". Debe quedar vacía para
 ## Archivos de contexto referenciados
 
 - [Requisitos, estados del pedido y casos de uso](../../anexos/introduccion.md): criterio de referencia para evaluar la coherencia de cada entregable.
-- [Boceto inicial de clases](../../diagramas/01-diagrama-clases/01-boceto-inicial-corregido.excalidraw) y [tarjetas CRC](../../herramientas-agile/tarjetas-crc/tarjetas-crc.md): para verificar que las clases, atributos y métodos citados en cada anexo existan en el diseño.
+- [Boceto inicial de clases](../../diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw) y [tarjetas CRC](../../herramientas-agile/tarjetas-crc/tarjetas-crc.md): para verificar que las clases, atributos y métodos citados en cada anexo existan en el diseño.
 - [Anexo SRP](../../anexos/principios-solid/01-srp.md) y [anexo OCP](../../anexos/principios-solid/02-ocp.md), ya integrados en `develop`: para verificar que los anexos de los distintos principios describan un mismo diseño.
 - Los archivos modificados en cada PR revisada (ver tabla siguiente).
 

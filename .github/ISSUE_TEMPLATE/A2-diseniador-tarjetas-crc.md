@@ -16,7 +16,7 @@ Crear las tarjetas CRC (Clase-Responsabilidad-Colaborador) de cada clase del boc
 - [ ] Verificar coherencia con `anexos/introduccion.md` y con `diagramas/01-diagrama-clases/`
 - [ ] Armar el índice general `herramientas-agile/herramientas_agile.md`
 - [ ] Armar el índice específico `herramientas-agile/tarjetas-crc/tarjetas-crc.md`
-- [ ] Documentar prompt, archivos consultados y revisión crítica en `ia/a2/diseñador-tarjetas-crc.md`
+- [ ] Documentar prompt, archivos consultados y revisión crítica en `ia/a2/disenador-tarjetas-crc.md`
 
 ## Clases del boceto
 
@@ -30,7 +30,7 @@ Crear las tarjetas CRC (Clase-Responsabilidad-Colaborador) de cada clase del boc
 - `herramientas-agile/herramientas_agile.md`
 - `herramientas-agile/tarjetas-crc/tarjetas-crc.md`
 - `herramientas-agile/tarjetas-crc/NN-tarjeta-crc-Clase.md`
-- `ia/a2/diseñador-tarjetas-crc.md`
+- `ia/a2/disenador-tarjetas-crc.md`
 - `changelog.md`
 
 ## Checklist

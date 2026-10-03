@@ -8,7 +8,7 @@ El problema que resuelve es la acumulación de tareas distintas en una misma cla
 
 ## Motivación
 
-El análisis se hizo sobre el [boceto inicial de clases](../../diagramas/01-diagrama-clases/01-boceto-inicial-corregido.excalidraw), las [tarjetas CRC](../../herramientas-agile/tarjetas-crc/tarjetas-crc.md) y los requisitos de [introduccion.md](../introduccion.md). Se identificaron tres clases principales con más de una responsabilidad.
+El análisis se hizo sobre el [boceto inicial de clases](../../diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw), las [tarjetas CRC](../../herramientas-agile/tarjetas-crc/tarjetas-crc.md) y los requisitos de [introduccion.md](../introduccion.md). Se identificaron tres clases principales con más de una responsabilidad.
 
 | Clase del boceto | Responsabilidades que mezcla | Problema de mantenibilidad |
 | :--- | :--- | :--- |

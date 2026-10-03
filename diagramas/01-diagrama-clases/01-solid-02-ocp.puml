@@ -68,14 +68,13 @@ WhatsApp --|> CanalNotificacion
 DisplayMostrador --|> CanalNotificacion
 
 Pedido --> EstadoPedido : usa
-Pedido ..> RegistradorPago : recibe Pedido para registrar pago
+RegistradorPago ..> Pedido : recibe el pedido a cobrar
 RegistradorPago --> MetodoPago : selecciona estrategia
 GestorPedidos --> CanalNotificacion : usa
-GestorPedidos --> CocinaInterna : envía notificación al registrar pedido
 GestorPedidos ..> Pedido : crea, registra y coordina
 
 note top of Pedido
-  El pedido depende de abstracciones de estado y pago;
+  El pedido depende de la abstracción EstadoPedido;
   la notificación a cocina no la mantiene Pedido sino
   GestorPedidos al registrar el pedido.
 end note

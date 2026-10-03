@@ -30,4 +30,4 @@ Closes #<!-- Número del issue -->
 @documentador-coordinador
 
 ## Notas adicionales
-<!-- Agrrega cualquier información relevante -->
+<!-- Agrega cualquier información relevante -->

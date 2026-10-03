@@ -32,8 +32,9 @@ Las consecuencias de una jerarquía incorrecta son graves:
 3. Cuentas bancarias y tipos especiales
    Una `CuentaCorriente` puede ser una variante de `Cuenta`, pero no puede redefinir el comportamiento de `depositar()` o `retirar()` de tal modo que rompa la regla de saldo mínimo o la operación de consulta. La subclase debe conservar el mismo comportamiento observable del contrato base.
 
-4. En el kiosco, el caso concreto es más claro: los estados del pedido no son “clases de pedido”, sino variantes de un contrato común de estado con reglas específicas. LSP exige que cada variante sea totalmente sustituible por el contrato base en la lógica del dominio.
-El ejemplo número 4 es el ejemplo del proyecto y es la aplicación concreta del principio.
+### Ejemplo del proyecto
+
+En el kiosco, el caso concreto es más claro: los estados del pedido no son “clases de pedido”, sino variantes de un contrato común de estado con reglas específicas. LSP exige que cada variante sea totalmente sustituible por el contrato base en la lógica del dominio. Este es el ejemplo del proyecto y la aplicación concreta del principio.
 
 ## Explicación de Herencia
 
@@ -48,7 +49,7 @@ Aplicado al sistema de pedidos:
 - `Pedido` no hereda de un estado; en cambio, usa un estado. Esto es correcto, porque un pedido tiene un estado, pero el estado no es un tipo de pedido.
 - `MetodoPago` representa una estrategia común para registrar un cobro; cada variante concreta la implementa con el mismo contrato de uso.
 
-Una jerarquía invalida sería, por ejemplo, que `PedidoCancelado` heredara de `Pedido` y permitiera cambiar de estado o agregar productos. Eso rompe el contrato del pedido, porque la clase hija no puede ser sustituida por la clase base sin producir un resultado que contravenga la lógica del negocio.
+Una jerarquía inválida sería, por ejemplo, que `PedidoCancelado` heredara de `Pedido` y permitiera cambiar de estado o agregar productos. Eso rompe el contrato del pedido, porque la clase hija no puede ser sustituida por la clase base sin producir un resultado que contravenga la lógica del negocio.
 
 La idea correcta es definir jerarquías con contrato cohesivo y reglas invariantes, no con relaciones de conveniencia. En el dominio del kiosco, la sustitución segura surge cuando el cliente solo conoce la abstracción, no el detalle real del estado o del medio de pago.
 

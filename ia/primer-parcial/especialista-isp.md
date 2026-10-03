@@ -38,7 +38,7 @@ Para realizar el análisis con Copilot Agent Mode se indicó como contexto:
 - `diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`
 - las tarjetas CRC ubicadas en `herramientas-agile/tarjetas-crc/`
 
-Durante el análisis, Copilot informó que el archivo `01-boceto-inicial.excalidraw` no existía con ese nombre exacto en el repositorio y utilizó en su lugar el boceto vigente `01-boceto-inicial-corregido.excalidraw`.
+Durante el análisis, Copilot informó que el archivo `01-boceto-inicial.excalidraw` no existía con ese nombre exacto en el repositorio y utilizó en su lugar el boceto vigente en ese momento, `01-boceto-inicial-corregido.excalidraw`. Ese archivo se renombró después a `01-boceto-inicial.excalidraw` para respetar la estructura de carpetas de la consigna; el contenido es el mismo.
 
 ## Output obtenido
 

@@ -19,7 +19,7 @@ La instrucción de análisis que el agente tomó de la consigna adjunta (tercera
 ## Archivos de contexto referenciados
 
 - [Requisitos, estados del pedido y casos de uso](../../anexos/introduccion.md)
-- [Boceto inicial de clases](../../diagramas/01-diagrama-clases/01-boceto-inicial-corregido.excalidraw)
+- [Boceto inicial de clases](../../diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw)
 - [Índice de tarjetas CRC](../../herramientas-agile/tarjetas-crc/tarjetas-crc.md) y las nueve tarjetas de `herramientas-agile/tarjetas-crc/`
 
 ## Output obtenido
@@ -47,4 +47,4 @@ Se contrastó la propuesta del agente con el boceto de clases, las tarjetas CRC 
 - **Relación entre `Pedido` y `Pago`.** El diagrama la rotulaba "corresponde a", que en el boceto es la relación entre `ItemPedido` y `Producto`. Se corrigió a "tiene", que es el nombre que el boceto le da a la relación entre `Pedido` y `Pago`.
 - **Actores e historial.** El análisis no mencionaba a `Cocina`, `Encargado` ni `Cliente`. Se aclaró que no se refactorizaron y que siguen solicitando los cambios de estado a través de `Pedido`, lo que sostiene el cumplimiento del RNF7. También se agregó el RF8 como razón de cambio de `HistorialPedido`, porque es el requisito que exige registrar la cancelación en el historial.
 
-Además, la consigna nombra el boceto como `01-boceto-inicial.excalidraw`; se usó `01-boceto-inicial-corregido.excalidraw`, que es el archivo vigente en el repositorio tras las correcciones de la Actividad Obligatoria N°2. Para el atributo de retiro se mantuvo `nombreRetiro`, como figura en el boceto.
+Además, la consigna nombra el boceto como `01-boceto-inicial.excalidraw`; al momento del análisis el archivo vigente en el repositorio, tras las correcciones de la Actividad Obligatoria N°2, se llamaba `01-boceto-inicial-corregido.excalidraw` y fue el que se usó. Luego se renombró a `01-boceto-inicial.excalidraw` para respetar la estructura de carpetas de la consigna; el contenido es el mismo. Para el atributo de retiro se mantuvo `nombreRetiro`, como figura en el boceto.

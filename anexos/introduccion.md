@@ -220,6 +220,6 @@ Definición: Cada pedido debe contar con un identificador único generado de for
 
 El siguiente diagrama representa el boceto inicial de clases del sistema, incluyendo las clases principales identificadas, sus atributos, métodos y relaciones.
 
-![Boceto inicial del diseño de clases](../diagramas/01-diagrama-clases/01-boceto-inicial-corregido-final.png)
+![Boceto inicial del diseño de clases](../diagramas/01-diagrama-clases/01-boceto-inicial.png)
 
 [Ver boceto inicial en línea](https://imgur.com/a/x6o1R6X)

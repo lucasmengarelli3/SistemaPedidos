@@ -12,7 +12,7 @@
 
 ## Archivos de contexto referenciados
 - [`anexos/introduccion.md`](../../anexos/introduccion.md)
-- [`diagramas/01-diagrama-clases/01-boceto-inicial-corregido.excalidraw`](../../diagramas/01-diagrama-clases/01-boceto-inicial-corregido.excalidraw)
+- [`diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw`](../../diagramas/01-diagrama-clases/01-boceto-inicial.excalidraw)
 - [`herramientas-agile/tarjetas-crc/tarjetas-crc.md`](../../herramientas-agile/tarjetas-crc/tarjetas-crc.md)
 - Tarjetas CRC individuales (`PersonalAtencion`, `Cocina`, `Pedido`, `ItemPedido`, `Producto`, `Personalizacion`, `Pago`, `Encargado`, `Cliente`) en `herramientas-agile/tarjetas-crc/`
 
