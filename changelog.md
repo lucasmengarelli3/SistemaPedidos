@@ -30,6 +30,8 @@
 
 - [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): Correcciones de Hallazgos: 1, 2, 3, 4, 5, 6. Issue: [#145](https://github.com/lucasmengarelli3/SistemaPedidos/issues/145) PR: [#146](https://github.com/lucasmengarelli3/SistemaPedidos/pull/146). @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
 
+- [feature/esp-extension-ocp-fix-hallazgos-pr-146] P1 - Principio Abierto/Cerrado (OCP): resolución de los hallazgos pendientes de la revisión de la PR #146 en el anexo `02-ocp.md`, el diagrama de clases `01-solid-02-ocp` y el documento de IA. Issue: [#156](https://github.com/lucasmengarelli3/SistemaPedidos/issues/156) PR: [#157](https://github.com/lucasmengarelli3/SistemaPedidos/pull/157). @santimarM (Documentador y Coordinador de Repositorio + SRP).
+
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
 ### Added
