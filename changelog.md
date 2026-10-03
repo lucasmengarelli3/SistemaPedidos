@@ -16,6 +16,7 @@
 
 - [feature/esp-dip-add-anexo-dip] P1 - Especialista en Inversión de Dependencias (DIP): anexo `05-dip.md`, diagrama de clases `01-solid-05-dip` y documento de IA. Issue: [#149](https://github.com/lucasmengarelli3/SistemaPedidos/issues/149) PR: [#150](https://github.com/lucasmengarelli3/SistemaPedidos/pull/150). @AgustinCalaver (Especialista en Inversión de Dependencias).
 
+
 - [feature/esp-extensión-lsp-add-anexo-lsp] P1 - Principio de sustitución de Liskov (LSP): anexo `03-LSP.MD`, diagrama de clases `01-solid-03-lsp` y documentación del uso de IA. Issue: [#154](https://github.com/lucasmengarelli3/SistemaPedidos/issues/154) PR:[#155](https://github.com/lucasmengarelli3/SistemaPedidos/pull/155). @LMengarelli93 (Especialista en Principios de Extensión (LSP)).
 
 
