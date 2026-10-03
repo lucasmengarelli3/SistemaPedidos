@@ -41,7 +41,6 @@ class Pedido {
   - estado : EstadoPedido
   + cambiarEstado(nuevo : EstadoPedido) : void
   + marcarPrioritario() : void
-  + registrarPago(metodo : MetodoPago, monto : Decimal) : void
 }
 
 class RegistradorPago {
@@ -69,14 +68,16 @@ WhatsApp --|> CanalNotificacion
 DisplayMostrador --|> CanalNotificacion
 
 Pedido --> EstadoPedido : usa
-Pedido ..> RegistradorPago : delega cobro
+Pedido ..> RegistradorPago : recibe Pedido para registrar pago
 RegistradorPago --> MetodoPago : selecciona estrategia
 GestorPedidos --> CanalNotificacion : usa
-GestorPedidos ..> Pedido : crea y coordina
+GestorPedidos --> CocinaInterna : envía notificación al registrar pedido
+GestorPedidos ..> Pedido : crea, registra y coordina
 
 note top of Pedido
-  El pedido depende de abstracciones;
-  no de decisiones condicionales por caso concreto.
+  El pedido depende de abstracciones de estado y pago;
+  la notificación a cocina no la mantiene Pedido sino
+  GestorPedidos al registrar el pedido.
 end note
 
 note bottom of RegistradorPago
@@ -86,6 +87,7 @@ end note
 
 note bottom of GestorPedidos
   OCP: el canal de aviso puede ampliarse con nuevas
-  implementaciones sin modificar el flujo principal.
+  implementaciones, y GestorPedidos coordina el envío
+  a cocina al registrar el pedido.
 end note
 @enduml

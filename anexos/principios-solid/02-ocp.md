@@ -40,10 +40,10 @@ En el diseño OCP, la herencia y el polimorfismo no se aplican para “copiar c�
 Aplicado al dominio del kiosco:
 
 - `EstadoPedido` es la superclase abstracta; cada estado (`Recibido`, `EnPreparacion`, `Listo`, `Entregado`, `Cancelado`) hereda la misma interfaz y personaliza la regla de negocio del estado.
-- `MetodoPago` es la superclase abstracta; cada medio de pago (`Efectivo`, `Tarjeta`, `PagoQR`, `Puntos`) implementa cómo se registra el cobro.
+- `MetodoPago` es la superclase abstracta; cada medio de pago (`Efectivo`, `Tarjeta`, `PagoQR`, `PagoPuntos`) implementa cómo se registra el cobro.
 - `CanalNotificacion` representa a cada forma de avisar a cocina; cada canal puede responder a `enviarPedido()` con sus propias reglas.
 
-La idea central es que `Pedido` depende de abstracciones (`EstadoPedido`, `MetodoPago`, `CanalNotificacion`) y no de cada caso concreto. Esta dependencia está invertida y es compatible con OCP, porque los nuevos casos se incorporan como nuevas subclases, no como modificaciones al código ya probado.
+La idea central es que `Pedido` depende de abstracciones (`EstadoPedido`, `MetodoPago`,) y no de cada caso concreto, mientras que la notificación a cocina es responsabilidad de `GestorPedidos`. Esta dependencia está invertida y es compatible con OCP, porque los nuevos casos se incorporan como nuevas subclases, no como modificaciones al código ya probado.
 
 ## Estructura de Clases
 
@@ -54,14 +54,14 @@ El siguiente diagrama muestra una propuesta de extensión compatible con OCP: la
 - [Ver el diagrama en detalle (PNG)](../../diagramas/01-diagrama-clases/01-solid-02-ocp.png)
 - [Ver el código PlantUML](../../diagramas/01-diagrama-clases/01-solid-02-ocp.puml)
 
-## Justificación Tecnica
+## Justificación Técnica
 
 Lo que se observa en el diagrama es una arquitectura basada en jerarquías y dependencias de abstracción:
 
 - `Pedido` conserva la responsabilidad de administrar el pedido y delega decisiones de estado en `EstadoPedido`.
 - Cada estado concreto implementa el comportamiento específico: `Recibido` puede permitir modificar, cancelar y priorizar; `EnPreparacion` puede cancelar y priorizar, pero no modificar; `Listo` solo permite entregar; `Entregado` y `Cancelado` son de consulta.
 - La lógica condicional que antes podría estar escrita como `if (estado == RECIBIDO) ...` se transforma en llamadas polimórficas, donde el objeto de estado responde según su propia implementación.
-- `RegistradorPago` ya no necesita conocer todas las variantes de cobro. Depende de `MetodoPago` y cada estrategia concreta implementa una forma de registro distinta. Esto permite ampliar con `PagoQR`, `PagoTransferencia` o `PagoCuentaCorriente` sin tocar la clase que coordina la operación.
+- `RegistradorPago` ya no necesita conocer todas las variantes de cobro. Depende de `MetodoPago` y cada estrategia concreta implementa una forma de registro distinta. Esto permite ampliar con, `PagoTransferencia` o `PagoCuentaCorriente` sin tocar la clase que coordina la operación.
 - `CanalNotificacion` encapsula el medio de aviso a cocina. Si luego se necesita avisar por WhatsApp, por sistema interno, o por display, solo se crea otra subclase sin cambiar la lógica de `GestorPedidos` y `Pedido`.
 
 Desde el punto de vista técnico, esta solución es correcta porque:
