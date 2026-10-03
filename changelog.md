@@ -10,7 +10,7 @@
 
 - [feature/esp-srp-add-anexo-srp] P1 - Principio de Responsabilidad Única (SRP): anexo `01-srp.md`, diagrama de clases `01-solid-01-srp`, índice `principios_solid.md` y documentación del uso de IA. Issue: [#140](https://github.com/lucasmengarelli3/SistemaPedidos/issues/140) PR: [#141](https://github.com/lucasmengarelli3/SistemaPedidos/pull/141). @santimarM (Documentador y Coordinador de Repositorio + SRP).
 
-- [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): anexo `02-ocp.md`, diagrama de clases `01-solid-02-ocp` y documentación del uso de IA. Issue: [#143](https://github.com/lucasmengarelli3/SistemaPedidos/issues/143) PR: [#144](https://github.com/lucasmengarelli3/SistemaPedidos/pull/144). @LMengarelli93 (Especialista en Principios de Extencion (OCP)).
+- [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): anexo `02-ocp.md`, diagrama de clases `01-solid-02-ocp` y documentación del uso de IA. Issue: [#143](https://github.com/lucasmengarelli3/SistemaPedidos/issues/143) PR: [#144](https://github.com/lucasmengarelli3/SistemaPedidos/pull/144). @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
 
 - [feature/esp-isp-add-anexo-isp] P1 - Principio de Segregación de Interfaces (ISP): anexo `04-isp.md`, diagrama de clases `01-solid-04-isp` y documentación del uso de IA. Issue: [#147](https://github.com/lucasmengarelli3/SistemaPedidos/issues/147) PR: [#148](https://github.com/lucasmengarelli3/SistemaPedidos/pull/148). @neith18 (Especialista en Segregación de Interfaces (ISP)).
 
@@ -26,7 +26,7 @@
 
 ### Fixed
 
-- [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): Correcciones de Hallazgos: 1, 2, 3, 4, 5, 6. Issue: [#145](https://github.com/lucasmengarelli3/SistemaPedidos/issues/145) PR: [#146](https://github.com/lucasmengarelli3/SistemaPedidos/pull/146). @LMengarelli93 (Especialista en Principios de Extensión (OCP)).
+- [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): Correcciones de Hallazgos: 1, 2, 3, 4, 5, 6. Issue: [#145](https://github.com/lucasmengarelli3/SistemaPedidos/issues/145) PR: [#146](https://github.com/lucasmengarelli3/SistemaPedidos/pull/146). @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
 
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
