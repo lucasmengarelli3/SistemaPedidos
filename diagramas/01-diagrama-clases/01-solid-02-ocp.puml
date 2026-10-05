@@ -68,10 +68,9 @@ WhatsApp --|> CanalNotificacion
 DisplayMostrador --|> CanalNotificacion
 
 Pedido --> EstadoPedido : usa
-Pedido ..> RegistradorPago : recibe Pedido para registrar pago
+RegistradorPago ..> Pedido : recibe Pedido para registrar pago
 RegistradorPago --> MetodoPago : selecciona estrategia
 GestorPedidos --> CanalNotificacion : usa
-GestorPedidos --> CocinaInterna : envía notificación al registrar pedido
 GestorPedidos ..> Pedido : crea, registra y coordina
 
 note top of Pedido
