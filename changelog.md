@@ -6,6 +6,8 @@
 
 ## [Unreleased]
 
+## Release Primer Parcial - 2026-10-03
+
 ### Added
 
 - [feature/esp-srp-add-anexo-srp] P1 - Principio de Responsabilidad Única (SRP): anexo `01-srp.md`, diagrama de clases `01-solid-01-srp`, índice `principios_solid.md` y documentación del uso de IA. Issue: [#140](https://github.com/lucasmengarelli3/SistemaPedidos/issues/140) PR: [#141](https://github.com/lucasmengarelli3/SistemaPedidos/pull/141). @santimarM (Documentador y Coordinador de Repositorio + SRP).
@@ -15,7 +17,7 @@
 - [feature/esp-isp-add-anexo-isp] P1 - Principio de Segregación de Interfaces (ISP): anexo `04-isp.md`, diagrama de clases `01-solid-04-isp` y documentación del uso de IA. Issue: [#147](https://github.com/lucasmengarelli3/SistemaPedidos/issues/147) PR: [#148](https://github.com/lucasmengarelli3/SistemaPedidos/pull/148). @neith18 (Especialista en Segregación de Interfaces (ISP)).
 
 - [feature/esp-dip-add-anexo-dip] P1 - Especialista en Inversión de Dependencias (DIP): anexo `05-dip.md`, diagrama de clases `01-solid-05-dip` y documento de IA. Issue: [#149](https://github.com/lucasmengarelli3/SistemaPedidos/issues/149) PR: [#150](https://github.com/lucasmengarelli3/SistemaPedidos/pull/150). @AgustinCalaver (Especialista en Inversión de Dependencias).
--
+
 - [feature/esp-extensión-lsp-add-anexo-lsp] P1 - Principio de sustitución de Liskov (LSP): anexo `03-LSP.MD`, diagrama de clases `01-solid-03-lsp` y documentación del uso de IA. Issue: [#154](https://github.com/lucasmengarelli3/SistemaPedidos/issues/154) PR:[#155](https://github.com/lucasmengarelli3/SistemaPedidos/pull/155). @LMengarelli93 (Especialista en Principios de Extensión (LSP)).
 
 
