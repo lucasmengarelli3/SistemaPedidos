@@ -33,6 +33,9 @@
 
 - [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): Correcciones de Hallazgos: 1, 2, 3, 4, 5, 6. Issue: [#145](https://github.com/lucasmengarelli3/SistemaPedidos/issues/145) PR: [#146](https://github.com/lucasmengarelli3/SistemaPedidos/pull/146). @LMengarelli93 (Especialista en Principios de Extensión (OCP)).
 
+- - [fix/esp-extensión-lsp-add-anexo-lsp] P1 - Principio de sustitución de Liskov (LSP): Correcciones de Hallazgos: 4 Issue: [#163](https://github.com/lucasmengarelli3/SistemaPedidos/issues/163) PR: [#164](https://github.com/lucasmengarelli3/SistemaPedidos/pull/164). @LMengarelli93 (Especialista en Principios de Extensión (LSP)).
+
+
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
 ### Added
