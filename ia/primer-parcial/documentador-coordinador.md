@@ -10,7 +10,9 @@ El uso de IA para el análisis del principio SRP está documentado en [especiali
 
 Se adjuntó la consigna del Primer Parcial en PDF y se ingresó el siguiente mensaje:
 
-> soy documentador y coordinador podes corregir lo que me falta
+```text
+soy documentador y coordinador podes corregir lo que me falta
+```
 
 A partir de la consigna adjunta (segunda tarea del rol), el agente revisó cada PR abierta con el formato de revisión que el equipo definió en la Actividad Obligatoria N°2 ([ia/a2/documentador-coordinador.md](../a2/documentador-coordinador.md)). En cada revisión, `{ROL_REVISADO}` se reemplazó por el rol dueño del entregable:
 

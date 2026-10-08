@@ -52,10 +52,15 @@ class Pedido {
   + agregarItem(item : ItemPedido) : void
   + quitarItem(item : ItemPedido) : void
   + modificarItem(item : ItemPedido) : void
-  + calcularTotal() : Decimal
   + cambiarEstado(nuevo : EstadoPedido) : void
   + cancelar() : void
 }
+
+class CalculadoraTotalPedido {
+  + calcularTotal(pedido : Pedido) : Decimal
+}
+
+CalculadoraTotalPedido ..> Pedido : calcula total
 
 class ItemPedido {
   - cantidad : int
