@@ -10,37 +10,34 @@
 
 ### Added
 
-- [feature/esp-srp-add-anexo-srp] P1 - Principio de Responsabilidad Única (SRP): anexo `01-srp.md`, diagrama de clases `01-solid-01-srp`, índice `principios_solid.md` y documentación del uso de IA. Issue: [#140](https://github.com/lucasmengarelli3/SistemaPedidos/issues/140) PR: [#141](https://github.com/lucasmengarelli3/SistemaPedidos/pull/141). @santimarM (Documentador y Coordinador de Repositorio + SRP).
+- [feature/esp-srp-add-anexo-srp] P1 - Principio de Responsabilidad Única - SRP: anexo `01-srp.md`, diagrama de clases `01-solid-01-srp`, índice `principios_solid.md` y documentación del uso de IA. Issue: [#140](https://github.com/lucasmengarelli3/SistemaPedidos/issues/140) PR: [#141](https://github.com/lucasmengarelli3/SistemaPedidos/pull/141). @santimarM (Documentador y Coordinador de Repositorio + SRP).
 
-- [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): anexo `02-ocp.md`, diagrama de clases `01-solid-02-ocp` y documentación del uso de IA. Issue: [#143](https://github.com/lucasmengarelli3/SistemaPedidos/issues/143) PR: [#144](https://github.com/lucasmengarelli3/SistemaPedidos/pull/144). @LMengarelli93 (Especialista en Principios de Extensión (OCP)).
+- [feature/esp-extension-ocp-add-anexo-ocp] P1 -Especialista en principios de extensión - OCP: anexo `02-ocp.md`, diagrama de clases `01-solid-02-ocp` y documentación del uso de IA. Issue: [#143](https://github.com/lucasmengarelli3/SistemaPedidos/issues/143) PR: [#144](https://github.com/lucasmengarelli3/SistemaPedidos/pull/144). @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
 
-- [feature/esp-isp-add-anexo-isp] P1 - Principio de Segregación de Interfaces (ISP): anexo `04-isp.md`, diagrama de clases `01-solid-04-isp` y documentación del uso de IA. Issue: [#147](https://github.com/lucasmengarelli3/SistemaPedidos/issues/147) PR: [#148](https://github.com/lucasmengarelli3/SistemaPedidos/pull/148). @neith18 (Especialista en Segregación de Interfaces (ISP)).
+- [feature/esp-isp-add-anexo-isp] P1 - Especialista en Segregación de Interfaces - ISP: anexo `04-isp.md`, diagrama de clases `01-solid-04-isp` y documentación del uso de IA. Issue: [#147](https://github.com/lucasmengarelli3/SistemaPedidos/issues/147) PR: [#148](https://github.com/lucasmengarelli3/SistemaPedidos/pull/148). @neith18 (Especialista en Segregación de Interfaces (ISP)).
 
-- [feature/esp-dip-add-anexo-dip] P1 - Especialista en Inversión de Dependencias (DIP): anexo `05-dip.md`, diagrama de clases `01-solid-05-dip` y documento de IA. Issue: [#149](https://github.com/lucasmengarelli3/SistemaPedidos/issues/149) PR: [#150](https://github.com/lucasmengarelli3/SistemaPedidos/pull/150). @AgustinCalaver (Especialista en Inversión de Dependencias).
+- [feature/esp-dip-add-anexo-dip] P1 - Especialista en Inversión de Dependencias - DIP: anexo `05-dip.md`, diagrama de clases `01-solid-05-dip` y documento de IA. Issue: [#149](https://github.com/lucasmengarelli3/SistemaPedidos/issues/149) PR: [#150](https://github.com/lucasmengarelli3/SistemaPedidos/pull/150). @AgustinCalaver (Especialista en Inversión de Dependencias).
 
-- [feature/esp-extensión-lsp-add-anexo-lsp] P1 - Principio de sustitución de Liskov (LSP): anexo `03-LSP.MD`, diagrama de clases `01-solid-03-lsp` y documentación del uso de IA. Issue: [#154](https://github.com/lucasmengarelli3/SistemaPedidos/issues/154) PR:[#155](https://github.com/lucasmengarelli3/SistemaPedidos/pull/155). @LMengarelli93 (Especialista en Principios de Extensión (LSP)).
+- [feature/esp-extensión-lsp-add-anexo-lsp] P1 -Especialista en principios de extensión - LSP: anexo `03-LSP.MD`, diagrama de clases `01-solid-03-lsp` y documentación del uso de IA. Issue: [#154](https://github.com/lucasmengarelli3/SistemaPedidos/issues/154) PR:[#155](https://github.com/lucasmengarelli3/SistemaPedidos/pull/155). @lucasmengarelli3 (Especialista en Principios de Extensión (LSP)).
 
-
-- [feature/esp-isp-add-anexo-isp] P1 - Principio de Segregación de Interfaces (ISP): anexo `04-isp.md`, diagrama de clases `01-solid-04-isp` y documentación del uso de IA. Issue: [#147](https://github.com/lucasmengarelli3/SistemaPedidos/issues/147) PR: [#148](https://github.com/lucasmengarelli3/SistemaPedidos/pull/148). @neith18 (Especialista en Segregación de Interfaces (ISP)).
-
-- [feature/esp-dip-add-anexo-dip] P1 - Especialista en Inversión de Dependencias (DIP): anexo `05-dip.md`, diagrama de clases `01-solid-05-dip` y documento de IA. Issue: [#149](https://github.com/lucasmengarelli3/SistemaPedidos/issues/149) PR: [#150](https://github.com/lucasmengarelli3/SistemaPedidos/pull/150). @AgustinCalaver (Especialista en Inversión de Dependencias).
 
 ### Changed
 
 - [feature/doc-coord-repo-update-readme-md] P1 - Documentar y Coordinar repositorio: `README.md` enlaza el índice de anexos, `diagramas/diagramasUML.md` integra los diagramas de clases SOLID, plantillas de PR adaptadas al Primer Parcial y documentación de los code reviews asistidos por IA en `ia/primer-parcial/documentador-coordinador.md`. Issue: [#142](https://github.com/lucasmengarelli3/SistemaPedidos/issues/142) PR: [#151](https://github.com/lucasmengarelli3/SistemaPedidos/pull/151). @santimarM (Documentador y Coordinador de Repositorio + SRP).
 
-- [feature/doc-coord-update-code-reviews] P1 - Documentador: `ia/primer-parcial/documentador-coordinador.md` registra la verificación de las correcciones de la PR #148 (ISP) y la segunda revisión, las correcciones y la aprobación de la PR #150 (DIP). Issue: [#152](https://github.com/lucasmengarelli3/SistemaPedidos/issues/152) PR: [#153](https://github.com/lucasmengarelli3/SistemaPedidos/pull/153). @santimarM (Documentador y Coordinador de Repositorio + SRP).
+- [feature/doc-coord-update-code-reviews] P1 - Documentador: actualizar el registro de code reviews de las PRs #148 y #150: `ia/primer-parcial/documentador-coordinador.md` registra la verificación de las correcciones de la PR #148 (ISP) y la segunda revisión, las correcciones y la aprobación de la PR #150 (DIP). Issue: [#152](https://github.com/lucasmengarelli3/SistemaPedidos/issues/152) PR: [#153](https://github.com/lucasmengarelli3/SistemaPedidos/pull/153). @santimarM (Documentador y Coordinador de Repositorio + SRP).
 
-- [backport/release-actividad-obligatoria-2] Backport de la release de la Actividad Obligatoria N°2: establecer la base en develop del Primer Parcial. Issue: [#138](https://github.com/lucasmengarelli3/SistemaPedidos/issues/138) PR: [#139](https://github.com/lucasmengarelli3/SistemaPedidos/pull/139). @santimarM (Documentador y coordinador).
+- [backport/release-actividad-obligatoria-2] Backport/release actividad obligatoria 2: establecer la base en develop del Primer Parcial. Issue: [#138](https://github.com/lucasmengarelli3/SistemaPedidos/issues/138) PR: [#139](https://github.com/lucasmengarelli3/SistemaPedidos/pull/139). @santimarM (Documentador y coordinador).
 
 ### Fixed
 
-- [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): Correcciones de Hallazgos: 1, 2, 3, 4, 5, 6. Issue: [#145](https://github.com/lucasmengarelli3/SistemaPedidos/issues/145) PR: [#146](https://github.com/lucasmengarelli3/SistemaPedidos/pull/146). @LMengarelli93 (Especialista en Principios de Extensión (OCP)).
+- [feature/esp-extension-ocp-add-anexo-ocp] Corrección Hallazgos 1, 2, 3, 4, 5, 6: Issue: [#145](https://github.com/lucasmengarelli3/SistemaPedidos/issues/145) PR: [#146](https://github.com/lucasmengarelli3/SistemaPedidos/pull/146). @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
 
-- [fix/esp-extensión-lsp-add-anexo-lsp] P1 - Principio de sustitución de Liskov (LSP): Correcciones de Hallazgos: 4 Issue: [#163](https://github.com/lucasmengarelli3/SistemaPedidos/issues/163) PR: [#164](https://github.com/lucasmengarelli3/SistemaPedidos/pull/164). @LMengarelli93 (Especialista en Principios de Extensión (LSP)).
+- [fix/esp-extensión-lsp-add-anexo-lsp] Resolución RC4: Issue: [#163](https://github.com/lucasmengarelli3/SistemaPedidos/issues/163) PR: [#164](https://github.com/lucasmengarelli3/SistemaPedidos/pull/164). @lucasmengarelli3 (Especialista en Principios de Extensión (LSP)).
 
-- [fix/esp-extensión-osp-add-anexo-osp] P1 - Principio Abierto/Cerrado (OCP): Correcciones de Hallazgos: 2 y 3 Issue: [#165](https://github.com/lucasmengarelli3/SistemaPedidos/issues/165) PR: [#166](https://github.com/lucasmengarelli3/SistemaPedidos/pull/166). @LMengarelli93 (Especialista en Principios de Extensión (OCP)).
+- [fix/esp-extensión-ocp-add-anexo-ocp] Resolución RC2, RC3: Correcciones de Hallazgos 2 y 3. Issue: [#165](https://github.com/lucasmengarelli3/SistemaPedidos/issues/165) PR: [#166](https://github.com/lucasmengarelli3/SistemaPedidos/pull/166). @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
 
+- [fix/rc1-rc5-rc8] P1 - Resolver RC1, RC5, RC6 y RC8: alineación del diagrama DIP con SRP, corrección del índice de diagramas, documentación literal del prompt del coordinador y reconciliación del changelog contra las PR reales. Issue: [#167](https://github.com/lucasmengarelli3/SistemaPedidos/issues/167) PR: [#168](https://github.com/lucasmengarelli3/SistemaPedidos/pull/168). @neith18.
 
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 

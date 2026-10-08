@@ -50,6 +50,8 @@ Las implementaciones concretas se seleccionan en el punto de composición de la 
 
 No se inyectan repositorios ni procesadores externos dentro de `Pedido` o `Pago`: sus responsabilidades CRC describen entidades de dominio, no servicios de infraestructura.
 
+Para mantener la coherencia con la aplicación del SRP, `Pedido` no realiza el cálculo del total. Esta responsabilidad se encuentra separada en `CalculadoraTotalPedido`, que calcula el importe a partir de los datos del pedido sin trasladar esa responsabilidad nuevamente a la entidad.
+
 La aplicación de DIP con esta inyección garantiza que:
 - Los coordinadores del kiosco (`PersonalAtencion`, `Cocina`, `RegistradorPago`) dependan de contratos abstractos y no de implementaciones concretas, mientras que `Pedido` y `Pago` conservan sus reglas sin conocer la infraestructura.
 - Se puedan realizar pruebas unitarias utilizando dobles de prueba (*mocks/stubs*) sin necesidad de una base de datos ni una pasarela de pago real.
