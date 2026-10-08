@@ -37,7 +37,7 @@
 
 - [fix/esp-extensión-ocp-add-anexo-ocp] Resolución RC2, RC3: Correcciones de Hallazgos 2 y 3. Issue: [#165](https://github.com/lucasmengarelli3/SistemaPedidos/issues/165) PR: [#166](https://github.com/lucasmengarelli3/SistemaPedidos/pull/166). @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
 
-- [fix/rc1-rc5-rc8] P1 - Resolver RC1, RC5, RC6 y RC8: alineación del diagrama DIP con SRP, corrección del índice de diagramas, documentación literal del prompt del coordinador y reconciliación del changelog contra las PR reales. Issue: [#167](https://github.com/lucasmengarelli3/SistemaPedidos/issues/167). @neith18.
+- [fix/rc1-rc5-rc8] P1 - Resolver RC1, RC5, RC6 y RC8: alineación del diagrama DIP con SRP, corrección del índice de diagramas, documentación literal del prompt del coordinador y reconciliación del changelog contra las PR reales. Issue: [#167](https://github.com/lucasmengarelli3/SistemaPedidos/issues/167) PR: [#168](https://github.com/lucasmengarelli3/SistemaPedidos/pull/168). @neith18.
 
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
