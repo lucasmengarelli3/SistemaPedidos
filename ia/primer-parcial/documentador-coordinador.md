@@ -130,3 +130,29 @@ Cada hallazgo se contrastó con los archivos de la PR, el boceto, las tarjetas C
 - **Verificación de las correcciones de la PR #150.** Se comparó el commit `5d11675` con la versión revisada antes. Los seis hallazgos estaban resueltos, pero la comparación mostró tres problemas nuevos que el diff por sí solo no evidenciaba: la Motivación atribuía al boceto dependencias de persistencia y cobro que no tiene, el anexo había perdido la tabla de dependencias y la de inyección por constructor, y el texto del "Prompt utilizado" había cambiado respecto del original.
 - **Correcciones aplicadas por el coordinador en la PR #150.** Los cuatro hallazgos de la segunda revisión se corrigieron en el commit `53cd8b2` sobre la rama del especialista: se recuperó el contenido de la versión anterior del anexo, se restauró el prompt original y se regeneró el PNG del diagrama. El aporte original y la corrección de la primera revisión son del especialista.
 - **Verificación del archivo de IA.** En las cuatro PRs se comprobó que existiera `ia/primer-parcial/[rol].md` con sus cuatro puntos. En las PRs #144, #146 y #150 se cargaron hallazgos por secciones faltantes o mal ubicadas.
+
+## Corrección de RC10 y RC11 — trazabilidad posterior a la entrega
+
+### RC10 — Participación en las correcciones de OCP y LSP
+
+En la PR #146, Lucas realizó una primera corrección de los hallazgos detectados sobre OCP. La revisión posterior verificó que parte de esos hallazgos seguían pendientes. El coordinador realizó una corrección adicional en la PR #157 mediante el commit `4cba8f1`, pero esa PR fue cerrada sin merge y dicho commit no quedó integrado en `release/primer-parcial`.
+
+En la PR #155 se detectaron hallazgos pendientes sobre LSP. La PR #161 incluyó una corrección de esos hallazgos mediante el commit `71670d2`, pero fue cerrada sin merge y dicho commit no quedó integrado en `release/primer-parcial`.
+
+Luego de los Request Changes del Primer Parcial, Lucas realizó nuevas correcciones sobre sus entregables. La corrección de OCP correspondiente a RC2 y RC3 quedó integrada mediante la PR #166, incluyendo el commit `72af049`. La corrección de LSP correspondiente a RC4 quedó integrada mediante la PR #164, incluyendo el commit `301ee85`.
+
+Por lo tanto, las correcciones que actualmente forman parte de `release/primer-parcial` fueron realizadas e integradas posteriormente por el especialista responsable.
+
+### RC11 — Cierre de PRs sin merge
+
+Las PR #157, #159 y #161 fueron cerradas sin merge y sin dejar documentado en ese momento el motivo del cierre.
+
+La PR #157 contenía correcciones pendientes de OCP realizadas por el coordinador. El commit de corrección `4cba8f1` quedó posteriormente incorporado en la rama utilizada por la PR #161, pero la PR #161 también fue cerrada sin merge. Por este motivo, dicho commit no quedó integrado en `release/primer-parcial`.
+
+La PR #159 actualizaba la documentación de los code reviews de las PR #146 y #155 mediante el commit `8ab5bce`. Sus cambios también fueron incorporados en la rama de la PR #161, pero al cerrarse esta última sin merge, dicho commit no quedó integrado en `release/primer-parcial`.
+
+La PR #161 integraba trabajo proveniente de las PR #157 y #159 y además incluía correcciones pendientes de LSP. El commit de corrección de LSP `71670d2` tampoco quedó integrado en `release/primer-parcial`, ya que la PR fue cerrada sin merge.
+
+Posteriormente, las correcciones técnicas pendientes fueron realizadas nuevamente e integradas mediante las PR #164 y #166. La actualización documental que había quedado fuera mediante la PR #159 se registra ahora como parte de esta corrección de RC10 y RC11.
+
+Se documenta esta secuencia para dejar explícita la trazabilidad de los cierres y de los cambios que finalmente quedaron integrados en `release/primer-parcial`.

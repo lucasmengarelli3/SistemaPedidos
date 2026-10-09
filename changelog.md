@@ -39,6 +39,8 @@
 
 - [fix/rc1-rc5-rc8] P1 - Resolver RC1, RC5, RC6 y RC8: alineación del diagrama DIP con SRP, corrección del índice de diagramas, documentación literal del prompt del coordinador y reconciliación del changelog contra las PR reales. Issue: [#167](https://github.com/lucasmengarelli3/SistemaPedidos/issues/167) PR: [#168](https://github.com/lucasmengarelli3/SistemaPedidos/pull/168). @neith18.
 
+- [fix/rc10-rc11-trazabilidad] P1 - Resolver RC10 y RC11 de trazabilidad y participación: documentación de la secuencia real de correcciones de OCP y LSP y aclaración del cierre sin merge de las PR #157, #159 y #161. Issue: [#169](https://github.com/lucasmengarelli3/SistemaPedidos/issues/169) PR: [#170](https://github.com/lucasmengarelli3/SistemaPedidos/pull/170). @neith18.
+
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
 ### Added
