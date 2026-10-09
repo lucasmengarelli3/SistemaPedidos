@@ -1,0 +1,137 @@
+@startuml
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide empty members
+hide circle
+
+title Principio de Responsabilidad Única (SRP) - Sistema de Pedidos "Sabor Kiosco"
+
+class Pedido {
+  - numero : int
+  - fechaHora : DateTime
+  - nombreRetiro : String
+  - estado : EstadoPedido
+  - prioritario : boolean
+  + agregarItem(item : ItemPedido) : void
+  + quitarItem(item : ItemPedido) : void
+  + modificarItem(item : ItemPedido) : void
+  + cambiarEstado(nuevo : EstadoPedido) : void
+  + cancelar() : void
+  + marcarPrioritario() : void
+}
+
+class ItemPedido {
+  - cantidad : int
+  - precioUnitario : Decimal
+  - subtotal : Decimal
+  + calcularSubtotal() : Decimal
+}
+
+enum EstadoPedido <<enumeration>> {
+  RECIBIDO
+  EN_PREPARACION
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+class PoliticaEstadoPedido {
+  + permiteModificar(estado : EstadoPedido) : boolean
+  + permiteCancelar(estado : EstadoPedido) : boolean
+  + permitePriorizar(estado : EstadoPedido) : boolean
+  + esTransicionValida(actual : EstadoPedido, nuevo : EstadoPedido) : boolean
+}
+
+class CalculadoraTotalPedido {
+  + calcularTotal(pedido : Pedido) : Decimal
+}
+
+class HistorialPedido {
+  + registrarCambio(pedido : Pedido, anterior : EstadoPedido, nuevo : EstadoPedido) : void
+  + consultar(pedido : Pedido) : List
+}
+
+class Pago {
+  - monto : Decimal
+  - fechaHora : DateTime
+  - formaPago : String
+}
+
+class ValidadorPago {
+  + validar(monto : Decimal, total : Decimal) : boolean
+}
+
+class RegistradorPago {
+  + registrarPago(pedido : Pedido, monto : Decimal, formaPago : String) : Pago
+}
+
+class PersonalAtencion {
+  - nombre : String
+  - rol : String
+}
+
+class GestorPedidos {
+  + registrarPedido(items : List) : Pedido
+  + modificarPedido(pedido : Pedido) : void
+}
+
+class NotificadorCocina {
+  + enviarPedidoACocina(pedido : Pedido) : void
+}
+
+Pedido "1" *-- "1..*" ItemPedido : contiene
+Pedido --> EstadoPedido : estado actual
+Pedido ..> PoliticaEstadoPedido : consulta reglas
+Pedido ..> HistorialPedido : registra cambios
+CalculadoraTotalPedido ..> Pedido : lee ítems
+
+Pedido "1" --> "0..*" Pago : tiene
+RegistradorPago ..> Pago : crea
+RegistradorPago ..> ValidadorPago : valida
+RegistradorPago ..> CalculadoraTotalPedido : obtiene total
+
+PersonalAtencion --> GestorPedidos : opera
+GestorPedidos ..> Pedido : crea / modifica
+GestorPedidos ..> NotificadorCocina : deriva
+
+note top of Pedido
+  SRP: conserva su identidad, sus ítems y su estado.
+  Antes también calculaba el total, definía las reglas
+  de estado, guardaba el historial y registraba el pago.
+end note
+
+note bottom of PoliticaEstadoPedido
+  Única razón de cambio:
+  las reglas de estado (RF7 a RF12).
+end note
+
+note bottom of CalculadoraTotalPedido
+  Única razón de cambio:
+  la forma de calcular el total (RF3).
+end note
+
+note bottom of HistorialPedido
+  Única razón de cambio:
+  lo que se conserva para auditoría (RF8, RNF4).
+end note
+
+note bottom of ValidadorPago
+  Única razón de cambio:
+  las reglas de validación del pago.
+end note
+
+note top of RegistradorPago
+  SRP: coordina el registro del pago (RF4).
+  Pago queda solo como dato del pago realizado.
+end note
+
+note bottom of NotificadorCocina
+  Única razón de cambio:
+  el medio de aviso a cocina (RF5, RNF5).
+end note
+
+note top of GestorPedidos
+  SRP: coordina el registro y la modificación (RF1, RF10).
+  PersonalAtencion queda solo como identidad y rol.
+end note
+@enduml

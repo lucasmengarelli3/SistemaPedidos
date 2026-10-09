@@ -1,0 +1,51 @@
+@startuml
+title Aplicación del Principio de Segregación de Interfaces (ISP)
+
+interface IEdicionPedido {
+    + agregarItem()
+    + quitarItem()
+    + modificarItem()
+}
+
+interface ICambioEstadoPedido {
+    + cambiarEstado()
+}
+
+class Pedido {
+    - numero
+    - fechaHora
+    - nombreRetiro
+    - estado
+    - prioritario
+
+    + agregarItem()
+    + quitarItem()
+    + modificarItem()
+    + cambiarEstado()
+    + cancelar()
+}
+
+class GestorPedidos
+class Cocina
+class Encargado
+
+Pedido ..|> IEdicionPedido
+Pedido ..|> ICambioEstadoPedido
+
+GestorPedidos ..> IEdicionPedido : usa
+Cocina ..> ICambioEstadoPedido : usa
+Encargado ..> ICambioEstadoPedido : usa
+
+note top of IEdicionPedido
+  Agrupa operaciones de edición del pedido.
+  Las modificaciones se permiten en estado recibido.
+  RF10 a RF12.
+end note
+
+note top of ICambioEstadoPedido
+  Expone únicamente el cambio de estado
+  requerido por sus clientes.
+  RF7.
+end note
+
+@enduml

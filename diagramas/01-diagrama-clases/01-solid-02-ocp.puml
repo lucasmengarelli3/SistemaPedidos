@@ -1,0 +1,92 @@
+@startuml
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide empty members
+hide circle
+
+title Principio Abierto/Cerrado (OCP) - Sistema de Pedidos "Sabor Kiosco"
+
+abstract class EstadoPedido {
+  + puedeModificar() : boolean
+  + puedeCancelar() : boolean
+  + puedePriorizar() : boolean
+  + puedeEntregar() : boolean
+}
+
+class Recibido
+class EnPreparacion
+class Listo
+class Entregado
+class Cancelado
+
+abstract class MetodoPago {
+  + registrar(Pedido, Decimal) : Pago
+}
+
+class Efectivo
+class Tarjeta
+class PagoQR
+class PagoPuntos
+
+abstract class CanalNotificacion {
+  + enviarPedido(Pedido) : void
+}
+
+class CocinaInterna
+class WhatsApp
+class DisplayMostrador
+
+class Pedido {
+  - numero : int
+  - estado : EstadoPedido
+  + cambiarEstado(nuevo : EstadoPedido) : void
+  + marcarPrioritario() : void
+}
+
+class RegistradorPago {
+  + registrar(pedido : Pedido, metodo : MetodoPago, monto : Decimal) : Pago
+}
+
+class GestorPedidos {
+  + registrarPedido() : Pedido
+  + notificarACocina(pedido : Pedido, canal : CanalNotificacion) : void
+}
+
+Recibido --|> EstadoPedido
+EnPreparacion --|> EstadoPedido
+Listo --|> EstadoPedido
+Entregado --|> EstadoPedido
+Cancelado --|> EstadoPedido
+
+Efectivo --|> MetodoPago
+Tarjeta --|> MetodoPago
+PagoQR --|> MetodoPago
+PagoPuntos --|> MetodoPago
+
+CocinaInterna --|> CanalNotificacion
+WhatsApp --|> CanalNotificacion
+DisplayMostrador --|> CanalNotificacion
+
+Pedido --> EstadoPedido : usa
+RegistradorPago ..> Pedido : recibe Pedido para registrar pago
+RegistradorPago --> MetodoPago : selecciona estrategia
+GestorPedidos --> CanalNotificacion : usa
+GestorPedidos ..> Pedido : crea, registra y coordina
+
+note top of Pedido
+  El pedido depende de abstracciones de estado y pago;
+  la notificación a cocina no la mantiene Pedido sino
+  GestorPedidos al registrar el pedido.
+end note
+
+note bottom of RegistradorPago
+  OCP: cada forma de pago es una variante abierta
+  a extensión sin tocar la coordinación central.
+end note
+
+note bottom of GestorPedidos
+  OCP: el canal de aviso puede ampliarse con nuevas
+  implementaciones, y GestorPedidos coordina el envío
+  a cocina al registrar el pedido.
+end note
+@enduml

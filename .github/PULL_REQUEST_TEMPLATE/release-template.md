@@ -1,10 +1,10 @@
-## Release: Actividad Obligatoria N°2
+## Release: Primer Parcial
 
 ### Resumen de la entrega
 <!-- Descripción general de qué se entrega -->
 
 ### Versión
-`release/actividad-obligatoria-2`
+`release/primer-parcial`
 
 ### Cambios integrados
 <!-- Lista de PRs mergeadas en esta release -->
@@ -18,16 +18,16 @@
 | Nombre | Rol | #X | #X |
 
 ### Archivos generados
-- [ ] `README.md` - Portada y accesos a los artefactos de la AO2
-- [ ] `changelog.md` - Registro de cambios y participación de la AO2
-- [ ] `herramientas-agile/herramientas_agile.md` - Índice de herramientas ágiles
-- [ ] `herramientas-agile/tarjetas-crc/` - Tarjetas CRC e índice `tarjetas-crc.md`
+- [ ] `README.md` - Portada y accesos a los índices del proyecto
+- [ ] `changelog.md` - Registro de cambios y participación del Primer Parcial
+- [ ] `anexos/anexos.md` - Índice de anexos
+- [ ] `anexos/principios-solid/` - Anexos `01-srp.md` a `05-dip.md` e índice `principios_solid.md`
 - [ ] `diagramas/diagramasUML.md` - Índice general de diagramas
-- [ ] `diagramas/02-casos-de-uso/` - Diagramas `.puml` y `.png` e índice `diagramas_de_casos_de_uso.md`
-- [ ] `diagramas/03-escenarios-casos-de-uso/` - Escenarios e índice `escenarios_de_casos_de_uso.md`
-- [ ] `ia/a2/` - Documentación del uso de IA de cada rol
+- [ ] `diagramas/01-diagrama-clases/` - Diagramas `01-solid-01-srp` a `01-solid-05-dip` en `.puml` y `.png`
+- [ ] `ia/primer-parcial/` - Documentación del uso de IA de cada rol
 
 ### Criterios de aceptación
+- [ ] Correcciones de la Actividad Obligatoria N°2 integradas en `develop` mediante el backport
 - [ ] Estructura de carpetas correcta
 - [ ] Formato markdown correcto
 - [ ] Todos los enlaces de los índices funcionan
@@ -35,6 +35,7 @@
 - [ ] Todos los integrantes documentados en changelog.md
 - [ ] PRs enlazadas en changelog.md
 - [ ] Issues cerradas correctamente
+- [ ] Solo quedan las ramas `master`, `develop` y `release/primer-parcial`
 
 ### Notas para el docente
 <!-- Comentarios o aclaraciones importantes -->

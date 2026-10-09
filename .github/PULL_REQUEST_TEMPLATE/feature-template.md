@@ -5,6 +5,7 @@
 - [ ] Tarjetas CRC
 - [ ] Diagramas de casos de uso
 - [ ] Escenarios de casos de uso
+- [ ] Principio SOLID (anexo, diagrama de clases y documentación de IA)
 - [ ] Documentación y coordinación
 - [ ] Corrección de hallazgos (`fix/`)
 - [ ] Otro (especificar)
@@ -21,6 +22,7 @@ Closes #<!-- Número del issue -->
 ## Verificación
 - [ ] He actualizado el `changelog.md`
 - [ ] He documentado mi aporte en el registro de cambios
+- [ ] He completado mi archivo `ia/primer-parcial/[rol].md` (prompt, archivos de contexto, output y ajustes)
 - [ ] Los archivos están en las carpetas correspondientes
 - [ ] He revisado la ortografía y formato markdown
 
