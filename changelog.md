@@ -41,7 +41,7 @@
 
 - [fix/rc10-rc11-trazabilidad] P1 - Resolver RC10 y RC11 de trazabilidad y participación: documentación de la secuencia real de correcciones de OCP y LSP y aclaración del cierre sin merge de las PR [#157], [#159] y [#161]. Issue: [#169](https://github.com/lucasmengarelli3/SistemaPedidos/issues/169) PR: [#170](https://github.com/lucasmengarelli3/SistemaPedidos/pull/170). @neith18.
 
-- [fix/rc09] P1 - Resolver RC09: Se realizo Code Review de las PR: [#141] y [#153]. Issue: [#171](https://github.com/lucasmengarelli3/SistemaPedidos/issues/171) PR: [#](). @lucasmengarelli3.
+- [fix/rc09] P1 - Resolver RC09: Se realizo Code Review de las PR: [#141] y [#153]. Issue: [#171](https://github.com/lucasmengarelli3/SistemaPedidos/issues/171) PR: [#172](https://github.com/lucasmengarelli3/SistemaPedidos/pull/172). @lucasmengarelli3.
 
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
