@@ -49,7 +49,7 @@ El diagrama muestra la refactorización propuesta para las tres clases analizada
 
 En el diagrama, `Pedido` depende de `PoliticaEstadoPedido` y de `HistorialPedido` mediante relaciones de dependencia (línea punteada): las usa, pero no contiene su lógica. La relación de composición con `ItemPedido` se mantiene igual que en el boceto.
 
-Esta separación respeta el RNF7, que exige que las transiciones de estado queden encapsuladas en las entidades del dominio. `cambiarEstado()` y `cancelar()` siguen siendo los únicos puntos de entrada para modificar el estado y permanecen en `Pedido`; lo que se extrae es la definición de la regla, no el control del estado. Ningún objeto externo puede cambiar el estado sin pasar por `Pedido`. Los actores del boceto que no se refactorizaron (`Cocina`, `Encargado` y `Cliente`) siguen solicitando los cambios de estado a través de esos métodos.
+**Cumplimiento del RNF7:** El RNF7 exige que las transiciones de estado queden encapsuladas en las entidades del dominio. La solución respeta este requisito porque `Pedido` sigue siendo la **única clase que puede modificar su propio estado**. `PoliticaEstadoPedido` es una **política consultiva**: no tiene acceso al estado del pedido ni puede cambiarlo; solo responde consultas sobre qué transiciones son válidas. `Pedido` consulta a la política y, si la transición es válida, ejecuta el cambio. De esta manera, ningún objeto externo puede alterar el estado sin pasar por `Pedido`, y las reglas de transición quedan encapsuladas en una clase especializada, lo que también respeta el SRP. Los actores del boceto que no se refactorizaron (`Cocina`, `Encargado` y `Cliente`) siguen solicitando los cambios de estado a través de los métodos de `Pedido`.
 
 `Pedido` incorpora la operación `marcarPrioritario()`, que no figuraba en el boceto. El RF9 pide marcar un pedido como prioritario y la tarjeta CRC de `Pedido` le asigna mantener su condición de prioridad, pero el boceto solo tenía el atributo `prioritario`. La operación consulta `permitePriorizar()` de `PoliticaEstadoPedido`, porque la prioridad solo se admite en estado recibido o en preparación.
 
@@ -74,6 +74,8 @@ Esta separación respeta el RNF7, que exige que las transiciones de estado quede
 | `NotificadorCocina` | Enviar el pedido a cocina. | Cambia el medio de comunicación con cocina (RF5, RNF5). |
 
 `PersonalAtencion` se asocia con `GestorPedidos`, que es quien crea y modifica el `Pedido` y deriva el aviso a `NotificadorCocina`. La identidad de quien opera queda separada de la lógica de los casos de uso.
+
+**Justificación de las clases nuevas:** `GestorPedidos` y `NotificadorCocina` no son entidades del dominio, sino **clases de servicio** que coordinan casos de uso. Surgen de aplicar SRP a `PersonalAtencion`, que mezclaba la identidad del empleado con la lógica de registrar pedidos y notificar a cocina. Su creación está justificada por los requisitos **RF1** (registrar pedido) y **RF5** (enviar comanda a cocina), y por las tarjetas CRC que ya asignaban esas responsabilidades a `PersonalAtencion`. Al separarlas, `PersonalAtencion` queda como una entidad simple de identidad, y las clases de servicio pueden cambiar sin afectar la representación del personal. No se agregaron conceptos ajenos al dominio: son tareas que ya existían como métodos en el boceto inicial (`registrarPedido()`, `modificarPedido()`, `enviarPedidoACocina()`).
 
 ### Por qué la solución es correcta
 

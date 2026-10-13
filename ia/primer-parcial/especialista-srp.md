@@ -47,4 +47,9 @@ Se contrastó la propuesta del agente con el boceto de clases, las tarjetas CRC 
 - **Relación entre `Pedido` y `Pago`.** El diagrama la rotulaba "corresponde a", que en el boceto es la relación entre `ItemPedido` y `Producto`. Se corrigió a "tiene", que es el nombre que el boceto le da a la relación entre `Pedido` y `Pago`.
 - **Actores e historial.** El análisis no mencionaba a `Cocina`, `Encargado` ni `Cliente`. Se aclaró que no se refactorizaron y que siguen solicitando los cambios de estado a través de `Pedido`, lo que sostiene el cumplimiento del RNF7. También se agregó el RF8 como razón de cambio de `HistorialPedido`, porque es el requisito que exige registrar la cancelación en el historial.
 
+### Ajustes adicionales para resolver RC15 y RC16
+
+- **RC15 (RNF7):** Se reforzó la justificación del cumplimiento del RNF7 en el archivo `01-srp.md`. Se aclaró que `PoliticaEstadoPedido` es una **política consultiva** que no modifica el estado, y que `Pedido` sigue siendo el **único punto de entrada** para cambiarlo. Se agregó una nota en el diagrama PlantUML que explica esto mismo.
+- **RC16 (clases nuevas):** Se justificó explícitamente la creación de `GestorPedidos` y `NotificadorCocina` como **clases de servicio** que surgen de aplicar SRP a `PersonalAtencion`, y se vincularon a los requisitos RF1 y RF5. Se agregaron notas en el diagrama PlantUML para aclarar que no son entidades del dominio.
+
 Además, la consigna nombra el boceto como `01-boceto-inicial.excalidraw`; se usó `01-boceto-inicial-corregido.excalidraw`, que es el archivo vigente en el repositorio tras las correcciones de la Actividad Obligatoria N°2. Para el atributo de retiro se mantuvo `nombreRetiro`, como figura en el boceto.

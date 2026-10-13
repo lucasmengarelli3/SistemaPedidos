@@ -1,4 +1,4 @@
-@startuml
+@startuml SRP_SistemaPedidos
 skinparam shadowing false
 skinparam classAttributeIconSize 0
 hide empty members
@@ -98,11 +98,15 @@ note top of Pedido
   SRP: conserva su identidad, sus ítems y su estado.
   Antes también calculaba el total, definía las reglas
   de estado, guardaba el historial y registraba el pago.
+  RNF7: Pedido sigue siendo el único punto de entrada
+  para cambiar el estado.
 end note
 
 note bottom of PoliticaEstadoPedido
   Única razón de cambio:
   las reglas de estado (RF7 a RF12).
+  Es una política consultiva: no modifica el estado,
+  solo responde consultas. Pedido aplica la transición.
 end note
 
 note bottom of CalculadoraTotalPedido
@@ -126,12 +130,16 @@ note top of RegistradorPago
 end note
 
 note bottom of NotificadorCocina
+  Clase de servicio (no entidad del dominio).
   Única razón de cambio:
   el medio de aviso a cocina (RF5, RNF5).
+  Surge de aplicar SRP a PersonalAtencion.
 end note
 
 note top of GestorPedidos
+  Clase de servicio (no entidad del dominio).
   SRP: coordina el registro y la modificación (RF1, RF10).
   PersonalAtencion queda solo como identidad y rol.
+  Surge de aplicar SRP a PersonalAtencion.
 end note
 @enduml
