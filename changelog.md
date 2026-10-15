@@ -45,6 +45,8 @@
 
 - [fix/rc17-ocp] P1 - Resolver RC17: contradicciones en OCP. Issue: [#174](https://github.com/lucasmengarelli3/SistemaPedidos/issues/174) PR: [#175](https://github.com/lucasmengarelli3/SistemaPedidos/pull/175). @neith18.
 
+- [fix/rc18-srp-dip] P1 - Resolver RC18: contradicción entre SRP y DIP. Issue: [#176](https://github.com/lucasmengarelli3/SistemaPedidos/issues/176) PR: [#177](https://github.com/lucasmengarelli3/SistemaPedidos/pull/177). @neith18.
+
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
 ### Added
