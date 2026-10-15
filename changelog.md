@@ -43,6 +43,8 @@
 
 - [fix/rc09] P1 - Resolver RC09: Se realizo Code Review de las PR: [#141] y [#153]. Issue: [#171](https://github.com/lucasmengarelli3/SistemaPedidos/issues/171) PR: [#172](https://github.com/lucasmengarelli3/SistemaPedidos/pull/172). @lucasmengarelli3.
 
+- [fix/rc17-ocp] P1 - Resolver RC17: contradicciones en OCP. Issue: [#174](https://github.com/lucasmengarelli3/SistemaPedidos/issues/174) PR: [#175](https://github.com/lucasmengarelli3/SistemaPedidos/pull/175). @neith18.
+
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
 ### Added
