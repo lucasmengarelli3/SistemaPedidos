@@ -74,9 +74,10 @@ GestorPedidos --> CanalNotificacion : usa
 GestorPedidos ..> Pedido : crea, registra y coordina
 
 note top of Pedido
-  El pedido depende de abstracciones de estado y pago;
-  la notificación a cocina no la mantiene Pedido sino
-  GestorPedidos al registrar el pedido.
+  Pedido depende de la abstracción EstadoPedido.
+  El registro del pago lo coordina RegistradorPago,
+  que recibe el Pedido y depende de MetodoPago.
+  La notificación a cocina la coordina GestorPedidos.
 end note
 
 note bottom of RegistradorPago
