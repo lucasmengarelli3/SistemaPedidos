@@ -53,3 +53,11 @@ Se contrastó la propuesta del agente con el boceto de clases, las tarjetas CRC 
 - **RC16 (clases nuevas):** Se justificó explícitamente la creación de `GestorPedidos` y `NotificadorCocina` como **clases de servicio** que surgen de aplicar SRP a `PersonalAtencion`, y se vincularon a los requisitos RF1 y RF5. Se agregaron notas en el diagrama PlantUML para aclarar que no son entidades del dominio.
 
 Además, la consigna nombra el boceto como `01-boceto-inicial.excalidraw`; se usó `01-boceto-inicial-corregido.excalidraw`, que es el archivo vigente en el repositorio tras las correcciones de la Actividad Obligatoria N°2. Para el atributo de retiro se mantuvo `nombreRetiro`, como figura en el boceto.
+
+### Segunda iteración: ajustes para resolver observaciones del docente
+
+Tras la revisión del docente, se ajustó el diseño para que el RNF7 se cumpla de forma efectiva:
+
+- **RC15 (RNF7 - segunda revisión):** El diseño anterior mantenía `PoliticaEstadoPedido` como una clase externa que validaba las transiciones, aunque `Pedido` fuera el único que modificaba su atributo `estado`. El docente observó que la validación seguía delegada fuera de la entidad. Se **eliminó `PoliticaEstadoPedido`** y se movieron sus reglas **dentro de `Pedido`** como métodos privados (`esTransicionValida()`) y públicos de consulta (`permiteModificar()`, `permiteCancelar()`, `permitePriorizar()`). Los métodos de comando (`cambiarEstado()`, `cancelar()`, `marcarPrioritario()`) consultan la validación interna antes de aplicar el cambio. Con esto, las transiciones quedan encapsuladas dentro de la entidad del dominio, tal como exige el RNF7.
+
+- **RC16 (RF10):** Se agregó el requisito **RF10** (modificación de pedidos) a la justificación textual de `GestorPedidos`, ya que coordina tanto el alta (RF1) como la modificación (RF10) de pedidos.
