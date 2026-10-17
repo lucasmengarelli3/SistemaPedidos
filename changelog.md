@@ -47,6 +47,12 @@
 
 - [fix/rc18-srp-dip] P1 - Resolver RC18: contradicción entre SRP y DIP. Issue: [#176](https://github.com/lucasmengarelli3/SistemaPedidos/issues/176) PR: [#177](https://github.com/lucasmengarelli3/SistemaPedidos/pull/177). @neith18.
 
+- [fix/rc1-rc5-rc8] P1 - Resolver RC1, RC5, RC6 y RC8. Issue: [#167](https://github.com/cmariano93-netizen/SistemaPedidos/issues/167) PR: [#168](https://github.com/cmariano93-netizen/SistemaPedidos/pull/168). @neith18 (Diseñadora de Tarjetas CRC).
+
+- [fix/rc10-rc11-trazabilidad] P1 - Resolver RC10 y RC11 de trazabilidad y participación. Issue: [#169](https://github.com/cmariano93-netizen/SistemaPedidos/issues/169) PR: [#170](https://github.com/cmariano93-netizen/SistemaPedidos/pull/170). @neith18 (Diseñadora de Tarjetas CRC).
+
+- [fix/rc09] Changelog actualizado RC09. Issue: [#171](https://github.com/cmariano93-netizen/SistemaPedidos/issues/171) PR: [#172](https://github.com/cmariano93-netizen/SistemaPedidos/pull/172). @lucasmengarelli3 (Modelador de diagramas de casos de uso).
+
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
 ### Added
