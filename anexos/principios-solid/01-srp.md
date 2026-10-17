@@ -38,20 +38,17 @@ El diagrama muestra la refactorización propuesta para las tres clases analizada
 
 ### Pedido
 
-`Pedido` conserva su identidad (`numero`, `nombreRetiro`), su composición de `ItemPedido`, su `estado` y su condición de `prioritario`. De sus cinco responsabilidades originales se extraen cuatro: tres pasan a clases nuevas y el registro del pago pasa a `RegistradorPago`, que se describe en la sección siguiente.
+`Pedido` conserva su identidad (`numero`, `nombreRetiro`), su composición de `ItemPedido`, su `estado` y su condición de `prioritario`. De sus cinco responsabilidades originales se extraen tres: el cálculo del total pasa a `CalculadoraTotalPedido`, el historial pasa a `HistorialPedido` y el registro del pago pasa a `RegistradorPago`. **Las reglas de estado permanecen dentro de `Pedido`** como métodos privados, porque son parte de la identidad y el comportamiento de la entidad.
 
 | Clase resultante | Responsabilidad única | Razón para cambiar |
 | :--- | :--- | :--- |
-| `Pedido` | Mantener sus ítems y su estado actual. | Cambia la estructura del pedido. |
-| `PoliticaEstadoPedido` | Decidir si un estado permite modificar, cancelar o priorizar, y si una transición es válida. | Cambian las reglas de estado (RF7 a RF12). |
+| `Pedido` | Mantener sus ítems, su estado y **validar las transiciones de estado**. | Cambia la estructura del pedido o las reglas de transición (RF7 a RF12). |
 | `CalculadoraTotalPedido` | Calcular el total a partir de los ítems. | Cambia la forma de calcular el total (RF3). |
 | `HistorialPedido` | Registrar y consultar los cambios de estado de un pedido. | Cambia lo que se conserva para auditoría (RF8, RNF4). |
 
-En el diagrama, `Pedido` depende de `PoliticaEstadoPedido` y de `HistorialPedido` mediante relaciones de dependencia (línea punteada): las usa, pero no contiene su lógica. La relación de composición con `ItemPedido` se mantiene igual que en el boceto.
+**Cumplimiento del RNF7:** El RNF7 exige que las transiciones de estado queden **encapsuladas dentro de las entidades del dominio**. La solución cumple este requisito porque las reglas de validación **viven dentro de `Pedido`** como métodos privados: `esTransicionValida(nuevo)`, `permiteModificar()`, `permiteCancelar()` y `permitePriorizar()`. Ningún objeto externo puede cambiar el estado ni validar transiciones sin pasar por `Pedido`. Los métodos públicos de comando (`cambiarEstado()`, `cancelar()`, `marcarPrioritario()`) son los **únicos puntos de entrada** y consultan internamente la validación antes de aplicar el cambio. Los actores del boceto que no se refactorizaron (`Cocina`, `Encargado` y `Cliente`) siguen solicitando los cambios de estado a través de esos métodos, sin tener acceso al atributo `estado` ni a la lógica de validación.
 
-Esta separación respeta el RNF7, que exige que las transiciones de estado queden encapsuladas en las entidades del dominio. `cambiarEstado()` y `cancelar()` siguen siendo los únicos puntos de entrada para modificar el estado y permanecen en `Pedido`; lo que se extrae es la definición de la regla, no el control del estado. Ningún objeto externo puede cambiar el estado sin pasar por `Pedido`. Los actores del boceto que no se refactorizaron (`Cocina`, `Encargado` y `Cliente`) siguen solicitando los cambios de estado a través de esos métodos.
-
-`Pedido` incorpora la operación `marcarPrioritario()`, que no figuraba en el boceto. El RF9 pide marcar un pedido como prioritario y la tarjeta CRC de `Pedido` le asigna mantener su condición de prioridad, pero el boceto solo tenía el atributo `prioritario`. La operación consulta `permitePriorizar()` de `PoliticaEstadoPedido`, porque la prioridad solo se admite en estado recibido o en preparación.
+`Pedido` incorpora la operación `marcarPrioritario()`, que no figuraba en el boceto. El RF9 pide marcar un pedido como prioritario y la tarjeta CRC de `Pedido` le asigna mantener su condición de prioridad, pero el boceto solo tenía el atributo `prioritario`. La operación consulta internamente `permitePriorizar()`, porque la prioridad solo se admite en estado recibido o en preparación.
 
 `CalculadoraTotalPedido` depende de `Pedido` y no al revés: lee los ítems y devuelve el importe. Por eso `Pedido` deja de tener un método `calcularTotal()`.
 
@@ -70,14 +67,17 @@ Esta separación respeta el RNF7, que exige que las transiciones de estado quede
 | Clase resultante | Responsabilidad única | Razón para cambiar |
 | :--- | :--- | :--- |
 | `PersonalAtencion` | Representar a la persona que atiende: nombre y rol. | Cambian los datos del personal. |
-| `GestorPedidos` | Coordinar el alta y la modificación de pedidos. | Cambian los pasos de esos casos de uso (RF1, RF10). |
+| `GestorPedidos` | Coordinar el alta y la modificación de pedidos. | Cambian los pasos de esos casos de uso (**RF1 y RF10**). |
 | `NotificadorCocina` | Enviar el pedido a cocina. | Cambia el medio de comunicación con cocina (RF5, RNF5). |
 
 `PersonalAtencion` se asocia con `GestorPedidos`, que es quien crea y modifica el `Pedido` y deriva el aviso a `NotificadorCocina`. La identidad de quien opera queda separada de la lógica de los casos de uso.
 
+**Justificación de las clases nuevas:** `GestorPedidos` y `NotificadorCocina` no son entidades del dominio, sino **clases de servicio** que coordinan casos de uso. Surgen de aplicar SRP a `PersonalAtencion`, que mezclaba la identidad del empleado con la lógica de registrar pedidos y notificar a cocina. Su creación está justificada por los requisitos **RF1** (registrar pedido), **RF10** (modificar pedido) y **RF5** (enviar comanda a cocina), y por las tarjetas CRC que ya asignaban esas responsabilidades a `PersonalAtencion`. En particular, `GestorPedidos` coordina tanto el alta (RF1) como la modificación (RF10) de pedidos, que son dos casos de uso distintos pero con la misma naturaleza de coordinación. Al separarlas, `PersonalAtencion` queda como una entidad simple de identidad, y las clases de servicio pueden cambiar sin afectar la representación del personal. No se agregaron conceptos ajenos al dominio: son tareas que ya existían como métodos en el boceto inicial (`registrarPedido()`, `modificarPedido()`, `enviarPedidoACocina()`).
+
 ### Por qué la solución es correcta
 
 - Cada clase resultante tiene una sola razón para cambiar, identificada con un requisito concreto del sistema. Ninguna quedó con una responsabilidad compartida.
+- **El encapsulamiento del RNF7 es real:** las reglas de estado están dentro de `Pedido`, no en una clase externa que las consulte.
 - La descomposición no agrega conceptos ajenos al dominio: las clases nuevas nombran tareas que ya figuraban como métodos del boceto o como responsabilidades de las tarjetas CRC.
 - Las clases que ya eran cohesivas no se modificaron. `ItemPedido` solo calcula su subtotal, `Producto` solo informa su precio y `Personalizacion` solo calcula su adicional.
-- El costo es un mayor número de clases: las tres clases analizadas pasan a ser diez, más la enumeración `EstadoPedido`. Se considera aceptable porque cada una es pequeña y puede modificarse sin afectar al resto.
+- El costo es un mayor número de clases: las tres clases analizadas pasan a ser nueve, más la enumeración `EstadoPedido`. Se considera aceptable porque cada una es pequeña y puede modificarse sin afectar al resto.
