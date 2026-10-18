@@ -6,6 +6,9 @@
 
 ## [Unreleased]
 
+## Release Primer Parcial - 2026-10-03
+
+
 ### Added
 
 - [feature/esp-srp-add-anexo-srp] P1 - Principio de Responsabilidad Única (SRP): anexo 01-srp.md, diagrama de clases 01-solid-01-srp, índice principios_solid.md y documentación del uso de IA. Issue: #140 PR: #141. @santimarM (Documentador y Coordinador de Repositorio + SRP).
@@ -29,6 +32,10 @@
 ### Fixed
 
 - [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): Correcciones de Hallazgos: 1, 2, 3, 4, 5, 6. Issue: [#145](https://github.com/lucasmengarelli3/SistemaPedidos/issues/145) PR: [#146](https://github.com/lucasmengarelli3/SistemaPedidos/pull/146). @LMengarelli93 (Especialista en Principios de Extensión (OCP)).
+
+- [fix/esp-extensión-lsp-add-anexo-lsp] Resolución RC4: Issue: #163 PR: #164. @lucasmengarelli3 (Especialista en Principios de Extensión (LSP)).
+
+- [fix/esp-extensión-ocp-add-anexo-ocp] Resolución RC2, RC3: Correcciones de Hallazgos 2 y 3. Issue: #165 PR: #166. @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
 
 - [fix/rc1-rc5-rc8] P1 - Resolver RC1, RC5, RC6 y RC8. Issue: [#167](https://github.com/cmariano93-netizen/SistemaPedidos/issues/167) PR: [#168](https://github.com/cmariano93-netizen/SistemaPedidos/pull/168). @neith18 (Diseñadora de Tarjetas CRC).
 
