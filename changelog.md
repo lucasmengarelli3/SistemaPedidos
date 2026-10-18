@@ -8,18 +8,17 @@
 
 ## Release Primer Parcial - 2026-10-03
 
-
 ### Added
 
-- [feature/esp-srp-add-anexo-srp] P1 - Principio de Responsabilidad Única (SRP): anexo 01-srp.md, diagrama de clases 01-solid-01-srp, índice principios_solid.md y documentación del uso de IA. Issue: #140 PR: #141. @santimarM (Documentador y Coordinador de Repositorio + SRP).
+- [feature/esp-srp-add-anexo-srp] P1 - Principio de Responsabilidad Única (SRP): anexo `01-srp.md`, diagrama de clases `01-solid-01-srp`, índice `principios_solid.md` y documentación del uso de IA. Issue: [#140](https://github.com/lucasmengarelli3/SistemaPedidos/issues/140) PR: [#141](https://github.com/lucasmengarelli3/SistemaPedidos/pull/141). @santimarM (Documentador y Coordinador de Repositorio + SRP).
 
-- [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): anexo 02-ocp.md, diagrama de clases 01-solid-02-ocp y documentación del uso de IA. Issue: #143 PR: #144. @LMengarelli93 (Especialista en Principios de Extensión (OCP)).
+- [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): anexo `02-ocp.md`, diagrama de clases `01-solid-02-ocp` y documentación del uso de IA. Issue: [#143](https://github.com/lucasmengarelli3/SistemaPedidos/issues/143) PR: [#144](https://github.com/lucasmengarelli3/SistemaPedidos/pull/144). @LMengarelli93 (Especialista en Principios de Extensión (OCP)).
 
-- [feature/esp-isp-add-anexo-isp] P1 - Principio de Segregación de Interfaces (ISP): anexo 04-isp.md, diagrama de clases 01-solid-04-isp y documentación del uso de IA. Issue: #147 PR: #148. @neith18 (Especialista en Segregación de Interfaces (ISP)).
+- [feature/esp-isp-add-anexo-isp] P1 - Principio de Segregación de Interfaces (ISP): anexo `04-isp.md`, diagrama de clases `01-solid-04-isp` y documentación del uso de IA. Issue: [#147](https://github.com/lucasmengarelli3/SistemaPedidos/issues/147) PR: [#148](https://github.com/lucasmengarelli3/SistemaPedidos/pull/148). @neith18 (Especialista en Segregación de Interfaces (ISP)).
 
-- [feature/esp-dip-add-anexo-dip] P1 - Especialista en Inversión de Dependencias (DIP): anexo 05-dip.md, diagrama de clases 01-solid-05-dip y documento de IA. Issue: #149 PR: #150. @AgustinCalaver (Especialista en Inversión de Dependencias).
+- [feature/esp-dip-add-anexo-dip] P1 - Especialista en Inversión de Dependencias (DIP): anexo `05-dip.md`, diagrama de clases `01-solid-05-dip` y documento de IA. Issue: [#149](https://github.com/lucasmengarelli3/SistemaPedidos/issues/149) PR: [#150](https://github.com/lucasmengarelli3/SistemaPedidos/pull/150). @AgustinCalaver (Especialista en Inversión de Dependencias).
 
-- [feature/esp-extensión-lsp-add-anexo-lsp] P1 - Principio de sustitución de Liskov (LSP): anexo 03-LSP.MD, diagrama de clases 01-solid-03-lsp y documentación del uso de IA. Issue: #154 PR:#155. @LMengarelli93 (Especialista en Principios de Extensión (LSP)).
+- [feature/esp-extensión-lsp-add-anexo-lsp] P1 - Principio de sustitución de Liskov (LSP): anexo `03-LSP.MD`, diagrama de clases `01-solid-03-lsp` y documentación del uso de IA. Issue: [#154](https://github.com/lucasmengarelli3/SistemaPedidos/issues/154) PR: [#155](https://github.com/lucasmengarelli3/SistemaPedidos/pull/155). @LMengarelli93 (Especialista en Principios de Extensión (LSP)).
 
 ### Changed
 
@@ -33,9 +32,9 @@
 
 - [feature/esp-extension-ocp-add-anexo-ocp] P1 - Principio Abierto/Cerrado (OCP): Correcciones de Hallazgos: 1, 2, 3, 4, 5, 6. Issue: [#145](https://github.com/lucasmengarelli3/SistemaPedidos/issues/145) PR: [#146](https://github.com/lucasmengarelli3/SistemaPedidos/pull/146). @LMengarelli93 (Especialista en Principios de Extensión (OCP)).
 
-- [fix/esp-extensión-lsp-add-anexo-lsp] Resolución RC4: Issue: #163 PR: #164. @lucasmengarelli3 (Especialista en Principios de Extensión (LSP)).
+- [fix/esp-extensión-lsp-add-anexo-lsp] Resolución RC4: Issue: [#163](https://github.com/lucasmengarelli3/SistemaPedidos/issues/163) PR: [#164](https://github.com/lucasmengarelli3/SistemaPedidos/pull/164). @lucasmengarelli3 (Especialista en Principios de Extensión (LSP)).
 
-- [fix/esp-extensión-ocp-add-anexo-ocp] Resolución RC2, RC3: Correcciones de Hallazgos 2 y 3. Issue: #165 PR: #166. @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
+- [fix/esp-extensión-ocp-add-anexo-ocp] Resolución RC2, RC3: Correcciones de Hallazgos 2 y 3. Issue: [#165](https://github.com/lucasmengarelli3/SistemaPedidos/issues/165) PR: [#166](https://github.com/lucasmengarelli3/SistemaPedidos/pull/166). @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
 
 - [fix/rc1-rc5-rc8] P1 - Resolver RC1, RC5, RC6 y RC8. Issue: [#167](https://github.com/cmariano93-netizen/SistemaPedidos/issues/167) PR: [#168](https://github.com/cmariano93-netizen/SistemaPedidos/pull/168). @neith18 (Diseñadora de Tarjetas CRC).
 
@@ -58,8 +57,8 @@
   PR: [#102](https://github.com/cmariano93-netizen/SistemaPedidos/pull/102). @cmariano93-netizen (Modelador de Diagramas de Casos de Uso).
 
   - [feature/modelador-diag-casos-uso-update-use-case-1] actualizados archivos .puml y .png en carpeta diagramas/02-casos-de-uso/.
-  Issue: [#102](https://github.com/cmariano93-netizen/SistemaPedidos/pull/102)
-  PR: [#109](https://github.com/cmariano93-netizen/SistemaPedidos/pull/109). @cmariano93-netizen (Modelador de Diagramas de Casos de Uso).
+    Issue: [#102](https://github.com/cmariano93-netizen/SistemaPedidos/pull/102)
+    PR: [#109](https://github.com/cmariano93-netizen/SistemaPedidos/pull/109). @cmariano93-netizen (Modelador de Diagramas de Casos de Uso).
 
 - [feature/espec-escenarios-casos-uso-add-escenario-1] A2 - Especialista en escenarios : agregar escenaios individuales de CU, índice y auditoría de IA.
   Issue: [#104](https://github.com/cmariano93-netizen/SistemaPedidos/issues/104)
@@ -245,4 +244,4 @@
 
 - [fix/doc-coor-repo-update-changelog.md] Changelog.md restructurado completo. Issue: [#93](https://github.com/cmariano93-netizen/SistemaPedidos/issues/93) PR: [#94](https://github.com/cmariano93-netizen/SistemaPedidos/pull/94). @LMengarelli93 (Documentador y coordinador).
 
-- [fix/doc-coor-repo-update-changelog.md] Changelog.md restructurado completo. Issue: [#95](https://github.com/cmariano93-netizen/SistemaPedidos/issues/95) PR: [#96](https://github.com/cmariano93-netizen/SistemaPedidos/pull/96). @LMengarelli93 (Documentador y coordinador).
+- [fix/doc-coor-repo-update-changelog.md] Changelog.md restructurado completo. Issue: [#95](https://github.com/cmariano93-netizen/SistemaPedidos/issues/95) PR: [#96](https://github.com/lucasmengarelli3/SistemaPedidos/pull/96). @LMengarelli93 (Documentador y coordinador).
