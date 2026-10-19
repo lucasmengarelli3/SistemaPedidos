@@ -52,6 +52,8 @@
 
 - [fix/rc15-rc16-srp] docs: registra correcciones de RC15 y RC16 en changelog (RC14). PR: [#181](https://github.com/lucasmengarelli3/SistemaPedidos/pull/181). @tomx2002-droid (Corrección individual de RC15 y RC16 - Recuperatorio RC14).
 
+- [fix/rc19-rc28-changelog] P1 - Resolver RC19 a RC28: correcciones del changelog. PR: [#182](https://github.com/lucasmengarelli3/SistemaPedidos/pull/182). @neith18 (Especialista en Segregación de Interfaces (ISP)).
+
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
 ### Added
