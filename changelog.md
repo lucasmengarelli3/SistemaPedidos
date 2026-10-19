@@ -36,23 +36,23 @@
 
 - [fix/esp-extensión-ocp-add-anexo-ocp] Resolución RC2, RC3: Correcciones de Hallazgos 2 y 3. Issue: [#165](https://github.com/lucasmengarelli3/SistemaPedidos/issues/165) PR: [#166](https://github.com/lucasmengarelli3/SistemaPedidos/pull/166). @lucasmengarelli3 (Especialista en Principios de Extensión (OCP)).
 
-- [fix/rc1-rc5-rc8] P1 - Resolver RC1, RC5, RC6 y RC8. Issue: [#167](https://github.com/cmariano93-netizen/SistemaPedidos/issues/167) PR: [#168](https://github.com/cmariano93-netizen/SistemaPedidos/pull/168). @neith18 (Diseñadora de Tarjetas CRC).
+- [fix/rc1-rc5-rc8] P1 - Resolver RC1, RC5, RC6 y RC8. Issue: [#167](https://github.com/lucasmengarelli3/SistemaPedidos/issues/167) PR: [#168](https://github.com/lucasmengarelli3/SistemaPedidos/pull/168). @neith18 (Especialista en Segregación de Interfaces (ISP)).
 
-- [fix/rc10-rc11-trazabilidad] P1 - Resolver RC10 y RC11 de trazabilidad y participación. Issue: [#169](https://github.com/cmariano93-netizen/SistemaPedidos/issues/169) PR: [#170](https://github.com/cmariano93-netizen/SistemaPedidos/pull/170). @neith18 (Diseñadora de Tarjetas CRC).
+- [fix/rc10-rc11-trazabilidad] P1 - Resolver RC10 y RC11 de trazabilidad y participación. Issue: [#169](https://github.com/lucasmengarelli3/SistemaPedidos/issues/169) PR: [#170](https://github.com/lucasmengarelli3/SistemaPedidos/pull/170). @neith18 (Especialista en Segregación de Interfaces (ISP)).
 
-- [fix/rc09] Changelog actualizado RC09. Issue: [#171](https://github.com/cmariano93-netizen/SistemaPedidos/issues/171) PR: [#172](https://github.com/cmariano93-netizen/SistemaPedidos/pull/172). @lucasmengarelli3 (Modelador de diagramas de casos de uso).
+- [fix/rc09] Changelog actualizado RC09. Issue: [#171](https://github.com/lucasmengarelli3/SistemaPedidos/issues/171) PR: [#172](https://github.com/lucasmengarelli3/SistemaPedidos/pull/172). @lucasmengarelli3 (Especialista en Principios de Extensión (OCP + LSP)).
 
-- [fix/rc15-rc16-srp] P1 - Correcciones RC15 y RC16 en SRP: encapsulamiento de las reglas de transición de estado dentro de `Pedido` (RNF7) y justificación de `GestorPedidos` con RF10. Se eliminó la clase `PoliticaEstadoPedido`, se actualizó `01-srp.md`, `01-solid-01-srp.puml`, `01-solid-01-srp.png` y `ia/primer-parcial/especialista-srp.md`. Issue: [#179](https://github.com/lucasmengarelli3/SistemaPedidos/issues/179) PR: [#173](https://github.com/lucasmengarelli3/SistemaPedidos/pull/173). @tomx2002-droid (Corrección de RC15 y RC16 - Recuperatorio RC14).
+- [fix/rc15-rc16-srp] fix: resuelve RC15 (RNF7) y RC16 (clases de servicio SRP). Issue: [#179](https://github.com/lucasmengarelli3/SistemaPedidos/issues/179) PR: [#173](https://github.com/lucasmengarelli3/SistemaPedidos/pull/173). @tomx2002-droid (Corrección individual de RC15 y RC16 - Recuperatorio RC14).
 
-- [fix/rc17-ocp] P1 - Resolver RC17: contradicciones en OCP. Issue: [#174](https://github.com/lucasmengarelli3/SistemaPedidos/issues/174) PR: [#175](https://github.com/lucasmengarelli3/SistemaPedidos/pull/175). @neith18.
+- [fix/rc17-ocp] P1 - Resolver RC17: contradicciones en OCP. Issue: [#174](https://github.com/lucasmengarelli3/SistemaPedidos/issues/174) PR: [#175](https://github.com/lucasmengarelli3/SistemaPedidos/pull/175). @neith18 (Especialista en Segregación de Interfaces (ISP)).
 
-- [fix/rc18-srp-dip] P1 - Resolver RC18: contradicción entre SRP y DIP. Issue: [#176](https://github.com/lucasmengarelli3/SistemaPedidos/issues/176) PR: [#177](https://github.com/lucasmengarelli3/SistemaPedidos/pull/177). @neith18.
+- [fix/rc18-srp-dip] P1 - Resolver RC18: contradicción entre SRP y DIP. Issue: [#176](https://github.com/lucasmengarelli3/SistemaPedidos/issues/176) PR: [#177](https://github.com/lucasmengarelli3/SistemaPedidos/pull/177). @neith18 (Especialista en Segregación de Interfaces (ISP)).
 
-- [fix/rc1-rc5-rc8] P1 - Resolver RC1, RC5, RC6 y RC8. Issue: [#167](https://github.com/cmariano93-netizen/SistemaPedidos/issues/167) PR: [#168](https://github.com/cmariano93-netizen/SistemaPedidos/pull/168). @neith18 (Diseñadora de Tarjetas CRC).
+- [fix/doc-coord-rc13] P1 - Resolver RC13: changelog de los fixes posteriores. PR: [#180](https://github.com/lucasmengarelli3/SistemaPedidos/pull/180). @AgustinCalaver (Especialista en Inversión de Dependencias).
 
-- [fix/rc10-rc11-trazabilidad] P1 - Resolver RC10 y RC11 de trazabilidad y participación. Issue: [#169](https://github.com/cmariano93-netizen/SistemaPedidos/issues/169) PR: [#170](https://github.com/cmariano93-netizen/SistemaPedidos/pull/170). @neith18 (Diseñadora de Tarjetas CRC).
+- [fix/rc15-rc16-srp] docs: registra correcciones de RC15 y RC16 en changelog (RC14). PR: [#181](https://github.com/lucasmengarelli3/SistemaPedidos/pull/181). @tomx2002-droid (Corrección individual de RC15 y RC16 - Recuperatorio RC14).
 
-- [fix/rc09] Changelog actualizado RC09. Issue: [#171](https://github.com/cmariano93-netizen/SistemaPedidos/issues/171) PR: [#172](https://github.com/cmariano93-netizen/SistemaPedidos/pull/172). @lucasmengarelli3 (Modelador de diagramas de casos de uso).
+- [fix/rc19-rc28-changelog] P1 - Resolver RC19 a RC28: correcciones del changelog. PR: [#182](https://github.com/lucasmengarelli3/SistemaPedidos/pull/182). @neith18 (Especialista en Segregación de Interfaces (ISP)).
 
 ## Release Actividad Obligatoria N°2 - 2026-09-30
 
