@@ -43,7 +43,7 @@ Aplicado al dominio del kiosco:
 - `MetodoPago` es la superclase abstracta; cada medio de pago (`Efectivo`, `Tarjeta`, `PagoQR`, `PagoPuntos`) implementa cómo se registra el cobro.
 - `CanalNotificacion` representa a cada forma de avisar a cocina; cada canal puede responder a `enviarPedido()` con sus propias reglas.
 
-La idea central es que `Pedido` depende de abstracciones (`EstadoPedido`, `MetodoPago`,) y no de cada caso concreto, mientras que la notificación a cocina es responsabilidad de `GestorPedidos`. Esta dependencia está invertida y es compatible con OCP, porque los nuevos casos se incorporan como nuevas subclases, no como modificaciones al código ya probado.
+La idea central es que `Pedido` depende de la abstracción `EstadoPedido` y no de cada estado concreto. Para el registro de pagos, `RegistradorPago` recibe el `Pedido` a procesar y depende de la abstracción `MetodoPago`, evitando conocer cada medio de pago concreto. La notificación a cocina es responsabilidad de `GestorPedidos`, que utiliza la abstracción `CanalNotificacion`. Este diseño es compatible con OCP porque los nuevos estados, medios de pago y canales de notificación se incorporan mediante nuevas subclases, sin modificar la lógica estable de las clases cliente.
 
 ## Estructura de Clases
 

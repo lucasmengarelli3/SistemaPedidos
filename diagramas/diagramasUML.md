@@ -9,7 +9,6 @@
 - [Diagrama de clases - Segregación de Interfaces (ISP)](./01-diagrama-clases/01-solid-04-isp.png) ([PlantUML](./01-diagrama-clases/01-solid-04-isp.puml))
 - [Diagrama de clases - Inversión de Dependencias (DIP)](./01-diagrama-clases/01-solid-05-dip.png) ([PlantUML](./01-diagrama-clases/01-solid-05-dip.puml))
 
-La justificación de cada diagrama SOLID está en el [Anexo - Principios SOLID](../anexos/principios-solid/principios_solid.md).
 
 ### Casos de uso
 

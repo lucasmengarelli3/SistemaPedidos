@@ -40,7 +40,7 @@ También generó el diagrama de clases [01-solid-02-ocp.puml](../../diagramas/01
 
 Fragmento representativo de la respuesta:
 
-> `Pedido` depende de abstracciones de estado y pago (`EstadoPedido`, `MetodoPago`), mientras que la notificación a cocina queda coordinada por `GestorPedidos` a través de `CanalNotificacion`. Esto coincide con el diagrama: `Pedido` no usa `CanalNotificacion` directamente, y el envío se realiza desde el gestor al registrar el pedido.
+> `Pedido` depende de la abstracción de estado `EstadoPedido`. Para el cobro, `RegistradorPago` recibe el `Pedido` y depende de la abstracción `MetodoPago`, mientras que la notificación a cocina queda coordinada por `GestorPedidos` a través de `CanalNotificacion`. Esto coincide con el diagrama: `Pedido` no depende directamente de `MetodoPago` ni de `CanalNotificacion`.
 
 > `RegistradorPago` ya no necesita conocer todos los casos concretos de cobro. Depende de `MetodoPago` y cada estrategia concreta implementa una forma de registro distinta. Esto permite ampliar con `PagoTransferencia` o `PagoCuentaCorriente` sin tocar la clase que coordina la operación.
 
@@ -50,7 +50,7 @@ Se contrastó la propuesta del agente con el boceto de clases, las tarjetas CRC,
 
 - **Responsabilidad de la notificación a cocina.** La propuesta original podía sugerir que `Pedido` o `CanalNotificacion` eran quienes emitían el aviso. Se dejó explícito que la coordinación la realiza `GestorPedidos`, y que la relación con `CocinaInterna` ocurre al registrar el pedido.
 - **Duplicación del registro de pago.** El diagrama no podía volver a introducir `registrarPago()` en `Pedido` porque ese método ya había sido quitado en el SRP como duplicado con `RegistradorPago`. Se mantuvo el diseño consistente con la firma `registrar(pedido : Pedido, metodo : MetodoPago, monto : Decimal) : Pago`.
-- **Dependencia de `Pedido` con `RegistradorPago`.** La relación se mantuvo como una dependencia explícita del pedido hacia el registrador, sin cambiar la estructura del diagrama, pero explicitando que `RegistradorPago` recibe el `Pedido` como parámetro cuando procesa el cobro.
+- **Dependencia entre `RegistradorPago` y `Pedido`.** Se corrigió la descripción para reflejar la dirección mostrada en el diagrama: `RegistradorPago` depende de `Pedido` porque lo recibe como parámetro al procesar el cobro. `Pedido` no depende de `RegistradorPago`. A su vez, `RegistradorPago` depende de la abstracción `MetodoPago`, que permite incorporar nuevas formas de pago sin modificar la coordinación del registro.
 - **Coherencia con el OCP.** Se reforzó que la variación del negocio queda encapsulada en jerarquías de extensión (`EstadoPedido`, `MetodoPago`, `CanalNotificacion`), mientras el cliente (`Pedido`, `GestorPedidos`, `RegistradorPago`) conserva la lógica estable y reutilizable.
 - **Alineación con el dominio.** El análisis se centró en los requisitos del kiosco: ciclo de vida del pedido, tipos de pago y avisos a cocina. No se introdujeron nuevas responsabilidades que no estuvieran sustentadas por el boceto ni por las tarjetas CRC.
 

@@ -28,11 +28,19 @@ interface IProcesadorPago {
 class PersonalAtencion {
   - nombre : String
   - rol : String
+}
+
+class GestorPedidos {
   + registrarPedido() : Pedido
-  + modificarPedido() : void
-  + enviarPedidoACocina() : void
+  + modificarPedido(pedido : Pedido) : void
   .. Constructor ..
-  + PersonalAtencion(repositorio : IRepositorioPedidos, catalogo : ICatalogoProductos, recepcion : IRecepcionPedidos)
+  + GestorPedidos(repositorio : IRepositorioPedidos, catalogo : ICatalogoProductos, notificador : NotificadorCocina)
+}
+
+class NotificadorCocina {
+  + enviarPedidoACocina(pedido : Pedido) : void
+  .. Constructor ..
+  + NotificadorCocina(recepcion : IRecepcionPedidos)
 }
 
 class Cocina {
@@ -52,10 +60,15 @@ class Pedido {
   + agregarItem(item : ItemPedido) : void
   + quitarItem(item : ItemPedido) : void
   + modificarItem(item : ItemPedido) : void
-  + calcularTotal() : Decimal
   + cambiarEstado(nuevo : EstadoPedido) : void
   + cancelar() : void
 }
+
+class CalculadoraTotalPedido {
+  + calcularTotal(pedido : Pedido) : Decimal
+}
+
+CalculadoraTotalPedido ..> Pedido : calcula total
 
 class ItemPedido {
   - cantidad : int
@@ -119,9 +132,11 @@ Cocina ..|> IRecepcionPedidos
 ProcesadorEfectivo ..|> IProcesadorPago
 ProcesadorQR ..|> IProcesadorPago
 
-PersonalAtencion --> IRepositorioPedidos : consulta / guarda
-PersonalAtencion --> ICatalogoProductos : busca productos
-PersonalAtencion --> IRecepcionPedidos : envía pedido
+PersonalAtencion --> GestorPedidos : utiliza
+GestorPedidos --> IRepositorioPedidos : consulta / guarda
+GestorPedidos --> ICatalogoProductos : busca productos
+GestorPedidos --> NotificadorCocina : deriva aviso
+NotificadorCocina --> IRecepcionPedidos : envia pedido
 Cocina --> IRepositorioPedidos : consulta / actualiza
 RegistradorPago --> IProcesadorPago : procesa cobro
 RegistradorPago --> IRepositorioPedidos : guarda pago
@@ -131,6 +146,8 @@ ItemPedido --> Producto : corresponde a
 ItemPedido "1" o-- "0..*" Personalizacion : incluye
 Pedido "1" o-- "0..*" Pago : registra
 Pedido --> EstadoPedido : mantiene
+GestorPedidos ..> Pedido : crea / modifica
+NotificadorCocina ..> Pedido : notifica envio
 RegistradorPago ..> Pedido : coordina registro
 Encargado --> Pedido : supervisa / cambia estado
 Cliente --> Pedido : solicita / retira
@@ -150,6 +167,18 @@ end note
 note right of RegistradorPago
   Servicio de aplicación alineado con SRP/OCP
   para coordinar el cobro mediante contratos abstractos.
+end note
+
+note right of GestorPedidos
+  Servicio de aplicación alineado con SRP:
+  coordina alta y modificación de pedidos
+  sin acoplar PersonalAtencion a infraestructura.
+end note
+
+note right of NotificadorCocina
+  Servicio de aplicación alineado con SRP:
+  encapsula el envío a cocina mediante
+  la abstracción IRecepcionPedidos.
 end note
 
 note bottom of IRepositorioPedidos

@@ -18,6 +18,10 @@ class Pedido {
   + cambiarEstado(nuevo : EstadoPedido) : void
   + cancelar() : void
   + marcarPrioritario() : void
+  + permiteModificar() : boolean
+  + permiteCancelar() : boolean
+  + permitePriorizar() : boolean
+  - esTransicionValida(nuevo : EstadoPedido) : boolean
 }
 
 class ItemPedido {
@@ -33,13 +37,6 @@ enum EstadoPedido <<enumeration>> {
   LISTO
   ENTREGADO
   CANCELADO
-}
-
-class PoliticaEstadoPedido {
-  + permiteModificar(estado : EstadoPedido) : boolean
-  + permiteCancelar(estado : EstadoPedido) : boolean
-  + permitePriorizar(estado : EstadoPedido) : boolean
-  + esTransicionValida(actual : EstadoPedido, nuevo : EstadoPedido) : boolean
 }
 
 class CalculadoraTotalPedido {
@@ -81,7 +78,6 @@ class NotificadorCocina {
 
 Pedido "1" *-- "1..*" ItemPedido : contiene
 Pedido --> EstadoPedido : estado actual
-Pedido ..> PoliticaEstadoPedido : consulta reglas
 Pedido ..> HistorialPedido : registra cambios
 CalculadoraTotalPedido ..> Pedido : lee ítems
 
@@ -96,13 +92,11 @@ GestorPedidos ..> NotificadorCocina : deriva
 
 note top of Pedido
   SRP: conserva su identidad, sus ítems y su estado.
-  Antes también calculaba el total, definía las reglas
-  de estado, guardaba el historial y registraba el pago.
-end note
-
-note bottom of PoliticaEstadoPedido
-  Única razón de cambio:
-  las reglas de estado (RF7 a RF12).
+  Antes también calculaba el total, guardaba el
+  historial y registraba el pago.
+  RNF7: las reglas de transición de estado están
+  encapsuladas aquí como métodos privados. Pedido
+  es el único punto de entrada para cambiarlo.
 end note
 
 note bottom of CalculadoraTotalPedido
@@ -126,12 +120,17 @@ note top of RegistradorPago
 end note
 
 note bottom of NotificadorCocina
-  Única razón de cambio:
-  el medio de aviso a cocina (RF5, RNF5).
+  Clase de servicio (no entidad del dominio).
+  Única razón de cambio: el medio de aviso a
+  cocina (RF5, RNF5). Surge de aplicar SRP a
+  PersonalAtencion.
 end note
 
 note top of GestorPedidos
-  SRP: coordina el registro y la modificación (RF1, RF10).
-  PersonalAtencion queda solo como identidad y rol.
+  Clase de servicio (no entidad del dominio).
+  SRP: coordina el alta (RF1) y la modificación
+  (RF10) de pedidos. PersonalAtencion queda solo
+  como identidad y rol. Surge de aplicar SRP a
+  PersonalAtencion.
 end note
 @enduml
