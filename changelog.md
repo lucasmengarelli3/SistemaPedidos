@@ -6,6 +6,14 @@
 
 ## [Unreleased]
 
+### Added
+
+- [feature/doc-coord-a3-documentacion] A3 - Documentador y Coordinador de Repositorio: incorporación de plantillas de Issues y Pull Requests para A3 y estructura de documentación de revisiones asistidas por IA en `ia/a3/documentador-coordinador.md`. Issue: [#185](https://github.com/lucasmengarelli3/SistemaPedidos/issues/185) PR: [#184](https://github.com/lucasmengarelli3/SistemaPedidos/pull/184). @neith18 (Documentador y Coordinador de Repositorio).
+
+### Changed
+
+- [feature/doc-coord-a3-documentacion] A3 - Documentador y Coordinador de Repositorio: actualización de `README.md` y `diagramas/diagramasUML.md` para incorporar la navegación a los diagramas de actividades y secuencia. Issue: [#185](https://github.com/lucasmengarelli3/SistemaPedidos/issues/185) PR: [#184](https://github.com/lucasmengarelli3/SistemaPedidos/pull/184). @neith18 (Documentador y Coordinador de Repositorio).
+
 ## Release Primer Parcial - 2026-10-03
 
 ### Added
