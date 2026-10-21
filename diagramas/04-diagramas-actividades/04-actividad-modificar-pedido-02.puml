@@ -1,0 +1,54 @@
+@startuml
+skinparam style strictuml
+skinparam ActivityBackgroundColor #E3F2FD
+skinparam ActivityBorderColor #1565C0
+skinparam SwimlaneTitleFontColor #0D47A1
+
+title Diagrama de Actividad - CU2: Modificar Pedido
+
+|Usuario de Mostrador|
+start
+:Buscar pedido por identificador;
+:Solicitar modificación;
+
+|Sistema|
+:Mostrar pedido;
+:Verificar estado del pedido;
+if (¿Estado == "recibido"?) then (No)
+  |Sistema|
+  :Bloquear edición;
+  :Notificar que no se puede modificar;
+  |Usuario de Mostrador|
+  :Informar al cliente;
+  stop
+else (Sí)
+  |Usuario de Mostrador|
+  :Agregar o quitar productos;
+  :Modificar personalizaciones;
+  :Confirmar cambios;
+  
+  |Sistema|
+  :Validar disponibilidad;
+  if (¿Reglas de negocio válidas?) then (No)
+    |Usuario de Mostrador|
+    :Ajustar cambios;
+    |Sistema|
+    :Recalcular total;
+  else (Sí)
+    |Sistema|
+    :Recalcular total;
+    :Persistir cambios en el pedido;
+    :Generar nueva comanda;
+    
+    |Cocina|
+    :Recibir comanda actualizada;
+    :Actualizar preparación;
+    
+    |Sistema|
+    :Mostrar confirmación de modificación;
+    |Usuario de Mostrador|
+    :Informar nuevo total al cliente;
+  endif
+endif
+stop
+@enduml

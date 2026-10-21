@@ -1,0 +1,48 @@
+@startuml
+skinparam style strictuml
+skinparam ActivityBackgroundColor #E8F5E9
+skinparam ActivityBorderColor #2E7D32
+skinparam SwimlaneTitleFontColor #1B5E20
+
+title Diagrama de Actividad - CU1: Registrar Pedido
+
+|Usuario de Mostrador|
+start
+:Iniciar nuevo pedido;
+:Solicitar catálogo de productos;
+
+|Sistema|
+:Mostrar catálogo disponible;
+:Calcular precios vigentes;
+
+|Usuario de Mostrador|
+:Agregar productos y cantidades;
+:Agregar personalizaciones;
+:Ingresar referencia de retiro;
+:Confirmar pedido;
+
+|Sistema|
+:Validar datos del pedido;
+if (¿Datos válidos?) then (No)
+  |Usuario de Mostrador|
+  :Corregir datos del pedido;
+  |Sistema|
+  :Recalcular total;
+else (Sí)
+  |Sistema|
+  :Generar identificador único;
+  :Calcular total final;
+  :Guardar pedido en estado "recibido";
+  :Generar comanda digital;
+endif
+
+|Cocina|
+:Recibir comanda;
+:Visualizar pedido;
+
+|Sistema|
+:Mostrar confirmación en pantalla;
+|Usuario de Mostrador|
+:Entregar número de pedido al cliente;
+stop
+@enduml
