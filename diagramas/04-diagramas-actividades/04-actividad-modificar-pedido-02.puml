@@ -25,30 +25,36 @@ else (Sí)
   |Usuario de Mostrador|
   :Agregar o quitar productos;
   :Modificar personalizaciones;
-  :Confirmar cambios;
   
   |Sistema|
-  :Validar disponibilidad;
-  if (¿Reglas de negocio válidas?) then (No)
-    |Usuario de Mostrador|
-    :Ajustar cambios;
-    |Sistema|
-    :Recalcular total;
-  else (Sí)
-    |Sistema|
-    :Recalcular total;
-    :Persistir cambios en el pedido;
-    :Generar nueva comanda;
-    
-    |Cocina|
-    :Recibir comanda actualizada;
-    :Actualizar preparación;
-    
-    |Sistema|
-    :Mostrar confirmación de modificación;
-    |Usuario de Mostrador|
-    :Informar nuevo total al cliente;
-  endif
+  repeat
+    :Validar disponibilidad y reglas de negocio;
+    if (¿Reglas válidas?) then (No)
+      |Usuario de Mostrador|
+      :Ajustar cambios;
+    else (Sí)
+      |Sistema|
+      :Cambios validados correctamente;
+    endif
+  repeat while (¿Reglas inválidas?) is (Sí) not (No)
+
+  |Sistema|
+  :Recalcular total;
+  :Mostrar nuevo total al usuario;
+
+  |Usuario de Mostrador|
+  :Confirmar cambios con nuevo total;
+
+  |Sistema|
+  :Persistir cambios en el pedido;
+  :Generar nueva comanda;
+
+  |Cocina|
+  :Recibir comanda actualizada;
+  :Actualizar preparación;
+
+  |Sistema|
+  :Mostrar confirmación de modificación;
 endif
 stop
 @enduml
