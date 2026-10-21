@@ -375,30 +375,166 @@ La decisión de solicitar correcciones fue tomada después de evaluar los hallaz
 
 ## Revisión 3
 
-**PR:** Pendiente
-**Autor:** Pendiente
-**Rol revisado:** Pendiente
-**Fecha:** Pendiente
-**Estado:** Pendiente
+**PR:** [#193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193) — segunda revisión sobre nuevos commits
+**Autor:** @tomx2002-droid
+**Rol revisado:** Especialista en Diagramas de Actividades (CU 1 y 2)
+**Fecha:** 21/10/2026
+**Estado:** Request changes publicado — correcciones pendientes
 
 ### Archivos de contexto
+
+- `diagramas/04-diagramas-actividades/04-actividad-registrar-pedido-01.puml`
+- `diagramas/04-diagramas-actividades/04-actividad-modificar-pedido-02.puml`
+- PNG correspondientes a ambos diagramas.
+- `ia/a3/esp-actividades-1-2.md`
+- `changelog.md`
+- Casos de uso y escenarios originales de A2.
+- Comparación de commits: `ec2f36f` → `51a8cbb`.
 
 ### Prompt utilizado
 
 ```text
-[PROMPT REAL UTILIZADO]
+Actuá como revisor técnico de UML y documentación de un proyecto académico.
+
+Necesito realizar una **segunda revisión asistida por IA del Pull Request #193**, correspondiente a los diagramas de actividades de los Casos de Uso 1 (Registrar pedido) y 2 (Modificar pedido).
+
+Repositorio: `lucasmengarelli3/SistemaPedidos`
+
+Rama del PR: `feature/esp-actividades-1-2-add-diagramas`
+
+Commits a comparar:
+
+- Versión revisada anteriormente: `ec2f36f`
+- Versión corregida: `51a8cbb`
+**Objetivo:** verificar si los cambios posteriores a mi primera revisión resolvieron los hallazgos y si introdujeron problemas nuevos.
+
+### Archivos a revisar
+
+- `diagramas/04-diagramas-actividades/04-actividad-registrar-pedido-01.puml`
+- `diagramas/04-diagramas-actividades/04-actividad-modificar-pedido-02.puml`
+- Los PNG correspondientes a ambos diagramas.
+- `ia/a3/esp-actividades-1-2.md`
+- `changelog.md`
+- Los casos de uso y escenarios originales de A2 que correspondan.
+Utilizá los archivos reales del repositorio y verificá las rutas antes de citar documentación.
+
+### Hallazgos de la primera revisión
+
+1. **CU1:** cuando los datos eran inválidos, el flujo podía continuar sin generar identificador ni persistir el pedido.
+2. **CU1:** faltaba contemplar el producto no disponible.
+3. **CU2:** cuando las reglas de negocio eran inválidas, el flujo terminaba después de ajustar cambios, sin revalidar.
+4. **CU2:** el usuario confirmaba los cambios antes de que el sistema validara y recalculara el total.
+5. **Documentación de IA:** faltaban detalles del output, las iteraciones y la verificación de las rutas de contexto.
+6. **Changelog:** faltaba registrar la contribución del autor.
+
+### Instrucciones
+
+1. Compará las versiones `ec2f36f` y `51a8cbb`, centrándote en los archivos del PR y no en cambios heredados de `develop`.
+2. Para cada hallazgo anterior, indicá si está **resuelto, parcialmente resuelto o pendiente**, explicando por qué.
+3. Analizá la lógica de los bucles `repeat` y las decisiones de ambos diagramas. Verificá especialmente qué sucede cuando se corrigen datos inválidos o se selecciona otro producto.
+4. Comprobá la coherencia con los escenarios originales de A2.
+5. Revisá la documentación de IA: prompt, archivos de contexto, output, iteraciones y ajustes humanos. No supongas que una respuesta resumida equivale al código originalmente generado.
+6. Revisá si la nueva entrada de `changelog.md` respeta la estructura de `Unreleased`.
+7. Comprobá que los PNG reflejen los `.puml` actualizados, si disponés de medios para inspeccionarlos.
+8. Identificá posibles regresiones o inconsistencias nuevas.
+9. No modifiques archivos, no hagas commits, no publiques comentarios ni apruebes el PR.
+
+### Formato de respuesta
+**A. Tabla de hallazgos anteriores:** hallazgo, estado, evidencia concreta (archivo y línea) y justificación.
+
+**B. Problemas nuevos:** archivo, línea, severidad y explicación.
+
+**C. Documentación y changelog:** pendientes concretos, si existen.
+
+**D. Verificaciones no realizadas:** indicá expresamente lo que no pudiste comprobar.
+
+**E. Propuesta de comentario para GitHub:** redactá un comentario breve, claro y constructivo, limitado a los problemas comprobados. Diferenciá los bloqueantes de las sugerencias.
+
+No inventes evidencia. Si no podés acceder a una rama, commit, archivo o imagen, indicámelo en lugar de asumir que lo revisaste.
 ```
 
 ### Output obtenido
 
+**Revisión comparativa:** `ec2f36f` → `51a8cbb57f346881a169996ecaa99a7bf29241e6` en el PR #193. Consulté las fuentes actualizadas, los PNG, la documentación, el changelog y los casos de uso y escenarios correspondientes de A2 en `develop`. La comparación se centra en los archivos del PR, no en cambios heredados de `develop`.
+
+## A. Estado de los hallazgos anteriores
+
+| Hallazgo | Estado | Evidencia y justificación |
+|---|---|---|
+| **CU1: los datos inválidos podían continuar sin validar, generar identificador ni guardar el pedido.** | **Resuelto** | En [04-actividad-registrar-pedido-01.puml, líneas 37–46](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/diagramas/04-diagramas-actividades/04-actividad-registrar-pedido-01.puml#L37-L46), corregir los datos conduce a una nueva validación. El bucle sale por la rama de datos válidos y luego sigue hacia confirmación y persistencia, líneas [48–55](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/diagramas/04-diagramas-actividades/04-actividad-registrar-pedido-01.puml#L48-L55). |
+| **CU1: faltaba el camino alternativo de producto no disponible.** | **Parcialmente resuelto** | Ahora existe la decisión «¿Producto disponible?» y la acción «Elegir otro producto o descartar», líneas [22–30](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/diagramas/04-diagramas-actividades/04-actividad-registrar-pedido-01.puml#L22-L30). Sin embargo, ambos resultados siguen a personalizaciones, referencia, validación y eventual registro. No se representa volver a agregar/revalidar el producto elegido ni terminar si se descarta. |
+| **CU2: tras reglas inválidas se ajustaba, pero no se revalidaba.** | **Resuelto** | El bucle de las líneas [30–39](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/diagramas/04-diagramas-actividades/04-actividad-modificar-pedido-02.puml#L30-L39) retorna a validar cuando las reglas siguen siendo inválidas y sale cuando son válidas. |
+| **CU2: se confirmaba antes de validar y recalcular el total.** | **Resuelto** | El sistema recalcula y muestra el total antes de que el usuario confirme; luego persiste los cambios. Ver líneas [41–50](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/diagramas/04-diagramas-actividades/04-actividad-modificar-pedido-02.puml#L41-L50). |
+| **Documentación de IA incompleta.** | **Parcialmente resuelto** | Ahora registra prompt, resumen de output, iteraciones y ajustes, líneas [3–5](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/ia/a3/esp-actividades-1-2.md#L3-L5) y [20–44](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/ia/a3/esp-actividades-1-2.md#L20-L44). Pero los nombres de los escenarios citados no corresponden a las rutas reales de A2, y no incluye el código PlantUML que la IA habría producido originalmente; por eso no se pueden cotejar las afirmaciones sobre iteraciones con ese output. |
+| **Faltaba registrar la contribución en el changelog.** | **Resuelto** | La entrada actual identifica rama, contribución, issues, PR y autora/rol: [changelog.md, líneas 9–13](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/changelog.md#L9-L13). |
+
+## B. Problemas nuevos o aún presentes
+
+| Archivo | Línea(s) | Severidad | Problema comprobado |
+|---|---:|---|---|
+| [04-actividad-registrar-pedido-01.puml](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/diagramas/04-diagramas-actividades/04-actividad-registrar-pedido-01.puml) | 22–34, 52–55 | **Importante** | La rama de producto no disponible no distingue «elegir otro» de «descartar». En ambos casos actualiza la selección y sigue al resto del alta; por tanto, elegir otro no vuelve a agregar ni a comprobar disponibilidad, y descartar puede seguir hasta crear y guardar el pedido. Esto no satisface el escenario de A2, que requiere reintentar desde la selección o descartar el borrador. |
+| [04-actividad-registrar-pedido-01.puml](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/diagramas/04-diagramas-actividades/04-actividad-registrar-pedido-01.puml) | 48–54 | **Importante** | El usuario confirma antes de que el sistema calcule el total final. El escenario principal de A2 ordena validar y calcular el total antes de confirmar; el diagrama solo calcula precios vigentes al inicio y calcula el total del pedido después de la confirmación. |
+| [04-actividad-modificar-pedido-02.puml](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/diagramas/04-diagramas-actividades/04-actividad-modificar-pedido-02.puml) | 16–17, 49–50 | **Importante** | El estado solo se verifica antes de iniciar la edición. El caso de uso de A2 también prevé rechazar la modificación si el pedido cambia de estado durante la edición; no hay una segunda verificación antes de persistir. En una edición concurrente, el flujo podría guardar cambios pese a que el pedido ya no esté en `recibido`. |
+
+**Coherencia con A2:** el orden del total en CU1 contradice [el escenario de registro exitoso](https://github.com/lucasmengarelli3/SistemaPedidos/blob/develop/diagramas/03-escenarios-casos-de-uso/03-registrar-pedido-flujo-principal-registro-exitoso-01.md#L16-L24). El camino alternativo incompleto contradice [el escenario de producto no disponible](https://github.com/lucasmengarelli3/SistemaPedidos/blob/develop/diagramas/03-escenarios-casos-de-uso/03-registrar-pedido-flujo-alternativo-producto-no-disponible-02.md#L16-L24). La ausencia de revalidación del estado en CU2 difiere del punto de extensión documentado en [el caso de uso Modificar pedido](https://github.com/lucasmengarelli3/SistemaPedidos/blob/develop/diagramas/02-casos-de-uso/02-modificar-pedido.puml#L27-L35). La revalidación de los datos en CU1 y de las reglas en CU2 sí queda representada por sus bucles.
+
+## C. Documentación y changelog
+
+- **Rutas de contexto de IA:** el registro cita `03-registrar-pedido-flujo-principal.md` y `03-modificar-pedido-flujo-principal.md` ([líneas 11–17](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/ia/a3/esp-actividades-1-2.md#L11-L17)). Las rutas reales consultadas son [03-registrar-pedido-flujo-principal-registro-exitoso-01.md](https://github.com/lucasmengarelli3/SistemaPedidos/blob/develop/diagramas/03-escenarios-casos-de-uso/03-registrar-pedido-flujo-principal-registro-exitoso-01.md) y [03-modificar-pedido-flujo-principal-modificacion-recibida-03.md](https://github.com/lucasmengarelli3/SistemaPedidos/blob/develop/diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-flujo-principal-modificacion-recibida-03.md). Tampoco se enumeran los dos escenarios alternativos que se usan en la revisión: [producto no disponible](https://github.com/lucasmengarelli3/SistemaPedidos/blob/develop/diagramas/03-escenarios-casos-de-uso/03-registrar-pedido-flujo-alternativo-producto-no-disponible-02.md) y [pedido no modificable](https://github.com/lucasmengarelli3/SistemaPedidos/blob/develop/diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-flujo-excepcion-pedido-no-modificable-04.md).
+- **Output e iteraciones de IA:** existe una respuesta textual resumida y una descripción de tres iteraciones, pero no el output original de código. Por lo tanto, la documentación mejoró, pero no permite confirmar qué código produjo originalmente la IA ni cotejarlo con los ajustes humanos.
+- **Índice:** [diagramas_de_actividades.md](https://github.com/lucasmengarelli3/SistemaPedidos/blob/51a8cbb57f346881a169996ecaa99a7bf29241e6/diagramas/04-diagramas-actividades/diagramas_de_actividades.md) enlaza las fuentes PlantUML. Es accesible; no incluye enlaces directos a los PNG, una mejora opcional.
+- **Changelog:** registra la contribución y la atribuye a `@tomx2002-droid`. La estructura sigue el patrón existente del repositorio —`[Unreleased]`, encabezado fechado y sección `Added`—. Si se pretende que la entrada quede estrictamente dentro de `Unreleased`, el encabezado de release fechado no la expresa como no publicada; no lo considero un incumplimiento claro frente a la convención observada en el archivo.
+
+## D. Verificaciones no realizadas
+
+- Inspeccioné visualmente los PNG actuales: ambos muestran los bucles y decisiones que aparecen en las fuentes actualizadas. No hice una comparación binaria ni regeneré las imágenes, así que no puedo certificar que se hayan producido desde esos `.puml` exactos; la inspección visual sí confirma correspondencia aparente.
+- No puedo verificar el código originalmente generado por la IA a partir del registro actual: ese output fuente no está incluido.
+- No ejecuté el renderizador PlantUML ni validé sintácticamente los diagramas mediante una herramienta externa.
+
+## E. Comentario propuesto para GitHub
+
+> Gracias por las correcciones: los bucles de validación y el orden de confirmación en CU2 ya reflejan mejor los escenarios. Antes de aprobar, sugiero ajustar tres puntos: en CU1, que elegir otro producto vuelva a la selección y que descartar termine sin registrar el pedido; calcular y presentar el total antes de confirmar el registro; y en CU2, volver a verificar que el estado siga siendo `recibido` antes de persistir. También convendría corregir las rutas de contexto en el registro de IA y añadir los escenarios alternativos consultados. Como mejora documental, se puede incluir el output PlantUML original para que las iteraciones queden verificables.
+
+**Conclusión:** hay hallazgos anteriores resueltos, pero permanecen defectos importantes en las ramas de producto no disponible y en el orden del total de CU1, además de faltar la comprobación del estado durante la edición en CU2. **El PR requiere correcciones antes de aprobarse.**
+
 ### Evaluación y ajustes humanos
+
+La segunda revisión del PR #193 se realizó sobre los cambios incorporados entre los commits `ec2f36f` y `51a8cbb`, con el objetivo de comprobar las correcciones solicitadas en la primera revisión y detectar posibles inconsistencias nuevas.
+
+**Hallazgos aceptados y verificados:**
+
+- **CU1 — Validación de datos:** se comprobó que el nuevo bucle permite corregir y volver a validar los datos antes de continuar con el registro. Se consideró resuelto el hallazgo original.
+- **CU1 — Producto no disponible:** se incorporó la decisión correspondiente, pero se verificó que elegir otro producto no conduce a una nueva comprobación de disponibilidad y que descartar no interrumpe el registro. Se mantuvo como corrección pendiente.
+- **CU2 — Revalidación de reglas:** se comprobó que el nuevo bucle permite ajustar los cambios y volver a validar las reglas de negocio. Se consideró resuelto.
+- **CU2 — Orden de confirmación:** se verificó que el sistema recalcula y muestra el nuevo total antes de solicitar la confirmación. Se consideró resuelto.
+- **CU1 — Total antes de confirmar:** se aceptó el hallazgo de Copilot al contrastar el orden de las actividades con el escenario principal de A2. Se solicitó calcular y mostrar el total final antes de confirmar el pedido.
+- **CU2 — Cambio de estado durante la edición:** se verificó en `diagramas/02-casos-de-uso/02-modificar-pedido.puml` que el caso de uso contempla rechazar una modificación cuando el pedido cambia de estado durante la edición. Se aceptó la observación de Copilot y se solicitó una nueva comprobación antes de persistir los cambios.
+
+**Evaluación de documentación:**
+
+- Se reconoció la incorporación de iteraciones y una respuesta textual de IA en `ia/a3/esp-actividades-1-2.md`.
+- Se mantuvo la observación sobre las rutas incorrectas de los escenarios de A2 y la necesidad de completar o aclarar la disponibilidad del output original de IA.
+- Se comprobó que el autor incorporó su contribución en `changelog.md`. Como ajuste de organización, se recomendó mantenerla dentro de `Unreleased → Added`, sin crear un encabezado de release adicional.
+
+**Ajustes humanos antes de publicar:**
+
+La propuesta de Copilot se reformuló en comentarios breves y específicos, vinculados con las líneas correspondientes de los diagramas PlantUML. Se diferenciaron los tres problemas técnicos que requerían corrección de las observaciones documentales, que se incluyeron en el comentario general.
+
+Se evitó repetir los hallazgos ya resueltos como errores pendientes. La decisión humana fue solicitar nuevamente cambios, dado que persistían inconsistencias con los escenarios y reglas de negocio de A2.
+
+La revisión se publicó en GitHub mediante tres comentarios inline y un comentario general, con la decisión Request changes.
 
 ### Revisión publicada en GitHub
 
-- **Enlace a la revisión:** Pendiente
-- **Decisión:** Pendiente
-- **Correcciones solicitadas:** Pendiente
-- **Resultado final:** Pendiente
+- **Enlace a la revisión:** [PR #193 — segunda revisión](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193)
+- **Decisión:** Request changes.
+- **Correcciones solicitadas:**
+  1. CU1: separar los caminos de producto no disponible, permitiendo volver a seleccionar y validar otro producto o descartar el pedido sin registrarlo.
+  2. CU1: calcular y mostrar el total final antes de confirmar el pedido.
+  3. CU2: volver a verificar que el pedido permanezca en estado `recibido` antes de persistir las modificaciones.
+  4. Documentación de IA: corregir las rutas de los escenarios de A2 y completar o aclarar el output original.
+  5. Changelog: mantener la contribución dentro de `Unreleased → Added`.
+- **Resultado final:** Segunda revisión del PR #193 publicada el 21/10/2026 mediante tres comentarios inline y un comentario general. Se reconocieron las correcciones realizadas, pero se solicitaron nuevos ajustes antes de aprobar el PR.
 
 ---
 
@@ -437,7 +573,7 @@ La decisión de solicitar correcciones fue tomada después de evaluar los hallaz
 | --- | --- | --- | --- | --- | --- |
 | 1 | #190 | Especialista en Diagramas de Actividades (CU 3–6) | Flujos de preparación, cobro, entrega y cancelación; codificación de PNG; registro de IA | Request changes | [PR #190](https://github.com/lucasmengarelli3/SistemaPedidos/pull/190) |
 | 2 | #193 | Especialista en Diagramas de Actividades (CU 1–2) | Validaciones y caminos alternativos de CU1 y CU2; orden de confirmación; changelog y registro de IA | Request changes | [PR #193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193) |
-| 3 | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |
+| 3 | #193 (segunda revisión) | Especialista en Diagramas de Actividades (CU 1–2) | Correcciones de validación verificadas; producto no disponible, cálculo del total en CU1 y cambio de estado en CU2; documentación de IA | Request changes | [PR #193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193) |
 | 4 | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |
 
 ## Conclusiones
