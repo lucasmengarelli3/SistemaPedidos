@@ -14,7 +14,7 @@ Este proyecto tiene como objetivo el diseño orientado a objetos de una aplicaci
 | :--------------------- | :-------: | :-----------------: |
 | Feijo, Agustin Ariel   |  164921   |   @AgustinCalaver   |
 | Lucas Mengarelli       |  164298   |  @lucasmengarelli3  |
-| Tomas Pablo Gonzalez   |  xxxxxx   |     @tomx2002-droid |
+| Tomas Pablo Gonzalez   |  157203   |     @tomx2002-droid |
 | Isis Neith Escalada    |  155447   |      @neith18       |
 
 ## Diagramas y diseños
