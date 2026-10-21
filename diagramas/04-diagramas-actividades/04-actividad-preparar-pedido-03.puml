@@ -1,0 +1,58 @@
+@startuml
+!pragma useVerticalIf on
+skinparam shadowing false
+skinparam linetype ortho
+skinparam activity {
+  BackgroundColor #F8F9FA
+  BorderColor #2F3A4A
+  DiamondBackgroundColor #EAF2FF
+  DiamondBorderColor #2F3A4A
+}
+
+title Diagrama de actividades - Preparar pedido
+
+start
+
+partition "Usuario de mostrador" {
+  :Consulta la cola de pedidos recibidos;
+  :Selecciona el pedido a preparar;
+  :Envía la notificación de pedido recibido;
+}
+
+partition "Sistema de pedidos" {
+  :Busca el pedido por identificador;
+  if (¿Existe el pedido?) then (sí)
+    :Carga detalle del pedido y personalizaciones;
+    :Valida que el estado sea "recibido";
+    :Actualiza el estado a "en preparación";
+    :Registra la transición y el historial;
+  else (no)
+    :Informa que el pedido no existe;
+    :Bloquea la preparación;
+    :Notifica al mostrador;
+    stop
+  endif
+}
+
+partition "Cocina" {
+  :Visualiza el pedido y su detalle;
+  :Verifica disponibilidad de ingredientes;
+  :Prepara los productos;
+  :Revisa personalizaciones y observaciones;
+  :Marca el pedido como "listo";
+}
+
+partition "Sistema de pedidos" {
+  :Actualiza el estado a "listo";
+  :Genera la notificación al mostrador;
+  :Publica el pedido como disponible para entrega;
+  :Guarda auditoría de preparación;
+}
+
+partition "Usuario de mostrador" {
+  :Recibe la alerta de pedido listo;
+  :Prepára la entrega del pedido;
+}
+
+stop
+@enduml

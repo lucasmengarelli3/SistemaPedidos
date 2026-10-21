@@ -1,0 +1,61 @@
+@startuml
+!pragma useVerticalIf on
+skinparam shadowing false
+skinparam linetype ortho
+skinparam activity {
+  BackgroundColor #F8F9FA
+  BorderColor #2F3A4A
+  DiamondBackgroundColor #FFF4E5
+  DiamondBorderColor #2F3A4A
+}
+
+title Diagrama de actividades - Cobrar cuenta
+
+start
+
+partition "Cliente" {
+  :Solicita abonar el pedido;
+  :Informa el importe a pagar;
+}
+
+partition "Usuario de mostrador" {
+  :Busca el pedido por referencia;
+  :Verifica el detalle y el total vigente;
+  :Selecciona el medio de pago;
+  :Confirma la operación de cobro;
+}
+
+partition "Sistema de pedidos" {
+  :Obtiene información del pedido;
+  :Calcula el monto total vigente;
+  :Solicita autorización del medio de pago;
+  if (¿Pago autorizado?) then (sí)
+    :Registra el pago asociado al pedido;
+    :Genera comprobante de pago;
+    :Actualiza la trazabilidad;
+  else (no)
+    :Recibe el motivo del rechazo;
+    :Informa el rechazo al cliente;
+    :Bloquea el cobro aprobado;
+    if (¿Desea reintentar con otro medio?) then (sí)
+      :Solicita otro medio de pago;
+      :Retoma desde la autorización;
+    else (no)
+      :Cancela la operación;
+      stop
+    endif
+  endif
+}
+
+partition "Medio de pago" {
+  :Valida la tarjeta / QR / efectivo;
+  :Devuelve el resultado de la operación;
+}
+
+partition "Usuario de mostrador" {
+  :Entrega comprobante al cliente;
+  :Cierra la operación de cobro;
+}
+
+stop
+@enduml
