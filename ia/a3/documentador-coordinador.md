@@ -540,30 +540,163 @@ La revisión se publicó en GitHub mediante tres comentarios inline y un comenta
 
 ## Revisión 4
 
-**PR:** Pendiente
-**Autor:** Pendiente
-**Rol revisado:** Pendiente
-**Fecha:** Pendiente
-**Estado:** Pendiente
+**PR:** [#190](https://github.com/lucasmengarelli3/SistemaPedidos/pull/190) — Segunda revisión de las correcciones
+
+**Autor:** @lucasmengarelli3 (Lucas)
+
+**Rol revisado:** Especialista en Diagramas de Actividades (CU3, CU4, CU5 y CU6)
+
+**Fecha:** 22/10/2026
+
+**Estado:** Revisión publicada — Request changes
 
 ### Archivos de contexto
+
+- Diagramas de actividades CU3, CU4, CU5 y CU6, en formato `.puml` y `.png`.
+- Versiones de los commits `2d9518b` y `e6c5734`.
+- Casos de uso y escenarios de la Actividad Obligatoria N.º 2.
+- `ia/a3/esp-actividades-3-4-5.md`.
+- `changelog.md`.
+- Observaciones de la primera revisión del PR #190.
 
 ### Prompt utilizado
 
 ```text
-[PROMPT REAL UTILIZADO]
+Actuá como revisor técnico de UML y documentación del proyecto académico SistemaPedidos.
+
+Necesito realizar la **segunda revisión asistida por IA del Pull Request #190**, correspondiente a los diagramas de actividades de los casos de uso CU3, CU4, CU5 y CU6.
+
+**Repositorio:** `lucasmengarelli3/SistemaPedidos`
+
+**Rama del PR:** `feature/esp-actividades-3-4-5-add-diagrama-actividad-3`
+
+**Commits a comparar:**
+
+- Versión anterior: `2d9518b`
+- Versión corregida: `e6c5734`
+**Objetivo:** comprobar si Lucas resolvió las observaciones de mi primera revisión y si sus cambios introdujeron nuevas inconsistencias.
+
+### Contexto obligatorio
+Consultá los archivos reales de ambas versiones, los cuatro diagramas `.puml`, sus PNG, los casos de uso y escenarios correspondientes de A2, `ia/a3/esp-actividades-3-4-5.md` y `changelog.md`.
+
+No utilices los archivos de secuencia de la rama de trabajo actual. La revisión corresponde exclusivamente al PR #190.
+
+### Hallazgos de la primera revisión
+
+1. CU3: la consulta y selección del pedido estaban asignadas a mostrador en lugar de Cocina; faltaba una decisión ante un estado inválido.
+2. CU4: el sistema decidía si el pago estaba autorizado antes de recibir el resultado del medio de pago.
+3. CU5: se registraba la entrega antes de la entrega física y su confirmación.
+4. CU6: faltaba la confirmación explícita del usuario después de validar el estado; la notificación a Cocina no estaba correctamente condicionada.
+5. Los PNG mostraban caracteres acentuados incorrectamente.
+6. La documentación de IA tenía inconsistencias y no detallaba suficientemente las iteraciones.
+
+### Instrucciones
+
+1. Compará los commits `2d9518b` y `e6c5734`, sin modificar archivos.
+2. Clasificá cada hallazgo anterior como **resuelto, parcialmente resuelto o pendiente**, con evidencia concreta.
+3. Revisá especialmente:
+
+- CU3: si Cocina visualiza el detalle antes de que el sistema lo busque y cargue.
+- CU4: si un pago rechazado puede continuar hacia la emisión del comprobante y si el reintento vuelve realmente a validar.
+- CU5: si el registro de entrega ocurre después de la entrega y confirmación humanas.
+- CU6: si Cocina interrumpe la preparación únicamente cuando el pedido estaba `en preparación`.
+4. Verificá si los PNG reflejan los `.puml` actualizados y muestran correctamente los caracteres.
+5. Revisá los cambios en la documentación de IA y el changelog.
+6. Identificá regresiones o problemas nuevos.
+7. Diferenciá errores confirmados de mejoras opcionales.
+8. No modifiques archivos, no hagas commits, no publiques comentarios, no apruebes ni hagas merge.
+
+### Formato de respuesta
+**A. Tabla de hallazgos anteriores:** estado, evidencia y justificación.
+
+**B. Problemas pendientes o nuevos:** archivo, ubicación, gravedad y explicación.
+
+**C. Documentación y PNG:** resultado de las verificaciones.
+
+**D. Verificaciones no realizadas:** indicar expresamente lo que no pudiste comprobar.
+
+**E. Comentarios propuestos para GitHub:** breves, respetuosos y accionables.
+
+**F. Conclusión:** indicar si el PR está listo para aprobarse o requiere correcciones.
+
+No inventes evidencia. Si no podés acceder a alguna versión, archivo o imagen, informalo expresamente.
 ```
 
 ### Output obtenido
 
+## A. Hallazgos anteriores
+
+| Hallazgo | Estado | Evidencia y justificación |
+|---|---|---|
+| **CU3: consulta/selección asignadas al carril incorrecto y falta de decisión ante estado inválido** | **Resuelto**, con una inconsistencia nueva | En [CU3 `.puml`](https://github.com/lucasmengarelli3/SistemaPedidos/blob/e6c5734410731ac7b1360828d16f04416a2b63e8/diagramas/04-diagramas-actividades/04-actividad-preparar-pedido-03.puml#L21-L38), Cocina consulta la cola y selecciona el pedido; el sistema ahora decide si el estado es `recibido` y detiene el flujo si no. Sin embargo, Cocina visualiza el detalle antes de que el sistema busque y cargue el pedido —ver problemas nuevos abajo. |
+| **CU4: se decidía si el pago estaba autorizado antes de recibir el resultado del medio** | **Resuelto** | En [CU4 `.puml`](https://github.com/lucasmengarelli3/SistemaPedidos/blob/e6c5734410731ac7b1360828d16f04416a2b63e8/diagramas/04-diagramas-actividades/04-actividad-cobrar-cuenta-04.puml#L28-L45), el sistema solicita la autorización, el medio de pago devuelve su resultado y recién después se decide si fue aprobado. El reintento, no obstante, no vuelve efectivamente a la validación. |
+| **CU5: registro de entrega previo a la entrega física y su confirmación** | **Resuelto en cuanto al orden** | En [CU5 `.puml`](https://github.com/lucasmengarelli3/SistemaPedidos/blob/e6c5734410731ac7b1360828d16f04416a2b63e8/diagramas/04-diagramas-actividades/04-actividad-entregar-pedido-05.puml#L40-L50), la entrega y confirmación humanas preceden a `Registra la entrega en historial`. Queda una asignación incorrecta de responsabilidades: `Registra responsable y fecha` está en un carril humano combinado. |
+| **CU6: faltaba confirmación explícita y la notificación a Cocina no estaba condicionada** | **Parcialmente resuelto** | En [CU6 `.puml`](https://github.com/lucasmengarelli3/SistemaPedidos/blob/e6c5734410731ac7b1360828d16f04416a2b63e8/diagramas/04-diagramas-actividades/04-actividad-cancelar-pedido-06.puml#L26-L51), el estado se valida, luego el Usuario confirma y la actividad que notifica a Cocina está condicionada a que el pedido estuviera `en preparación`. Pero la actividad posterior de Cocina `Interrumpe la preparación` queda fuera de esa decisión y se ejecuta también si el pedido estaba solo `recibido`. |
+| **PNG con caracteres acentuados incorrectos** | **Resuelto** | Comparé las imágenes de `2d9518b` con las de `e6c5734`: las anteriores mostraban texto mojibake —por ejemplo, `preparaciÃ³n`— y las actuales muestran los acentos correctamente en los cuatro diagramas. |
+| **Documentación de IA inconsistente y sin detalle suficiente de iteraciones** | **Parcialmente resuelto** | Se agregó una sección de iteraciones en [documentación de IA](https://github.com/lucasmengarelli3/SistemaPedidos/blob/e6c5734410731ac7b1360828d16f04416a2b63e8/ia/a3/esp-actividades-3-4-5.md), pero se limita a mencionar duplicación/nombres cruzados y correcciones solicitadas por el coordinador; no registra qué cambios concretos se hicieron en cada iteración. Persisten inconsistencias en el título y en el prompt transcripto. |
+
+## B. Problemas pendientes o nuevos
+
+1. **Importante — CU3, orden de consulta y carga del detalle.**  
+   En [CU3 `.puml`, actividad de Cocina y búsqueda del sistema](https://github.com/lucasmengarelli3/SistemaPedidos/blob/e6c5734410731ac7b1360828d16f04416a2b63e8/diagramas/04-diagramas-actividades/04-actividad-preparar-pedido-03.puml#L21-L30), `Visualiza el pedido y su detalle` aparece antes de `Busca el pedido por identificador` y `Carga detalle del pedido y personalizaciones`. El PNG refleja ese orden. Esto deja la visualización antes de que el flujo haya encontrado y cargado los datos. Además, es una regresión respecto a `2d9518b`, donde la visualización estaba después de la búsqueda y carga.
+
+2. **Importante — CU4, reintento de pago no regresa a la validación.**  
+   En [CU4 `.puml`](https://github.com/lucasmengarelli3/SistemaPedidos/blob/e6c5734410731ac7b1360828d16f04416a2b63e8/diagramas/04-diagramas-actividades/04-actividad-cobrar-cuenta-04.puml#L43-L58), el camino de rechazo contiene `Solicita otro medio de pago` y `Retoma desde la validación de la operación`, pero no tiene una transición que vuelva al medio de pago o a `Solicita autorización`. Las ramas se reúnen y continúan hacia `Entrega comprobante al cliente`; por tanto, un rechazo puede alcanzar el comprobante sin un nuevo intento aprobado. El PNG confirma la misma convergencia. El escenario alternativo de A2 especifica que el reintento vuelve al paso de autorización, sin registrar el pago rechazado.
+
+3. **Importante — CU5, carriles de entrega y registro de responsable.**  
+   En [CU5 `.puml`](https://github.com/lucasmengarelli3/SistemaPedidos/blob/e6c5734410731ac7b1360828d16f04416a2b63e8/diagramas/04-diagramas-actividades/04-actividad-entregar-pedido-05.puml#L40-L48), se usa un solo carril `Mostrador / Cliente` para entregar, confirmar y registrar responsable/fecha. A2 asigna la entrega y confirmación al Usuario de mostrador, y el registro de estado, fecha y responsable al sistema. El cambio corrigió el orden temporal de la actividad del sistema, pero no separó esas responsabilidades. No es un problema de secuencia —la confirmación precede al registro del historial—, sino de asignación y claridad de los carriles.
+
+4. **Importante — CU6, interrupción de Cocina no condicionada.**  
+   En [CU6 `.puml`](https://github.com/lucasmengarelli3/SistemaPedidos/blob/e6c5734410731ac7b1360828d16f04416a2b63e8/diagramas/04-diagramas-actividades/04-actividad-cancelar-pedido-06.puml#L47-L56), la decisión condiciona la notificación, pero luego ambas ramas convergen antes de que Cocina `Interrumpe la preparación`. Si el estado era `recibido`, Cocina no debería recibir aviso ni ejecutar una interrupción. El PNG muestra esa actividad fuera de la rama afirmativa. Esto empeoró respecto a la versión anterior, que al menos rotulaba la interrupción como condicional.
+
+5. **Menor — changelog con ruta de documentación incorrecta.**  
+   La entrada actual de [changelog.md](https://github.com/lucasmengarelli3/SistemaPedidos/blob/e6c5734410731ac7b1360828d16f04416a2b63e8/changelog.md#L13) referencia `ia/a3/esp-actividades-3-4-5-6`, pero el archivo entregado por el PR es `ia/a3/esp-actividades-3-4-5.md`. La versión anterior enlazaba el nombre sin `-6`, de modo que el cambio introdujo el desajuste. La entrada sí registra las issues y el PR; como recomendación menor, podría incluir también la persona y el rol, dado que la descripción del changelog menciona participación y roles.
+
+## C. Documentación y PNG
+
+- **Imágenes:** los cuatro PNG están modificados en `e6c5734`. Los inspeccioné visualmente y sus acciones corresponden a las fuentes `.puml` actuales; los caracteres acentuados se ven correctamente. También reflejan los problemas de flujo señalados en CU3, CU4 y CU6. No hice una comparación binaria ni regeneré las imágenes.
+- **Documentación de IA:** registra el prompt, una lista de contexto, los outputs y ajustes. La sección nueva de iteraciones no permite reconstruir qué observación produjo cada corrección ni qué se cambió en respuesta. El título todavía dice “Casos de uso 3, 4 y 5” aunque cubre también CU6. El prompt contiene nombres de salida equivocados para los PNG de cobro y cancelación; la lista de outputs posterior sí usa los nombres correctos.
+- **Changelog:** la entrada está bajo la sección de actividad/unreleased y enlaza PR/issues, pero la ruta de IA es incorrecta. No considero que la jerarquía de encabezados sea un defecto: coincide con la estructura de releases anterior del archivo.
+
+## D. Verificaciones no realizadas
+
+- No ejecuté PlantUML ni regeneré los PNG. La comprobación de correspondencia y acentos fue visual, junto con la inspección de las fuentes y del cambio de archivos en el commit.
+- No comprobé equivalencia binaria entre cada PNG y una renderización fresca de su fuente.
+
+Sí pude consultar ambas versiones de los cuatro diagramas, los PNG previos y corregidos, las fuentes de casos de uso y escenarios A2, la documentación de IA y el changelog. La revisión se limitó al PR #190; no usé los diagramas de secuencia de la rama de trabajo.
+
+## E. Comentarios propuestos para GitHub
+
+- **CU3:** “¿Podrían mover `Visualiza el pedido y su detalle` después de buscar el pedido y cargar su detalle? En el flujo actual Cocina ve información antes de que el sistema la recupere.”
+- **CU4:** “¿Podrían conectar el reintento con una nueva solicitud de autorización/validación y evitar que la rama rechazada se reúna con la emisión del comprobante? Actualmente el rechazo también puede llegar a `Entrega comprobante al cliente`.”
+- **CU5:** “¿Podrían separar `Cliente` y `Usuario de mostrador` en carriles distintos y ubicar el registro de responsable/fecha en el sistema? A2 atribuye la entrega y confirmación al usuario, y el registro al sistema.”
+- **CU6:** “¿Podrían hacer que la actividad de Cocina `Interrumpe la preparación` solo se alcance cuando el estado previo era `en preparación`? En el flujo actual la notificación está condicionada, pero la interrupción se ejecuta después de la convergencia.”
+- **Documentación:** “¿Podrían detallar las iteraciones/correcciones concretas en el registro de IA y corregir en el changelog el enlace a `ia/a3/esp-actividades-3-4-5.md`?”
+
+## F. Conclusión
+
+**El PR requiere correcciones antes de aprobarse.** Se resolvieron varias observaciones anteriores —incluido el orden del resultado de autorización en CU4, la confirmación de CU6 y la codificación de los PNG—, pero siguen presentes errores funcionales en el reintento de cobro y la condición de interrupción de Cocina, además del orden de visualización en CU3. También quedan ajustes de responsabilidad y documentación.
+
 ### Evaluación y ajustes humanos
+
+Se contrastaron los hallazgos de Copilot con los archivos del PR, en particular los flujos de CU3, CU4, CU5 y CU6.
+
+Se confirmó que las correcciones anteriores resolvieron parte de los problemas, pero no eliminaron todas las inconsistencias funcionales.
+
+En CU5 se examinó el bloque `Mostrador / Cliente` y se confirmó que la entrega, la confirmación y el registro de responsable y fecha estaban agrupados en un mismo carril, pese a corresponder a participantes distintos.
+
+También se verificó que `changelog.md` referencia `ia/a3/esp-actividades-3-4-5-6`, mientras que el archivo existente se denomina `ia/a3/esp-actividades-3-4-5.md`.
+
+La evaluación humana distinguió los errores funcionales de las observaciones documentales. Se reconocieron expresamente las correcciones realizadas por el autor y no se solicitaron cambios adicionales sobre los aspectos ya resueltos.
+
+No se modificaron archivos del PR durante la revisión ni se realizaron commits o merges. La decisión de solicitar cambios fue humana, basada en la evidencia técnica y no únicamente en la respuesta de Copilot.
 
 ### Revisión publicada en GitHub
 
-- **Enlace a la revisión:** Pendiente
-- **Decisión:** Pendiente
-- **Correcciones solicitadas:** Pendiente
-- **Resultado final:** Pendiente
+- **Enlace a la revisión:** [PR #190 — conversación y revisiones](https://github.com/lucasmengarelli3/SistemaPedidos/pull/190)
+- **Decisión:** Request changes.
+- **Correcciones solicitadas:** Ajustar el orden de visualización en CU3, representar un reintento real de autorización en CU4, separar responsabilidades en CU5, condicionar la interrupción de Cocina en CU6 y corregir la trazabilidad documental.
+- **Resultado final:** Segunda revisión publicada con cinco observaciones en línea y comentario general. El PR permanece pendiente de correcciones y no fue aprobado en esta revisión.
 
 ---
 
@@ -571,11 +704,19 @@ La revisión se publicó en GitHub mediante tres comentarios inline y un comenta
 
 | Revisión | PR | Rol revisado | Hallazgos validados | Decisión humana | Enlace |
 | --- | --- | --- | --- | --- | --- |
-| 1 | #190 | Especialista en Diagramas de Actividades (CU 3–6) | Flujos de preparación, cobro, entrega y cancelación; codificación de PNG; registro de IA | Request changes | [PR #190](https://github.com/lucasmengarelli3/SistemaPedidos/pull/190) |
-| 2 | #193 | Especialista en Diagramas de Actividades (CU 1–2) | Validaciones y caminos alternativos de CU1 y CU2; orden de confirmación; changelog y registro de IA | Request changes | [PR #193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193) |
-| 3 | #193 (segunda revisión) | Especialista en Diagramas de Actividades (CU 1–2) | Correcciones de validación verificadas; producto no disponible, cálculo del total en CU1 y cambio de estado en CU2; documentación de IA | Request changes | [PR #193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193) |
-| 4 | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |
+| 1 | #190 | Especialista en Diagramas de Actividades (CU3–6) | Flujos de preparación, cobro, entrega y cancelación; codificación de PNG; registro de IA | Request changes | [PR #190](https://github.com/lucasmengarelli3/SistemaPedidos/pull/190) |
+| 2 | #193 | Especialista en Diagramas de Actividades (CU1–2) | Validaciones y caminos alternativos de CU1 y CU2; orden de confirmación; changelog y registro de IA | Request changes | [PR #193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193) |
+| 3 | #193 (segunda revisión) | Especialista en Diagramas de Actividades (CU1–2) | Correcciones de validación verificadas; producto no disponible, cálculo del total en CU1 y cambio de estado en CU2; documentación de IA | Request changes | [PR #193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193) |
+| 4 | #190 (segunda revisión) | Especialista en Diagramas de Actividades (CU3–6) | Correcciones verificadas y errores pendientes de flujo, responsabilidades y documentación | Request changes | [PR #190](https://github.com/lucasmengarelli3/SistemaPedidos/pull/190) |
 
 ## Conclusiones
 
-<!-- Al finalizar las cuatro revisiones, explicar cómo se utilizó la IA, qué aportó al control de calidad, qué errores o sugerencias se descartaron y qué decisiones se tomaron mediante revisión humana. -->
+Se realizaron cuatro revisiones de código asistidas por GitHub Copilot sobre los PR #190 y #193, correspondientes a los diagramas de actividades de los seis casos de uso de SistemaPedidos.
+
+La IA se utilizó para analizar diagramas PlantUML, comparar versiones, identificar inconsistencias en los flujos, verificar la asignación de responsabilidades y revisar la trazabilidad documental. Las revisiones posteriores permitieron comprobar qué observaciones habían sido resueltas y detectar problemas nuevos introducidos durante las correcciones.
+
+Los resultados de Copilot no se adoptaron automáticamente. Cada revisión incluyó evaluación humana de los hallazgos, contraste con los archivos del repositorio y selección de observaciones justificadas. También se tuvieron en cuenta las limitaciones declaradas por la herramienta, especialmente cuando no se ejecutaron validaciones automáticas o no se regeneraron imágenes.
+
+Las cuatro revisiones concluyeron con solicitudes de cambios porque se identificaron inconsistencias que requerían intervención de sus respectivos autores. Se publicaron observaciones específicas en GitHub para facilitar las correcciones.
+
+La experiencia permitió utilizar la IA como apoyo al control de calidad sin delegarle la responsabilidad de aprobar cambios, modificar el repositorio ni decidir su integración. Las decisiones finales permanecieron bajo supervisión humana.
