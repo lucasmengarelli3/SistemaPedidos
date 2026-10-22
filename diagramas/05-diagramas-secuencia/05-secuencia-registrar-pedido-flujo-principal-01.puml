@@ -34,22 +34,27 @@ loop porCadaItem en listaItems
     personal -> catalogo: validarDisponibilidad(codigoProducto, cantidad)
     catalogo --> personal: informarDisponibilidad(codigoProducto, disponible)
 
-    personal -> item: crearItemPedido(codigoProducto, cantidad)
-    item -> producto: consultarDatosProducto(codigoProducto)
-    producto --> item: informarDatosProducto(codigoProducto, descripcion, precioBase)
-    item -> producto: obtenerPrecioUnitario()
-    producto --> item: informarPrecioUnitario(precioUnitario)
+    alt disponible == true
+        personal -> item: crearItemPedido(codigoProducto, cantidad)
+        item -> producto: consultarDatosProducto(codigoProducto)
+        producto --> item: informarDatosProducto(codigoProducto, descripcion, precioBase)
+        item -> producto: obtenerPrecioUnitario()
+        producto --> item: informarPrecioUnitario(precioUnitario)
 
-    opt itemTienePersonalizaciones
-        personal -> personalizacion: crearPersonalizacion(tipo, descripcion)
-        item -> personalizacion: obtenerPrecioAdicional()
-        personalizacion --> item: informarPrecioAdicional(precioAdicional)
+        opt itemTienePersonalizaciones
+            personal -> personalizacion: crearPersonalizacion(tipo, descripcion)
+            item -> personalizacion: obtenerPrecioAdicional()
+            personalizacion --> item: informarPrecioAdicional(precioAdicional)
+        end
+
+        personal -> pedido: agregarItem(item)
+        pedido -> item: calcularSubtotal()
+        item --> pedido: informarSubtotal(subtotal)
+        pedido --> personal: confirmarItemAgregado(item, subtotal)
+    else disponible == false
+        personal -> pantalla: notificarProductoNoDisponible(codigoProducto)
+        pantalla --> usuario: mostrarAdvertenciaNoDisponible(codigoProducto)
     end
-
-    personal -> pedido: agregarItem(item)
-    pedido -> item: calcularSubtotal()
-    item --> pedido: informarSubtotal(subtotal)
-    pedido --> personal: confirmarItemAgregado(item, subtotal)
 end
 
 personal -> pedido: asignarReferenciaRetiro(referenciaRetiro)
