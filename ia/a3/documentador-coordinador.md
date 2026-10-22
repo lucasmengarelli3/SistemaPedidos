@@ -700,6 +700,161 @@ No se modificaron archivos del PR durante la revisión ni se realizaron commits 
 
 ---
 
+## Revisión 5
+
+**PR:** [#201 — Diagramas de secuencia](https://github.com/lucasmengarelli3/SistemaPedidos/pull/201)
+
+**Autor:** Agustín (@AgustinCalaver)
+
+**Rol revisado:** Especialista en Diagramas de Secuencia
+
+**Fecha:** 22/10/2026
+
+**Estado:** Revisión publicada — Request changes
+
+### Archivos de contexto
+
+**Pull Request revisado:** [PR #201 — Diagramas de secuencia](https://github.com/lucasmengarelli3/SistemaPedidos/pull/201)
+
+**Rama revisada:** `feature/a3-uml-secuencia`
+
+**Commit analizado:** `bc1c379`
+
+**Commit base de A2:** `c846495`
+
+**Diagramas de secuencia revisados:**
+- `diagramas/05-diagramas-secuencia/05-secuencia-registrar-pedido-flujo-principal-01.puml`
+- `diagramas/05-diagramas-secuencia/05-secuencia-modificar-pedido-flujo-principal-03.puml`
+- `diagramas/05-diagramas-secuencia/05-secuencia-preparar-pedido-flujo-principal-05.puml`
+- `diagramas/05-diagramas-secuencia/05-secuencia-cobrar-cuenta-flujo-principal-07.puml`
+- `diagramas/05-diagramas-secuencia/05-secuencia-entregar-pedido-flujo-principal-09.puml`
+- `diagramas/05-diagramas-secuencia/05-secuencia-cancelar-pedido-flujo-excepcion-03.puml`
+
+**Documentación complementaria:**
+- `diagramas/05-diagramas-secuencia/diagramas_de_secuencias.md`
+- `ia/a3/esp-secuencia.md`
+- `changelog.md`
+- Imágenes `.png` correspondientes a los seis diagramas.
+
+**Referencias utilizadas para la comparación:**
+- Escenarios de casos de uso de A2: `diagramas/03-escenarios-casos-de-uso/`
+- Tarjetas CRC de A2: `herramientas-agile/tarjetas-crc/`
+
+**Herramienta de revisión:** GitHub Copilot, en modo agente, con evaluación humana de los hallazgos.
+
+### Prompt utilizado
+
+```text
+Actuá como revisor técnico de UML del proyecto académico SistemaPedidos.
+
+Necesito revisar el Pull Request de Agustín, correspondiente a la rama `feature/a3-uml-secuencia` del repositorio `lucasmengarelli3/SistemaPedidos`.
+
+**Objetivo:** evaluar los seis diagramas de secuencia entregados, sus imágenes PNG, el índice, la documentación de IA y el changelog, contrastándolos con los escenarios de A2, las tarjetas CRC y los requisitos de A3.
+
+**Instrucciones:**
+
+1. Consultá los archivos reales de la rama remota `origin/feature/a3-uml-secuencia`, sin cambiar de rama ni modificar archivos.
+2. Revisá los seis diagramas `.puml` y sus respectivos `.png`.
+3. Verificá la correspondencia entre cada diagrama y el escenario que representa.
+4. Comprobá participantes, notación `Clase:objeto`, mensajes `camelCase` con argumentos, orden temporal, retornos, estructuras `alt`, `opt` y `loop`, y uso de `create` y `destroy`.
+5. Prestá especial atención a:
+
+- CU1: tratamiento del resultado de disponibilidad y creación del pedido.
+- CU2: aplicación de cambios antes de la confirmación, resultado de disponibilidad y nueva validación del estado antes de persistir.
+- CU3–CU6: coherencia con los escenarios y responsabilidades de cada participante.
+6. Revisá si `ia/a3/esp-secuencia.md` registra prompts reales, outputs concretos, iteraciones y evaluación humana, y no solamente una descripción general de la metodología.
+7. Verificá los enlaces del índice y las entradas del changelog.
+8. Diferenciá errores funcionales confirmados, incumplimientos de la consigna y mejoras opcionales.
+9. No uses los diagramas de secuencia de respaldo de otras ramas ni archivos guardados en stash.
+10. No modifiques archivos, no publiques comentarios, no hagas commits, no apruebes ni hagas merge.
+
+**Formato de respuesta:**
+
+A. Resumen por caso de uso (CU1–CU6), con hallazgos y evidencia.
+
+B. Problemas importantes: archivo, línea, explicación y corrección sugerida.
+
+C. Revisión de documentación de IA, índice, changelog y PNG.
+
+D. Verificaciones que no pudiste realizar.
+
+E. Comentarios breves, respetuosos y accionables para publicar en GitHub.
+
+F. Conclusión: indicar si el PR está listo para aprobarse o requiere correcciones.
+
+No inventes evidencia. Si no podés acceder a un archivo o verificar algún requisito, indicalo expresamente.
+```
+
+### Output obtenido
+
+#### A. Resumen por caso de uso (CU1–CU6)
+
+La revisión corresponde al PR [#201](https://github.com/lucasmengarelli3/SistemaPedidos/pull/201), sobre el commit `bc1c379`, contrastado con A2 y las CRC del commit base `c846495`.
+
+| Caso | Resultado |
+|---|---|
+| **CU1 — Registrar pedido** | El flujo representa catálogo, personalizaciones, resumen y confirmación del Usuario de mostrador. Pero la respuesta de disponibilidad no condiciona la creación/agregación del ítem; además, el `loop` reutiliza una sola lifeline `item` aunque cada iteración debería representar un ítem distinto. Ver [CU1](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-registrar-pedido-flujo-principal-01.puml#L33) y el [escenario A2 de registro](https://github.com/lucasmengarelli3/SistemaPedidos/blob/c84649548cc57cb0ab540377216c30231328dcad/diagramas/03-escenarios-casos-de-uso/03-registrar-pedido-flujo-principal-registro-exitoso-01.md). |
+| **CU2 — Modificar pedido** | Incluye búsqueda, verificación inicial del estado, resumen, confirmación y persistencia posterior. No muestra qué ocurre si la disponibilidad devuelve `false` y no vuelve a validar el estado antes de persistir. El `aplicarCambios` previo a la confirmación requiere aclarar si modifica una propuesta temporal o el pedido persistido. Ver [CU2](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-modificar-pedido-flujo-principal-03.puml#L37) y el [escenario A2 de modificación](https://github.com/lucasmengarelli3/SistemaPedidos/blob/c84649548cc57cb0ab540377216c30231328dcad/diagramas/03-escenarios-casos-de-uso/03-modificar-pedido-flujo-principal-modificacion-recibida-03.md). |
+| **CU3 — Preparar pedido** | La cronología general —cola, selección, detalle, inicio, preparación, pedido listo y notificación— está representada. Sin embargo, se invoca `validarTransicion` y acto seguido se registra el cambio sin mostrar el resultado ni condicionar el registro. También hay interacciones adicionales de sincronización con mostrador que no se ven justificadas por el escenario. Ver [CU3](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-preparar-pedido-flujo-principal-05.puml#L85) y el [escenario A2 de preparación](https://github.com/lucasmengarelli3/SistemaPedidos/blob/c84649548cc57cb0ab540377216c30231328dcad/diagramas/03-escenarios-casos-de-uso/03-preparar-pedido-flujo-principal-pedido-listo-05.md). |
+| **CU4 — Cobrar cuenta** | La rama de rechazo no emite comprobante, lo cual es correcto. Pero `decidirSiguientePaso` no conduce a un nuevo intento: no hay revalidación ni nueva autorización. La disponibilidad del medio y la validación del total tampoco tienen una decisión representada. Ver [CU4](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-cobrar-cuenta-flujo-principal-07.puml#L26) y el [escenario alternativo A2 de pago rechazado](https://github.com/lucasmengarelli3/SistemaPedidos/blob/c84649548cc57cb0ab540377216c30231328dcad/diagramas/03-escenarios-casos-de-uso/03-cobrar-cuenta-flujo-alternativo-pago-rechazado-08.md). |
+| **CU5 — Entregar pedido** | La validación de número, referencia y estado `listo` precede a la entrega física; el registro aparece después de la confirmación del personal, respetando el orden esencial. No obstante, el diagrama agrega una confirmación de recepción del Cliente que A2 no exige, y modela a `PersonalAtencion` como actor en vez de identificar al actor humano como Usuario de mostrador. El retorno de `registrarEntrega` se llama `confirmarEntrega`, lo que puede confundirse con una nueva operación. Ver [CU5](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-entregar-pedido-flujo-principal-09.puml#L20) y el [escenario A2 de entrega](https://github.com/lucasmengarelli3/SistemaPedidos/blob/c84649548cc57cb0ab540377216c30231328dcad/diagramas/03-escenarios-casos-de-uso/03-entregar-pedido-flujo-principal-entrega-validada-09.md). |
+| **CU6 — Cancelar pedido** | La confirmación final precede a la cancelación y la interrupción de Cocina está correctamente limitada al estado `en preparación`. La lifeline `SolicitudCancelacion` termina con `destroy`, pero no aparece su creación; debe aclararse su ciclo de vida. Ver [CU6](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-cancelar-pedido-flujo-excepcion-03.puml#L35) y los [escenarios A2 de cancelación](https://github.com/lucasmengarelli3/SistemaPedidos/tree/c84649548cc57cb0ab540377216c30231328dcad/diagramas/03-escenarios-casos-de-uso). |
+
+Los seis diagramas tienen al menos cuatro participantes. La mayoría de las operaciones están nombradas en `camelCase`; la notación de participantes no es uniforme: por ejemplo, CU3 y CU6 usan `objeto:Clase`, mientras que otros usan `Clase:objeto`. CU5 además rotula un actor humano como `PersonalAtencion: personalAtencion`. Conviene ajustarlo a la convención pedida y mantener la separación entre actores y objetos del sistema. Las CRC consultadas están en [tarjetas CRC de A2](https://github.com/lucasmengarelli3/SistemaPedidos/tree/c84649548cc57cb0ab540377216c30231328dcad/herramientas-agile/tarjetas-crc).
+
+#### B. Problemas importantes
+
+| Gravedad / tipo | Archivo y ubicación | Problema y corrección sugerida |
+|---|---|---|
+| **Alta — control funcional no representado** | [CU3, líneas 85–86](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-preparar-pedido-flujo-principal-05.puml#L85), y también [líneas 100–101](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-preparar-pedido-flujo-principal-05.puml#L100) | La validación de transición no devuelve un resultado ni condiciona `registrarTransicion`. Añadir una decisión: registrar solo si la transición es válida; de lo contrario, detener el cambio de estado. |
+| **Importante — resultado de validación ignorado y ciclo de vida ambiguo** | [CU1, líneas 17 y 33–37](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-registrar-pedido-flujo-principal-01.puml#L33) | `informarDisponibilidad(..., disponible)` no condiciona la creación ni la agregación del ítem. Además, el `loop` usa la misma lifeline `item` en cada vuelta. Modelar la rama no disponible si corresponde y mostrar una instancia distinta por cada ítem creado. |
+| **Importante — consistencia antes de persistir** | [CU2, líneas 37, 50–51 y 68](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-modificar-pedido-flujo-principal-03.puml#L37) | Se comprueba el estado antes de editar, pero no nuevamente antes de `persistirCambios`; tampoco se representa qué ocurre si la disponibilidad falla. Añadir la revalidación previa a persistir y una decisión para el resultado de disponibilidad. Aclarar que `aplicarCambios` es una propuesta temporal hasta la confirmación. |
+| **Importante — reintento incompleto** | [CU4, líneas 31–34 y 46–50](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-cobrar-cuenta-flujo-principal-07.puml#L46) | La respuesta de disponibilidad no condiciona la solicitud de autorización. Tras el rechazo, `decidirSiguientePaso` queda sin continuación; si se elige reintentar, no se ve una nueva validación/autorización. Representar la repetición descrita por A2 o retirar la decisión si el flujo no contempla reintento. |
+| **Importante — actor/operación y semántica de retorno** | [CU5, líneas 20–21 y 38–42](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-entregar-pedido-flujo-principal-09.puml#L38) | Identificar al actor como “Usuario de mostrador”; eliminar o justificar la confirmación adicional del Cliente frente a A2. Renombrar el retorno de `registrarEntrega` para que sea claramente una respuesta y no parezca una segunda operación `confirmarEntrega`. |
+| **Menor — ciclo de vida UML** | [CU6, líneas 35–36 y 62](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/05-secuencia-cancelar-pedido-flujo-excepcion-03.puml#L62) | Se destruye `solicitud`, pero no se representa su creación. Si nace en el escenario, introducir `create`; si persiste después de la operación, no destruirla. La clase tampoco está respaldada explícitamente por las CRC consultadas, por lo que conviene justificarla o simplificar el modelo. |
+
+#### C. Documentación, índice, changelog y PNG
+
+- **Documentación de IA:** [esp-secuencia.md](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/ia/a3/esp-secuencia.md#L18) contiene el objetivo, herramientas, lista de artefactos y una descripción genérica de la estrategia de prompting. No registra prompts reales por diagrama, outputs concretos, iteraciones/correcciones ni evaluación humana. Por eso, la afirmación del [changelog](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/changelog.md) de que se completa el registro de prompts e iteraciones no queda respaldada por ese documento.
+- **Índice:** el [índice de secuencias](https://github.com/lucasmengarelli3/SistemaPedidos/blob/bc1c379f35aa9baaa60bfdef5226162f2e302ae1/diagramas/05-diagramas-secuencia/diagramas_de_secuencias.md) enumera los seis pares `.puml`/`.png` con nombres correctos, pero los nombres están como texto de código y no como enlaces navegables.
+- **Changelog:** registra la incorporación de seis escenarios y relaciona issues y PR. El índice y el changelog coinciden en seis artefactos; el título del PR dice cinco, una diferencia menor de alcance que sería conveniente corregir.
+- **PNG:** están disponibles los seis PNG indicados por el índice y se inspeccionaron sus vistas. No observé una discrepancia visual evidente con la estructura general de las fuentes. Esto no demuestra que cada imagen haya sido regenerada desde el contenido exacto del commit: no hice comparación automática ni renderizado de control.
+
+#### D. Verificaciones no realizadas
+
+No ejecuté PlantUML ni volví a generar imágenes; tampoco comprobé hashes entre los PNG y una renderización de las fuentes. La revisión se basó en los archivos del commit remoto `bc1c379` y en las vistas disponibles de las imágenes. No se modificó el repositorio ni se interactuó con el PR.
+
+#### E. Comentarios propuestos para GitHub
+
+1. **CU1:** “¿Podrías representar qué ocurre cuando `informarDisponibilidad` devuelve `false` y modelar una instancia distinta de `ItemPedido` en cada iteración? Así queda explícita la condición para agregar cada producto.”
+2. **CU2:** “¿Podrías volver a validar que el pedido siga `recibido` inmediatamente antes de persistir y condicionar el flujo al resultado de disponibilidad? También sería útil aclarar que los cambios previos a la confirmación son una propuesta temporal.”
+3. **CU3:** “Después de `validarTransicion`, el diagrama registra el cambio sin mostrar el resultado. ¿Podrías condicionar `registrarTransicion` a una validación exitosa para evitar representar transiciones inválidas?”
+4. **CU4:** “En el rechazo, `decidirSiguientePaso` no continúa con otro intento. ¿Podrías conectar el reintento a una nueva validación y autorización según el escenario A2?”
+5. **CU5:** “¿Podrías usar ‘Usuario de mostrador’ para el actor, revisar si es necesaria la confirmación extra del Cliente y nombrar el retorno de `registrarEntrega` como respuesta?”
+6. **Documentación:** “El registro describe una estrategia general, pero no incluye prompts, outputs ni iteraciones por diagrama. ¿Podrías agregar esa trazabilidad para respaldar lo indicado en el changelog?”
+
+#### F. Conclusión
+
+**El PR requiere correcciones antes de aprobarse.** Los puntos más relevantes son las transiciones de CU3 sin control visible, las validaciones sin decisión en CU1/CU2 y el reintento incompleto de CU4. También deben resolverse la ambigüedad del actor y el retorno en CU5 y completar la trazabilidad de IA declarada por el changelog.
+
+### Evaluación y ajustes humanos
+
+Se contrastaron los hallazgos de GitHub Copilot con los archivos PlantUML y los escenarios de A2. Se verificaron especialmente los problemas de disponibilidad de productos en CU1 y CU2, la revalidación del estado antes de persistir modificaciones, las transiciones de estado de CU3 y el tratamiento del pago rechazado en CU4.
+
+A partir de esa evaluación, se seleccionaron ocho observaciones para publicar como comentarios inline en el PR #201, incluyendo aspectos de modelado UML, coherencia funcional y documentación del uso de IA.
+
+La decisión humana fue solicitar correcciones antes de aprobar la integración. Copilot no modificó archivos ni tomó decisiones sobre el merge. La revisión no incluyó una regeneración independiente de las imágenes PNG.
+
+### Revisión publicada en GitHub
+
+Se publicaron ocho comentarios inline sobre los archivos del PR #201, señalando correcciones relacionadas con validaciones, transiciones de estado, manejo de alternativas, responsabilidades de los participantes, ciclo de vida de objetos y documentación de IA.
+
+**Enlace:** [PR #201 — Revisión de diagramas de secuencia](https://github.com/lucasmengarelli3/SistemaPedidos/pull/201)
+
+**Resultado:** Request changes. Se solicitaron correcciones al autor antes de aprobar la integración.
+
+---
+
 ## Resumen de revisiones
 
 | Revisión | PR | Rol revisado | Hallazgos validados | Decisión humana | Enlace |
@@ -708,15 +863,22 @@ No se modificaron archivos del PR durante la revisión ni se realizaron commits 
 | 2 | #193 | Especialista en Diagramas de Actividades (CU1–2) | Validaciones y caminos alternativos de CU1 y CU2; orden de confirmación; changelog y registro de IA | Request changes | [PR #193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193) |
 | 3 | #193 (segunda revisión) | Especialista en Diagramas de Actividades (CU1–2) | Correcciones de validación verificadas; producto no disponible, cálculo del total en CU1 y cambio de estado en CU2; documentación de IA | Request changes | [PR #193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193) |
 | 4 | #190 (segunda revisión) | Especialista en Diagramas de Actividades (CU3–6) | Correcciones verificadas y errores pendientes de flujo, responsabilidades y documentación | Request changes | [PR #190](https://github.com/lucasmengarelli3/SistemaPedidos/pull/190) |
+| 5 | #201 | Especialista en Diagramas de Secuencia (CU1–CU6) | Validaciones de disponibilidad, persistencia de cambios, transiciones de estado, reintento de pago, ciclo de vida de objetos y documentación de IA | Request changes | [PR #201](https://github.com/lucasmengarelli3/SistemaPedidos/pull/201) |
 
 ## Conclusiones
 
-Se realizaron cuatro revisiones de código asistidas por GitHub Copilot sobre los PR #190 y #193, correspondientes a los diagramas de actividades de los seis casos de uso de SistemaPedidos.
+Se realizaron **cinco revisiones de código asistidas por GitHub Copilot** sobre los PR #190, #193 y #201, correspondientes a los diagramas de actividades y de secuencia de los seis casos de uso de SistemaPedidos.
 
-La IA se utilizó para analizar diagramas PlantUML, comparar versiones, identificar inconsistencias en los flujos, verificar la asignación de responsabilidades y revisar la trazabilidad documental. Las revisiones posteriores permitieron comprobar qué observaciones habían sido resueltas y detectar problemas nuevos introducidos durante las correcciones.
+La IA se utilizó como herramienta de apoyo para analizar diagramas PlantUML, contrastarlos con los escenarios de A2 y las tarjetas CRC, identificar inconsistencias funcionales, verificar responsabilidades de los participantes y evaluar la trazabilidad de la documentación.
 
-Los resultados de Copilot no se adoptaron automáticamente. Cada revisión incluyó evaluación humana de los hallazgos, contraste con los archivos del repositorio y selección de observaciones justificadas. También se tuvieron en cuenta las limitaciones declaradas por la herramienta, especialmente cuando no se ejecutaron validaciones automáticas o no se regeneraron imágenes.
+Las revisiones sucesivas de los PR #190 y #193 permitieron comprobar las correcciones realizadas por sus autores y detectar problemas que todavía requerían ajustes.
 
-Las cuatro revisiones concluyeron con solicitudes de cambios porque se identificaron inconsistencias que requerían intervención de sus respectivos autores. Se publicaron observaciones específicas en GitHub para facilitar las correcciones.
+En la quinta revisión, correspondiente al PR #201, se analizaron los seis diagramas de secuencia. Se identificaron observaciones relacionadas con la validación de disponibilidad, la persistencia de modificaciones, las transiciones de estado, los reintentos de pago, la representación de actores y el ciclo de vida de objetos. También se solicitó completar el registro de interacciones con IA.
 
-La experiencia permitió utilizar la IA como apoyo al control de calidad sin delegarle la responsabilidad de aprobar cambios, modificar el repositorio ni decidir su integración. Las decisiones finales permanecieron bajo supervisión humana.
+Los resultados de Copilot no se adoptaron automáticamente. Los hallazgos se evaluaron mediante revisión humana, se seleccionaron las observaciones relevantes y se publicaron comentarios específicos en los archivos correspondientes de GitHub.
+
+Las cinco revisiones concluyeron con solicitudes de cambios (*Request changes*), priorizando la coherencia de los diagramas con los escenarios definidos y el cumplimiento de los requisitos de la actividad.
+
+Como limitación, la revisión de los diagramas de secuencia no incluyó la regeneración independiente de las imágenes PNG mediante PlantUML.
+
+La experiencia permitió utilizar la IA como apoyo al control de calidad del repositorio, manteniendo la responsabilidad humana sobre la evaluación, la aprobación y la integración de los cambios.
