@@ -1,0 +1,61 @@
+@startuml
+title Entregar pedido — validación y registro de entrega
+
+autonumber
+hide footbox
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam ParticipantPadding 25
+skinparam BoxPadding 10
+skinparam ArrowColor #34495E
+skinparam LifeLineBorderColor #7F8C8D
+skinparam ParticipantBorderColor #34495E
+skinparam ParticipantBackgroundColor #ECF0F1
+skinparam ActorBorderColor #34495E
+skinparam ActorBackgroundColor #ECF0F1
+
+actor "Cliente: cliente" as cliente
+actor "PersonalAtencion: personalAtencion" as personalAtencion
+boundary "InterfazEntrega: interfazEntrega" as interfazEntrega
+entity "Pedido: pedido" as pedido
+actor "Encargado: encargado" as encargado
+
+cliente -> personalAtencion : informarDatosRetiro(idPedido, referenciaRetiro)
+personalAtencion -> interfazEntrega : iniciarValidacion(idPedido, referenciaRetiro)
+
+create participant "ConsultaEntrega: consultaEntrega" as consultaEntrega
+interfazEntrega -> consultaEntrega : cargarDatosRetiro(idPedido, referenciaRetiro)
+consultaEntrega -> pedido : validarEntrega(idPedido, referenciaRetiro)
+pedido --> consultaEntrega : devolverResultadoValidacion(coincide, estado)
+consultaEntrega --> interfazEntrega : informarResultadoValidacion(coincide, estado)
+
+alt numero y referencia coinciden, y estado es listo
+    interfazEntrega --> personalAtencion : mostrarPedidoListo(idPedido, detallePedido)
+    personalAtencion -> cliente : entregarPedido(idPedido)
+    cliente -> personalAtencion : confirmarRecepcion(idPedido)
+    personalAtencion -> interfazEntrega : confirmarEntrega(idPedido, usuarioAutenticado)
+    interfazEntrega -> consultaEntrega : registrarConfirmacionEntrega(idPedido, usuarioAutenticado)
+    consultaEntrega -> pedido : registrarEntrega(idPedido, fechaHora, responsable)
+    pedido --> consultaEntrega : confirmarEntrega(estado, fechaHora, responsable)
+    consultaEntrega --> interfazEntrega : informarEntregaRegistrada(idPedido, fechaHora)
+    interfazEntrega --> personalAtencion : notificarEntregaRegistrada(idPedido, fechaHora)
+    destroy consultaEntrega
+else numero, referencia o estado no permiten validar
+    interfazEntrega --> personalAtencion : informarValidacionFallida(idPedido)
+    opt se solicita verificacion adicional
+        personalAtencion -> encargado : solicitarVerificacionAdicional(idPedido, referenciaRetiro)
+        encargado -> pedido : consultarEstadoEntrega(idPedido)
+        pedido --> encargado : informarEstadoEntrega(idPedido, estado)
+        encargado --> personalAtencion : indicarVerificacionRequerida(idPedido)
+    end
+    personalAtencion --> cliente : informarEntregaNoValidada(idPedido)
+    note over pedido
+        El pedido permanece sin cambios y disponible para una nueva validacion autorizada.
+    end note
+    destroy consultaEntrega
+end
+
+@enduml
