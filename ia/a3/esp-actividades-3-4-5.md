@@ -1,4 +1,4 @@
-# Especialista en diagramas de actividades (Casos de uso 3, 4 y 5)
+# Especialista en diagramas de actividades (Casos de uso 3, 4, 5 y 6)
 
 ## Prompt utilizado
 
@@ -56,6 +56,8 @@ Durante la generación se realizaron los siguientes ajustes para mantener la tra
 
 ## Ajustes o iteracciones realizados
 
-Al concluir el trabajo fue necesario seleccionar los diagramas correctos debido a que hubo una duplicación de diagramas y nombres cruzados. El resto de las correcciones se realizaron a partir de las RC que solicito el coordinador.
+Se recibieron observaciones sobre la secuencia del CU3, el reintento del CU4, la responsabilidad de los carriles en CU5 y la interrupción de Cocina en CU6. En respuesta, se reordenaron las actividades para validar primero la búsqueda y carga del detalle antes de mostrarlo al usuario, se incorporó un ciclo explícito de reintento en el cobro cuando el pago era rechazado, se separaron las responsabilidades de entrega y confirmación de recepción y se dejó la notificación a Cocina condicionada únicamente al caso en que el pedido estaba en estado `en preparación`.
 
-El resultado final quedó integrado en el repositorio con archivos `.puml` y `.png` y listo para revisión en la carpeta indicada.
+Además, se corrigió la trazabilidad documental del entregable: la referencia del changelog quedó alineada con la ruta real del documento `ia/a3/esp-actividades-3-4-5.md` y se incorporó la información del responsable con su rol para mantener el mismo formato que en entregas anteriores.
+
+El resultado final quedó integrado en el repositorio con los diagramas actualizados y la documentación de IA corregida para revisión en la carpeta indicada.

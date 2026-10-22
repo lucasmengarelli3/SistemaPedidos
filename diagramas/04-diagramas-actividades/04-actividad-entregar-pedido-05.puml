@@ -13,15 +13,18 @@ title Diagrama de actividades - Entregar pedido
 
 start
 
-partition "Cliente" {
-  :Se presenta a retirar el pedido;
-  :Informa el número y la referencia de retiro;
-}
-
 partition "Usuario de mostrador" {
   :Busca el pedido activo;
   :Consulta estado del pedido;
   :Verifica coincidencia de datos;
+  :Entrega el pedido al cliente;
+}
+
+partition "Cliente" {
+  :Se presenta a retirar el pedido;
+  :Informa el número y la referencia de retiro;
+  :Recibe el pedido;
+  :Confirma la entrega;
 }
 
 partition "Sistema de pedidos" {
@@ -35,15 +38,7 @@ partition "Sistema de pedidos" {
     :Mantiene el pedido sin cambio de estado;
     stop
   endif
-}
-
-partition "Mostrador / Cliente" {
-  :Entrega el pedido al cliente;
-  :Confirma la entrega;
   :Registra responsable y fecha;
-}
-
-partition "Sistema de pedidos" {
   :Registra la entrega en historial;
   :Actualiza el estado a "entregado";
   :Guarda la trazabilidad final;
