@@ -1,0 +1,58 @@
+@startuml
+!pragma useVerticalIf on
+skinparam shadowing false
+skinparam linetype ortho
+skinparam activity {
+  BackgroundColor #F8F9FA
+  BorderColor #2F3A4A
+  DiamondBackgroundColor #FDECEC
+  DiamondBorderColor #2F3A4A
+}
+
+title Diagrama de actividades - Cancelar pedido
+
+start
+
+partition "Cliente" {
+  :Solicita cancelar un pedido;
+  :Explica el motivo de la cancelación;
+}
+
+partition "Usuario de mostrador" {
+  :Busca el pedido activo;
+  :Consulta el detalle y el estado actual;
+  :Solicita confirmación de cancelación;
+}
+
+partition "Sistema de pedidos" {
+  :Verifica si el pedido existe;
+  if (¿El estado es "recibido" o "en preparación"?) then (sí)
+    :Confirma la cancelación autorizada;
+    :Actualiza el estado a "cancelado";
+    :Guarda motivo y responsable;
+    :Quita el pedido de la cola activa;
+    if (¿El pedido estaba en "en preparación"?) then (sí)
+      :Notifica a Cocina;
+    else (no)
+      :No requiere notificación a Cocina;
+    endif
+  else (no)
+    :Rechaza la cancelación;
+    :Informa la regla de negocio;
+    :Mantiene el pedido sin cambios;
+    stop
+  endif
+}
+
+partition "Cocina" {
+  :Recibe la notificación de detención;
+  :Interrumpe la preparación;
+}
+
+partition "Sistema de pedidos" {
+  :Registra el histórico de cancelación;
+  :Finaliza la operación de cancelación;
+}
+
+stop
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+title Cobrar cuenta — flujo aprobado, pago rechazado y reintento
+
+autonumber
+skinparam sequenceMessageAlign center
+skinparam ParticipantPadding 25
+
+actor "Usuario de mostrador" as usuario
+participant "Cliente:cliente" as cliente
+control "SistemaCobro:sistemaCobro" as sistema
+entity "Pedido:pedido" as pedido
+participant "MedioPago:medioPago" as medioPago
+participant "SolicitudAutorizacion:solicitud" as solicitud
+entity "Pago:pago" as pago
+
+cliente -> usuario: solicitarAbono(numeroPedido)
+usuario -> sistema: buscarPedido(numeroPedido, referenciaRetiro)
+sistema -> pedido: consultarDetalle(numeroPedido)
+pedido --> sistema: informarDetalle(detallePedido, totalVigente)
+sistema -> usuario: mostrarDetalle(detallePedido, totalVigente)
+sistema -> cliente: presentarDetalleYMedios(detallePedido, totalVigente, mediosHabilitados)
+
+cliente -> sistema: seleccionarMedioPago(formaPago)
+usuario -> sistema: confirmarCobro(numeroPedido, formaPago, totalVigente)
+sistema -> pedido: validarTotal(totalVigente)
+pedido --> sistema: informarTotalValidado(esValido, totalVigente)
+
+loop reintentarPago [mientras el pago sea rechazado y se decida reintentar]
+    create solicitud
+    sistema -> solicitud: prepararAutorizacion(idOperacion, numeroPedido, formaPago, totalVigente)
+    solicitud -> medioPago: consultarDisponibilidad(formaPago)
+    medioPago --> solicitud: informarDisponibilidad(disponible)
+    solicitud -> medioPago: solicitarAutorizacion(idOperacion, numeroPedido, totalVigente, formaPago)
+    medioPago --> solicitud: informarAutorizacion(estadoAutorizacion, codigoRespuesta)
+    solicitud -> sistema: informarResultadoAutorizacion(estadoAutorizacion, codigoRespuesta)
+    destroy solicitud
+
+    alt [autorizacionAprobada]
+        create pago
+        sistema -> pago: inicializarPago(idPago, numeroPedido, totalVigente, formaPago, fechaHora)
+        pago -> pedido: validarPago(numeroPedido, totalVigente)
+        pedido --> pago: informarValidacionPago(esValido, totalVigente)
+        pago -> pedido: registrarPago(idPago, totalVigente, formaPago, fechaHora)
+        pedido --> pago: confirmarRegistroPago(idPago)
+        pago -> sistema: informarPagoRegistrado(idPago, resultadoRegistro)
+        sistema -> usuario: informarCobroAprobado(idPedido, idPago, totalVigente)
+        sistema -> cliente: emitirComprobante(idPedido, idPago, totalVigente, formaPago, resultadoRegistro)
+    else [autorizacionRechazada]
+        sistema -> usuario: informarPagoRechazado(numeroPedido, codigoRespuesta)
+        sistema -> cliente: informarPagoRechazado(estadoAutorizacion, codigoRespuesta)
+        cliente -> sistema: decidirSiguientePaso(decisionCliente, formaAlternativa)
+    end
+end
+
+@enduml

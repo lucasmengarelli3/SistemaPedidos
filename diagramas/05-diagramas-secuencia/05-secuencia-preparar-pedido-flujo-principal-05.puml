@@ -1,0 +1,134 @@
+@startuml preparar_pedido
+title Preparar pedido — consulta, preparación y notificación
+autonumber
+hide footbox
+
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam ParticipantPadding 24
+skinparam BoxPadding 10
+
+actor "Cocina" as operadorCocina
+participant "pantallaCocina: PantallaCocina" as pantalla
+participant "cocina: Cocina" as cocina
+participant "pedido: Pedido" as pedido
+participant "item: ItemPedido" as item
+participant "producto: Producto" as producto
+participant "personalizacion: Personalizacion" as personalizacion
+actor "Personal de mostrador" as mostrador
+
+== Consultar la cola ==
+
+operadorCocina -> pantalla: consultarColaPedidos(estado, ordenarPorPrioridad)
+activate pantalla
+pantalla -> cocina: obtenerPedidosRecibidos(estado, ordenarPorPrioridad)
+activate cocina
+cocina -> pedido: listarPedidosRecibidos(estado, ordenarPorPrioridad)
+activate pedido
+pedido --> cocina: devolverPedidosRecibidos(pedidos, cantidad)
+deactivate pedido
+cocina --> pantalla: mostrarColaPedidos(pedidos, cantidad)
+deactivate cocina
+pantalla --> operadorCocina: mostrarPedidosDisponibles(pedidos)
+deactivate pantalla
+
+== Seleccionar y consultar el pedido ==
+
+operadorCocina -> pantalla: seleccionarPedido(numeroPedido)
+activate pantalla
+pantalla -> cocina: cargarPedido(numeroPedido)
+activate cocina
+cocina -> pedido: buscarPedido(numeroPedido)
+
+alt Pedido inexistente
+    pedido --> cocina: informarPedidoNoEncontrado(numeroPedido)
+    cocina --> pantalla: mostrarErrorPedidoInexistente(numeroPedido)
+    pantalla --> operadorCocina: notificarPedidoNoDisponible(numeroPedido)
+    cocina -> mostrador: notificarIncidenteSincronizacion(numeroPedido, detalleError)
+    mostrador -> pantalla: consultarRegistroPedido(numeroPedido)
+    pantalla --> mostrador: mostrarResultadoVerificacion(numeroPedido, encontrado)
+    mostrador --> cocina: solicitarReenvioNotificacion(numeroPedido)
+else Pedido encontrado
+    pedido --> cocina: devolverPedidoEncontrado(numeroPedido, prioridad, estado)
+    cocina -> pedido: obtenerDetallePedido(numeroPedido)
+    activate item
+    pedido -> item: calcularSubtotal(cantidad, precioUnitario, precioAdicional)
+
+    item -> producto: obtenerCodigo(itemId)
+    activate producto
+    producto --> item: informarCodigo(itemId, codigo)
+    item -> producto: obtenerDescripcion(itemId)
+    producto --> item: informarDescripcion(itemId, descripcion)
+    item -> producto: obtenerPrecioBase(itemId)
+    producto --> item: informarPrecioBase(itemId, precioBase)
+    deactivate producto
+
+    item -> personalizacion: obtenerDescripcion(itemId)
+    activate personalizacion
+    personalizacion --> item: informarDescripcionPersonalizacion(itemId, descripcion)
+    item -> personalizacion: obtenerPrecioAdicional(itemId)
+    personalizacion --> item: informarPrecioAdicional(itemId, precioAdicional)
+    deactivate personalizacion
+
+    item --> pedido: devolverDetalleItem(itemId, codigo, descripcion, cantidad, subtotal)
+    deactivate item
+    pedido --> cocina: devolverDetallePedido(numeroPedido, prioridad, estado, detalle)
+    cocina --> pantalla: mostrarDetallePedido(numeroPedido, prioridad, estado, detalle)
+    pantalla --> operadorCocina: presentarComanda(numeroPedido, detalle)
+
+    == Iniciar la preparación ==
+
+    operadorCocina -> pantalla: confirmarInicioPreparacion(numeroPedido)
+    pantalla -> cocina: iniciarPreparacion(numeroPedido, fechaHora)
+    cocina -> pedido: cambiarEstado(numeroPedido, estadoActual, estadoNuevo, fechaHora)
+    activate pedido
+    pedido -> pedido: validarTransicion(estadoActual, estadoNuevo)
+    pedido --> pedido: informarResultadoValidacion(esValida)
+    
+    alt transicionValida
+        pedido -> pedido: registrarTransicion(numeroPedido, estadoActual, estadoNuevo, fechaHora)
+        pedido --> cocina: informarEstadoActualizado(numeroPedido, estadoNuevo)
+        deactivate pedido
+        cocina --> pantalla: confirmarInicioPreparacion(numeroPedido, estadoNuevo)
+        pantalla --> operadorCocina: mostrarPreparacionIniciada(numeroPedido)
+    else transicionInvalida
+        pedido --> cocina: informarErrorTransicion(numeroPedido)
+        deactivate pedido
+        cocina --> pantalla: mostrarErrorTransicion(numeroPedido)
+        pantalla --> operadorCocina: notificarErrorTransicion(numeroPedido)
+    end
+
+    == Completar la preparación ==
+
+    operadorCocina -> pantalla: confirmarProductosPreparados(numeroPedido, observaciones)
+    pantalla -> cocina: prepararPedido(numeroPedido, detalle, observaciones)
+    cocina -> pedido: obtenerComanda(numeroPedido, incluirPersonalizaciones)
+    pedido --> cocina: devolverComanda(numeroPedido, detalle, observaciones)
+    cocina -> pedido: marcarPedidoListo(numeroPedido, fechaHora)
+    activate pedido
+    pedido -> pedido: validarTransicion(estadoActual, estadoListo)
+    pedido --> pedido: informarResultadoValidacion(esValidaListo)
+    
+    alt transicionValidaListo
+        pedido -> pedido: registrarTransicion(numeroPedido, estadoActual, estadoListo, fechaHora)
+        pedido --> cocina: informarPedidoListo(numeroPedido, referenciaRetiro)
+        deactivate pedido
+        cocina --> pantalla: mostrarPedidoListo(numeroPedido, referenciaRetiro)
+        pantalla --> operadorCocina: confirmarPedidoListo(numeroPedido)
+
+        cocina -> mostrador: notificarPedidoListo(numeroPedido, referenciaRetiro, prioridad)
+        mostrador -> pantalla: consultarDisponibilidadPedido(numeroPedido)
+        pantalla --> mostrador: mostrarEstadoPedido(numeroPedido, estadoListo)
+        mostrador --> cocina: confirmarRecepcionAviso(numeroPedido)
+    else transicionInvalidaListo
+        pedido --> cocina: informarErrorTransicion(numeroPedido)
+        deactivate pedido
+        cocina --> pantalla: mostrarErrorTransicion(numeroPedido)
+        pantalla --> operadorCocina: notificarErrorTransicion(numeroPedido)
+    end
+end
+
+deactivate cocina
+deactivate pantalla
+
+@enduml
