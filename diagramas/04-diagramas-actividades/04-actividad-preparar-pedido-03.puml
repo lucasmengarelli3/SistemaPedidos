@@ -13,19 +13,30 @@ title Diagrama de actividades - Preparar pedido
 
 start
 
-partition "Usuario de mostrador" {
+partition "Sistema de pedidos" {
+  :Genera la notificación automática del pedido recibido;
+  :Publica la cola de pedidos recibidos;
+}
+
+partition "Cocina" {
   :Consulta la cola de pedidos recibidos;
   :Selecciona el pedido a preparar;
-  :Envía la notificación de pedido recibido;
+  :Visualiza el pedido y su detalle;
 }
 
 partition "Sistema de pedidos" {
   :Busca el pedido por identificador;
   if (¿Existe el pedido?) then (sí)
     :Carga detalle del pedido y personalizaciones;
-    :Valida que el estado sea "recibido";
-    :Actualiza el estado a "en preparación";
-    :Registra la transición y el historial;
+    if (¿El estado es "recibido"?) then (sí)
+      :Actualiza el estado a "en preparación";
+      :Registra la transición y el historial;
+      :Permite a cocina continuar con la preparación;
+    else (no)
+      :Informa que no corresponde preparar el pedido;
+      :Mantiene el estado actual;
+      stop
+    endif
   else (no)
     :Informa que el pedido no existe;
     :Bloquea la preparación;
@@ -35,7 +46,6 @@ partition "Sistema de pedidos" {
 }
 
 partition "Cocina" {
-  :Visualiza el pedido y su detalle;
   :Verifica disponibilidad de ingredientes;
   :Prepara los productos;
   :Revisa personalizaciones y observaciones;
@@ -51,7 +61,7 @@ partition "Sistema de pedidos" {
 
 partition "Usuario de mostrador" {
   :Recibe la alerta de pedido listo;
-  :Prepára la entrega del pedido;
+  :Prepara la entrega del pedido;
 }
 
 stop

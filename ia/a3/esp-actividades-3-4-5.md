@@ -54,4 +54,8 @@ Durante la generación se realizaron los siguientes ajustes para mantener la tra
 - Se conservó la nomenclatura del entregable A3 y, además, se agregaron archivos auxiliares con nombres de compatibilidad para no perder ninguna referencia de la consigna.
 - Se exportaron los diagramas como PNG y se actualizaron los índices de navegación en `diagramas/04-diagramas-actividades/diagramas_de_actividades.md`.
 
+## Ajustes o iteracciones realizados
+
+Al concluir el trabajo fue necesario seleccionar los diagramas correctos debido a que hubo una duplicación de diagramas y nombres cruzados. El resto de las correcciones se realizaron a partir de las RC que solicito el coordinador.
+
 El resultado final quedó integrado en el repositorio con archivos `.puml` y `.png` y listo para revisión en la carpeta indicada.
