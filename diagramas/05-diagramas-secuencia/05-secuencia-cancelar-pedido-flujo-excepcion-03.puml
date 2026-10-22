@@ -32,6 +32,8 @@ interfaz --> usuario : mostrarDetallePedido(idPedido, estado, total)
 usuario -> cliente : confirmarDatosCancelacion(idPedido, motivo)
 cliente --> usuario : confirmarCancelacion(idPedido, confirmacion)
 usuario -> interfaz : solicitarCancelacion(idPedido, motivo, idResponsable, confirmacion)
+
+create solicitud
 interfaz -> solicitud : registrarSolicitudCancelacion(idPedido, motivo, idResponsable)
 solicitud -> pedido : validarEstadoCancelacion(idPedido)
 pedido --> solicitud : informarResultadoValidacion(idPedido, estado, esCancelable)

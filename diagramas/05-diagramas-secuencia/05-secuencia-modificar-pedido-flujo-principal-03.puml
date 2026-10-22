@@ -42,40 +42,56 @@ alt estado != recibido
     personalAtencion --> usuario: informarRechazo(idPedido, estado)
     destroy solicitud
 else estado == recibido
-    personalAtencion -> pedido: aplicarCambios(cambios)
-    pedido -> itemPedido: actualizarItem(cambios, precioHistorico)
+    personalAtencion -> pedido: simularPropuestaCambios(cambios)
+    pedido -> itemPedido: calcularPropuestaItem(cambios, precioHistorico)
 
     itemPedido -> producto: obtenerPrecio(codigoProducto, precioHistorico)
     producto --> itemPedido: informarPrecio(precioFinal)
     itemPedido -> producto: validarDisponibilidad(codigoProducto, cantidad)
     producto --> itemPedido: informarDisponibilidad(disponible)
 
-    itemPedido -> personalizacion: obtenerDetalle(tipoPersonalizacion)
-    personalizacion --> itemPedido: informarDetalle(tipo, descripcion, precioAdicional)
-    itemPedido -> personalizacion: obtenerPrecioAdicional(tipoPersonalizacion)
-    personalizacion --> itemPedido: devolverPrecioAdicional(precioAdicional)
-    itemPedido -> personalizacion: obtenerDescripcion(tipoPersonalizacion)
-    personalizacion --> itemPedido: devolverDescripcion(descripcion)
+    alt disponible == true
+        itemPedido -> personalizacion: obtenerDetalle(tipoPersonalizacion)
+        personalizacion --> itemPedido: informarDetalle(tipo, descripcion, precioAdicional)
+        itemPedido -> personalizacion: obtenerPrecioAdicional(tipoPersonalizacion)
+        personalizacion --> itemPedido: devolverPrecioAdicional(precioAdicional)
+        itemPedido -> personalizacion: obtenerDescripcion(tipoPersonalizacion)
+        personalizacion --> itemPedido: devolverDescripcion(descripcion)
 
-    pedido -> itemPedido: calcularSubtotal(cantidad)
-    itemPedido --> pedido: devolverSubtotal(subtotal)
-    pedido -> pedido: recalcularTotal()
-    pedido --> personalAtencion: informarCambiosValidados(valido, totalNuevo)
+        pedido -> itemPedido: calcularSubtotalPropuesta(cantidad)
+        itemPedido --> pedido: devolverSubtotal(subtotal)
+        pedido -> pedido: calcularTotalPropuesto()
+        pedido --> personalAtencion: informarPropuestaCalculada(valido, totalNuevo)
 
-    personalAtencion --> usuario: mostrarResumen(totalAnterior, cambios, totalNuevo)
-    usuario -> personalAtencion: confirmarModificacion(idPedido, cambios)
+        personalAtencion --> usuario: mostrarResumen(totalAnterior, cambios, totalNuevo)
+        usuario -> personalAtencion: confirmarModificacion(idPedido, cambios)
 
-    personalAtencion -> pedido: persistirCambios(cambios, totalNuevo)
-    pedido --> personalAtencion: confirmarPersistencia(idPedido, totalNuevo)
-    personalAtencion -> solicitud: registrarResultado(estado, totalNuevo)
+        personalAtencion -> pedido: revalidarEstado(idPedido)
+        pedido --> personalAtencion: informarEstadoActual(estadoActual)
 
-    personalAtencion -> cocina: notificarModificacionPedido(idPedido, cambios, totalNuevo)
-    cocina -> pedido: consultarPedidoActualizado(idPedido)
-    pedido --> cocina: entregarPedidoActualizado(pedido)
-    cocina --> personalAtencion: confirmarRecepcionActualizacion(idPedido)
+        alt estadoActual == recibido
+            personalAtencion -> pedido: persistirCambios(cambios, totalNuevo)
+            pedido --> personalAtencion: confirmarPersistencia(idPedido, totalNuevo)
+            personalAtencion -> solicitud: registrarResultado(estadoActual, totalNuevo)
 
-    personalAtencion --> usuario: confirmarModificacion(idPedido, totalNuevo)
-    destroy solicitud
+            personalAtencion -> cocina: notificarModificacionPedido(idPedido, cambios, totalNuevo)
+            cocina -> pedido: consultarPedidoActualizado(idPedido)
+            pedido --> cocina: entregarPedidoActualizado(pedido)
+            cocina --> personalAtencion: confirmarRecepcionActualizacion(idPedido)
+
+            personalAtencion --> usuario: confirmarModificacion(idPedido, totalNuevo)
+            destroy solicitud
+        else estadoActual != recibido
+            personalAtencion -> solicitud: registrarResultado(estadoActual, rechazado)
+            personalAtencion --> usuario: informarRechazoPorCambioDeEstado(idPedido, estadoActual)
+            destroy solicitud
+        end
+    else disponible == false
+        pedido --> personalAtencion: informarProductoNoDisponible(codigoProducto)
+        personalAtencion --> usuario: mostrarErrorDisponibilidad(codigoProducto)
+        personalAtencion -> solicitud: registrarResultado(estado, rechazadoPorFaltaStock)
+        destroy solicitud
+    end
 end
 
 @enduml
