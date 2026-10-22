@@ -29,27 +29,28 @@ partition "Sistema de pedidos" {
   :Obtiene información del pedido;
   :Calcula el monto total vigente;
   :Solicita autorización del medio de pago;
-  if (¿Pago autorizado?) then (sí)
+}
+
+partition "Medio de pago" {
+  :Valida la operación y devuelve el resultado;
+}
+
+partition "Sistema de pedidos" {
+  if (¿La operación fue aprobada?) then (sí)
     :Registra el pago asociado al pedido;
     :Genera comprobante de pago;
     :Actualiza la trazabilidad;
   else (no)
     :Recibe el motivo del rechazo;
     :Informa el rechazo al cliente;
-    :Bloquea el cobro aprobado;
     if (¿Desea reintentar con otro medio?) then (sí)
       :Solicita otro medio de pago;
-      :Retoma desde la autorización;
+      :Retoma desde la validación de la operación;
     else (no)
       :Cancela la operación;
       stop
     endif
   endif
-}
-
-partition "Medio de pago" {
-  :Valida la tarjeta / QR / efectivo;
-  :Devuelve el resultado de la operación;
 }
 
 partition "Usuario de mostrador" {

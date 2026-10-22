@@ -29,7 +29,6 @@ partition "Sistema de pedidos" {
   if (¿Los datos coinciden y el estado es "listo"?) then (sí)
     :Carga detalle del pedido validado;
     :Autoriza la entrega;
-    :Registra la entrega en historial;
   else (no)
     :Informa que no puede validar la entrega;
     :Solicita verificación adicional;
@@ -45,6 +44,7 @@ partition "Mostrador / Cliente" {
 }
 
 partition "Sistema de pedidos" {
+  :Registra la entrega en historial;
   :Actualiza el estado a "entregado";
   :Guarda la trazabilidad final;
   :Elimina la disponibilidad activa del pedido;
