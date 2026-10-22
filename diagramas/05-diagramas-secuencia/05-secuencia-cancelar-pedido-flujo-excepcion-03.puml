@@ -1,0 +1,63 @@
+@startuml
+title Cancelar pedido
+
+skinparam shadowing false
+skinparam sequence {
+    ArrowColor #34495E
+    LifeLineBorderColor #7F8C8D
+    LifeLineBackgroundColor #F8F9F9
+    ParticipantBorderColor #34495E
+    ParticipantBackgroundColor #EAF2F8
+    ActorBorderColor #34495E
+    ActorBackgroundColor #FCF3CF
+    BoxBorderColor #85929E
+    BoxBackgroundColor #F8F9F9
+}
+
+autonumber
+
+actor "Usuario de mostrador" as usuario
+actor "Cliente" as cliente
+participant "interfazCancelacion: InterfazCancelacion" as interfaz
+participant "pedido: Pedido" as pedido
+participant "cocina: Cocina" as cocina
+participant "solicitudCancelacion: SolicitudCancelacion" as solicitud
+
+cliente -> usuario : solicitarCancelacion(idPedido, motivo)
+usuario -> interfaz : buscarPedido(idPedido)
+interfaz -> pedido : consultarEstado(idPedido)
+pedido --> interfaz : informarEstado(idPedido, estado, total)
+interfaz --> usuario : mostrarDetallePedido(idPedido, estado, total)
+
+usuario -> cliente : confirmarDatosCancelacion(idPedido, motivo)
+cliente --> usuario : confirmarCancelacion(idPedido, confirmacion)
+usuario -> interfaz : solicitarCancelacion(idPedido, motivo, idResponsable, confirmacion)
+interfaz -> solicitud : registrarSolicitudCancelacion(idPedido, motivo, idResponsable)
+solicitud -> pedido : validarEstadoCancelacion(idPedido)
+pedido --> solicitud : informarResultadoValidacion(idPedido, estado, esCancelable)
+
+alt esCancelable
+    solicitud --> interfaz : solicitarConfirmacionFinal(idPedido, estado)
+    interfaz --> usuario : solicitarConfirmacionFinal(idPedido, estado)
+    usuario -> interfaz : confirmarOperacion(idPedido, confirmacion)
+    interfaz -> solicitud : confirmarCancelacion(idPedido, confirmacion)
+    solicitud -> pedido : cancelarPedido(idPedido, motivo, idResponsable)
+    pedido --> solicitud : informarCancelacion(idPedido, estado, fechaHora)
+    solicitud --> interfaz : informarCancelacion(idPedido, estado, fechaHora)
+
+    opt estado == "en preparación"
+        interfaz -> cocina : notificarCancelacion(idPedido, motivo)
+        cocina -> cocina : registrarAvisoCancelacion(idPedido)
+        cocina -> cocina : detenerPreparacion(idPedido)
+    end
+
+    interfaz --> usuario : mostrarResultadoCancelacion(idPedido, estado)
+    usuario -> cliente : informarCancelacion(idPedido, estado)
+else estadoNoCancelable
+    solicitud --> interfaz : rechazarCancelacion(idPedido, estado)
+    interfaz --> usuario : informarRechazoCancelacion(idPedido, estado)
+    usuario --> cliente : explicarRechazoCancelacion(idPedido, estado)
+end
+
+destroy solicitud
+@enduml

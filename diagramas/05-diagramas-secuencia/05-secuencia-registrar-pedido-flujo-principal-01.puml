@@ -1,0 +1,78 @@
+@startuml
+title Registrar pedido - flujo principal exitoso
+
+autonumber
+hide footbox
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam ParticipantPadding 20
+
+actor "Usuario de mostrador" as usuario
+actor "Cliente" as cliente
+boundary "PantallaPedidos:pantalla" as pantalla
+control "PersonalAtencion:personal" as personal
+entity "CatalogoProductos:catalogo" as catalogo
+entity "Producto:producto" as producto
+entity "ItemPedido:item" as item
+entity "Personalizacion:personalizacion" as personalizacion
+entity "Pedido:pedido" as pedido
+entity "Cocina:cocina" as cocina
+
+usuario -> pantalla: iniciarNuevoPedido()
+pantalla -> catalogo: consultarCatalogoDisponible()
+catalogo --> pantalla: informarCatalogo(listaProductos)
+pantalla --> usuario: mostrarCatalogo(listaProductos)
+
+cliente -> usuario: solicitarPedido(listaProductosDeseados)
+usuario -> cliente: consultarPreferencias(listaProductosDeseados)
+cliente --> usuario: informarPedidoDeseado(listaItems, referenciaRetiro)
+usuario -> pantalla: ingresarPedido(referenciaRetiro, listaItems)
+pantalla -> personal: registrarItems(listaItems, referenciaRetiro)
+
+loop porCadaItem en listaItems
+    personal -> catalogo: validarDisponibilidad(codigoProducto, cantidad)
+    catalogo --> personal: informarDisponibilidad(codigoProducto, disponible)
+
+    personal -> item: crearItemPedido(codigoProducto, cantidad)
+    item -> producto: consultarDatosProducto(codigoProducto)
+    producto --> item: informarDatosProducto(codigoProducto, descripcion, precioBase)
+    item -> producto: obtenerPrecioUnitario()
+    producto --> item: informarPrecioUnitario(precioUnitario)
+
+    opt itemTienePersonalizaciones
+        personal -> personalizacion: crearPersonalizacion(tipo, descripcion)
+        item -> personalizacion: obtenerPrecioAdicional()
+        personalizacion --> item: informarPrecioAdicional(precioAdicional)
+    end
+
+    personal -> pedido: agregarItem(item)
+    pedido -> item: calcularSubtotal()
+    item --> pedido: informarSubtotal(subtotal)
+    pedido --> personal: confirmarItemAgregado(item, subtotal)
+end
+
+personal -> pedido: asignarReferenciaRetiro(referenciaRetiro)
+personal -> pedido: calcularTotal()
+pedido --> personal: informarTotal(total)
+
+create participant "ResumenPedido:resumen" as resumen
+personal -> resumen: crearResumen(listaItems, referenciaRetiro, total)
+pantalla -> resumen: obtenerDatosResumen()
+resumen --> pantalla: informarDatosResumen(datosResumen)
+pantalla --> usuario: mostrarResumen(datosResumen)
+
+usuario -> pantalla: confirmarPedido()
+pantalla -> resumen: cerrarResumen()
+destroy resumen
+
+pantalla -> personal: confirmarPedido()
+personal -> pedido: confirmarYRegistrarPedido(estadoRecibido)
+pedido --> personal: informarPedidoRegistrado(numeroPedido, referenciaRetiro, total)
+personal -> cocina: enviarPedido(numeroPedido, listaItems)
+cocina -> pedido: consultarDetallePedido(numeroPedido)
+pedido --> cocina: informarDetallePedido(listaItems, referenciaRetiro)
+personal -> pantalla: mostrarConfirmacion(numeroPedido, referenciaRetiro, total)
+pantalla --> usuario: informarConfirmacion(numeroPedido, referenciaRetiro, total)
+
+@enduml
