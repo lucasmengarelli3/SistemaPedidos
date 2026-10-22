@@ -6,7 +6,6 @@
 
 ## [Unreleased]
 
-## [Actividad Obligatoria N°3] - 2026-10-21
 
 ### Added
 

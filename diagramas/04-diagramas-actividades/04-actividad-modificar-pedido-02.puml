@@ -46,15 +46,27 @@ else (Sí)
   :Confirmar cambios con nuevo total;
 
   |Sistema|
-  :Persistir cambios en el pedido;
-  :Generar nueva comanda;
+  :Verificar nuevamente estado del pedido;
+  if (¿Sigue en estado "recibido"?) then (No)
+    |Sistema|
+    :Rechazar modificación por cambio de estado;
+    |Usuario de Mostrador|
+    :Informar al cliente;
+    stop
+  else (Sí)
+    |Sistema|
+    :Persistir cambios en el pedido;
+    :Generar nueva comanda;
 
-  |Cocina|
-  :Recibir comanda actualizada;
-  :Actualizar preparación;
+    |Cocina|
+    :Recibir comanda actualizada;
+    :Actualizar preparación;
 
-  |Sistema|
-  :Mostrar confirmación de modificación;
+    |Sistema|
+    :Mostrar confirmación de modificación;
+    |Usuario de Mostrador|
+    :Informar nuevo total al cliente;
+  endif
 endif
 stop
 @enduml
