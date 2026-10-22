@@ -28,29 +28,28 @@ partition "Usuario de mostrador" {
 partition "Sistema de pedidos" {
   :Obtiene información del pedido;
   :Calcula el monto total vigente;
-  :Solicita autorización del medio de pago;
+  repeat
+    :Solicita autorización del medio de pago;
+    if (¿La operación fue aprobada?) then (sí)
+      :Registra el pago asociado al pedido;
+      :Genera comprobante de pago;
+      :Actualiza la trazabilidad;
+      break
+    else (no)
+      :Recibe el motivo del rechazo;
+      :Informa el rechazo al cliente;
+      if (¿Desea reintentar con otro medio?) then (sí)
+        :Solicita otro medio de pago;
+      else (no)
+        :Cancela la operación;
+        stop
+      endif
+    endif
+  repeat while (¿La operación fue aprobada?) is (no)
 }
 
 partition "Medio de pago" {
   :Valida la operación y devuelve el resultado;
-}
-
-partition "Sistema de pedidos" {
-  if (¿La operación fue aprobada?) then (sí)
-    :Registra el pago asociado al pedido;
-    :Genera comprobante de pago;
-    :Actualiza la trazabilidad;
-  else (no)
-    :Recibe el motivo del rechazo;
-    :Informa el rechazo al cliente;
-    if (¿Desea reintentar con otro medio?) then (sí)
-      :Solicita otro medio de pago;
-      :Retoma desde la validación de la operación;
-    else (no)
-      :Cancela la operación;
-      stop
-    endif
-  endif
 }
 
 partition "Usuario de mostrador" {

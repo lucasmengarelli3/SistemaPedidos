@@ -21,12 +21,21 @@ partition "Cliente" {
 partition "Usuario de mostrador" {
   :Busca el pedido activo;
   :Consulta el detalle y el estado actual;
+  :Solicita confirmación de cancelación;
 }
 
 partition "Sistema de pedidos" {
   :Verifica si el pedido existe;
   if (¿El estado es "recibido" o "en preparación"?) then (sí)
-    :Autoriza la cancelación;
+    :Confirma la cancelación autorizada;
+    :Actualiza el estado a "cancelado";
+    :Guarda motivo y responsable;
+    :Quita el pedido de la cola activa;
+    if (¿El pedido estaba en "en preparación"?) then (sí)
+      :Notifica a Cocina;
+    else (no)
+      :No requiere notificación a Cocina;
+    endif
   else (no)
     :Rechaza la cancelación;
     :Informa la regla de negocio;
@@ -35,24 +44,8 @@ partition "Sistema de pedidos" {
   endif
 }
 
-partition "Usuario de mostrador" {
-  :Solicita confirmación de cancelación;
-  :Confirma la operación;
-}
-
-partition "Sistema de pedidos" {
-  :Actualiza el estado a "cancelado";
-  :Guarda motivo y responsable;
-  :Quita el pedido de la cola activa;
-  if (¿El pedido estaba en "en preparación"?) then (sí)
-    :Notifica a cocina la detención de la preparación;
-  else (no)
-    :Mantiene el registro sin aviso adicional;
-  endif
-}
-
 partition "Cocina" {
-  :Recibe la notificación si correspondía;
+  :Recibe la notificación de detención;
   :Interrumpe la preparación;
 }
 

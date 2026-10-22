@@ -21,7 +21,6 @@ partition "Sistema de pedidos" {
 partition "Cocina" {
   :Consulta la cola de pedidos recibidos;
   :Selecciona el pedido a preparar;
-  :Visualiza el pedido y su detalle;
 }
 
 partition "Sistema de pedidos" {
@@ -46,6 +45,7 @@ partition "Sistema de pedidos" {
 }
 
 partition "Cocina" {
+  :Visualiza el pedido y su detalle;
   :Verifica disponibilidad de ingredientes;
   :Prepara los productos;
   :Revisa personalizaciones y observaciones;
