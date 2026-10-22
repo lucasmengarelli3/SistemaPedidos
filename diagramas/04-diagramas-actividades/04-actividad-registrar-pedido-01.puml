@@ -23,7 +23,18 @@ if (¿Producto disponible?) then (No)
   |Usuario de Mostrador|
   :Elegir otro producto o descartar;
   |Sistema|
-  :Actualizar selección;
+  if (¿Se elige otro producto?) then (Sí)
+    |Sistema|
+    :Actualizar selección;
+    |Usuario de Mostrador|
+    :Agregar productos y cantidades;
+    |Sistema|
+    :Validar disponibilidad del nuevo producto;
+  else (No)
+    |Sistema|
+    :Cancelar registro de pedido;
+    stop
+  endif
 else (Sí)
   |Sistema|
   :Continuar con la selección;
@@ -45,12 +56,15 @@ repeat
   endif
 repeat while (¿Datos inválidos?) is (Sí) not (No)
 
+|Sistema|
+:Calcular total final;
+:Mostrar total al usuario;
+
 |Usuario de Mostrador|
 :Confirmar pedido;
 
 |Sistema|
 :Generar identificador único;
-:Calcular total final;
 :Guardar pedido en estado "recibido";
 :Generar comanda digital;
 

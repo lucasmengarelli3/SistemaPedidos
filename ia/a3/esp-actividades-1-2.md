@@ -20,9 +20,71 @@ Para que la IA pueda generar los diagramas correctamente, se le proporcionaron l
 ## Output obtenido
 - La IA generó una propuesta inicial de los dos diagramas en código PlantUML, estructurando los flujos con los carriles solicitados y agregando los nodos de decisión correspondientes a las validaciones de los escenarios.
 
-Respuesta textual de la IA :
+- A continuación, se muestra un fragmento representativo del output original para CU1 devuelto por la herramienta antes de las correcciones manuales:
 
-- "A continuación, se presentan los diagramas de actividades para el CU1 (Registrar Pedido) y el CU2 (Modificar Pedido). Se han utilizado los carriles 'Usuario de Mostrador', 'Sistema' y 'Cocina'. Para el CU1, se incluye un nodo de decisión para la validación de datos. Para el CU2, se incluye un nodo de decisión para verificar el estado del pedido antes de permitir la modificación."
+@startuml
+title Diagrama de Actividad - CU1: Registrar Pedido
+
+|Usuario de Mostrador|
+start
+:Iniciar nuevo pedido;
+:Solicitar catálogo de productos;
+
+|Sistema|
+:Mostrar catálogo disponible;
+:Calcular precios vigentes;
+
+|Usuario de Mostrador|
+:Agregar productos y cantidades;
+:Agregar personalizaciones;
+:Ingresar referencia de retiro;
+
+|Sistema|
+:Validar datos del pedido;
+if (¿Datos válidos?) then (No)
+  :Corregir datos del pedido;
+else (Sí)
+  :Datos validados correctamente;
+endif
+
+|Usuario de Mostrador|
+:Confirmar pedido;
+
+|Sistema|
+:Generar identificador único;
+:Guardar pedido en estado "recibido";
+stop
+@enduml
+
+- Output Original para CU2 antes de las correcciones manuales: 
+
+@startuml
+title Diagrama de Actividad - CU2: Modificar Pedido
+
+|Usuario de Mostrador|
+start
+:Buscar pedido por identificador;
+:Solicitar modificación;
+
+|Sistema|
+:Mostrar pedido;
+:Verificar estado del pedido;
+
+|Usuario de Mostrador|
+:Agregar o quitar productos;
+:Modificar personalizaciones;
+
+|Sistema|
+:Validar disponibilidad;
+:Recalcular total;
+
+|Usuario de Mostrador|
+:Confirmar cambios;
+
+|Sistema|
+:Persistir cambios;
+stop
+@enduml
 
 ## Iteraciones relevantes
 
