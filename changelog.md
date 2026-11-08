@@ -4,7 +4,25 @@
 
 ---
 
-## [Unreleased]
+## Release Actividad Obligatoria N°3 - 2026-10-22
+
+### Added
+
+- [feature/esp-actividades-3-4-5-add-diagrama-actividad-3] Actividad 3  ESPECIALISTA EN DIAGRAMAS DE ACTIVIDADES: incorporación de diagramas PlantUML y PNG para CU3, CU4, CU5 y CU6, documentación de IA y correcciones posteriores a las revisiones. Issues: [#186](https://github.com/lucasmengarelli3/SistemaPedidos/issues/186), [#187](https://github.com/lucasmengarelli3/SistemaPedidos/issues/187), [#188](https://github.com/lucasmengarelli3/SistemaPedidos/issues/188), [#189](https://github.com/lucasmengarelli3/SistemaPedidos/issues/189). PR: [#190](https://github.com/lucasmengarelli3/SistemaPedidos/pull/190). @lucasmengarelli3 (Especialista en Actividades CU3–CU6).
+
+- [feature/esp-actividades-1-2-add-diagramas] feat: Agrega diagramas de actividades CU1 y CU2: corrección de bucles de validación, camino alternativo de producto no disponible y orden de confirmación según revisión. Se actualiza documentación de IA con iteraciones y respuestas textuales. Issues: [#191](https://github.com/lucasmengarelli3/SistemaPedidos/issues/191), [#192](https://github.com/lucasmengarelli3/SistemaPedidos/issues/192). PR: [#193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193). @tomx2002-droid (Especialista en Actividades 1 y 2).
+
+- [feature/doc-coord-a3-documentacion] [A3] Documentador y Coordinador de Repositorio - Documentación y plantillas: incorporación de plantillas de Issues y Pull Requests para A3 y estructura de documentación de revisiones asistidas por IA en `ia/a3/documentador-coordinador.md`. Issue: [#185](https://github.com/lucasmengarelli3/SistemaPedidos/issues/185). PR: [#184](https://github.com/lucasmengarelli3/SistemaPedidos/pull/184). @neith18 (Documentador y Coordinador de Repositorio).
+
+- [feature/a3-uml-secuencia] Agrega diagramas/05-diagramas-secuencia/ con índice y 5 diagramas de secuencia completos: incorporación de diagramas de secuencia UML en PlantUML y PNG, índice y documentación de IA. Issues: [#195](https://github.com/lucasmengarelli3/SistemaPedidos/issues/195), [#196](https://github.com/lucasmengarelli3/SistemaPedidos/issues/196), [#197](https://github.com/lucasmengarelli3/SistemaPedidos/issues/197), [#198](https://github.com/lucasmengarelli3/SistemaPedidos/issues/198), [#199](https://github.com/lucasmengarelli3/SistemaPedidos/issues/199), [#200](https://github.com/lucasmengarelli3/SistemaPedidos/issues/200). PR: [#201](https://github.com/lucasmengarelli3/SistemaPedidos/pull/201). @AgustinCalaver (Especialista en Diagramas de Secuencia).
+
+### Changed
+
+- [feature/doc-coord-a3-documentacion] [A3] Documentador y Coordinador de Repositorio - Documentación y plantillas: actualización de `README.md` y `diagramas/diagramasUML.md` para incorporar la navegación a los diagramas de actividades y secuencia. Issue: [#185](https://github.com/lucasmengarelli3/SistemaPedidos/issues/185). PR: [#184](https://github.com/lucasmengarelli3/SistemaPedidos/pull/184). @neith18 (Documentador y Coordinador de Repositorio).
+
+- [feature/doc-coord-a3-revisiones-ia] docs: registrar revisiones IA de A3 (PR #190 , #193 y #201): documentación de cinco revisiones técnicas asistidas por GitHub Copilot sobre las PR [#190](https://github.com/lucasmengarelli3/SistemaPedidos/pull/190), [#193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193) y [#201](https://github.com/lucasmengarelli3/SistemaPedidos/pull/201). Se registran prompts, outputs, evaluación humana, hallazgos y solicitudes de corrección en `ia/a3/documentador-coordinador.md`. Issue: [#185](https://github.com/lucasmengarelli3/SistemaPedidos/issues/185). PR: [#194](https://github.com/lucasmengarelli3/SistemaPedidos/pull/194). @neith18 (Documentador y Coordinador de Repositorio).
+
+- [fix/a3-rc10-rc14] A3 - Correcciones RC10 a RC14: actualización del `changelog.md` con los títulos literales de las PR [#190](https://github.com/lucasmengarelli3/SistemaPedidos/pull/190), [#193](https://github.com/lucasmengarelli3/SistemaPedidos/pull/193), [#184](https://github.com/lucasmengarelli3/SistemaPedidos/pull/184), [#201](https://github.com/lucasmengarelli3/SistemaPedidos/pull/201) y [#194](https://github.com/lucasmengarelli3/SistemaPedidos/pull/194) y normalización de los enlaces a Issues y Pull Requests. Simplificación de `diagramas/05-diagramas-secuencia/diagramas_de_secuencias.md` a un índice minimalista con enlaces a archivos PlantUML e imágenes PNG. Responsable: @neith18 (Documentadora y Coordinadora de Repositorio). PR: [#203](https://github.com/lucasmengarelli3/SistemaPedidos/pull/203).
 
 ## Release Primer Parcial - 2026-10-03
 

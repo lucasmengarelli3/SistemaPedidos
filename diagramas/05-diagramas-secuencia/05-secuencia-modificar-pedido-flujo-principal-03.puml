@@ -1,0 +1,97 @@
+@startuml
+title Modificar pedido
+
+autonumber
+hide footbox
+skinparam shadowing false
+skinparam sequence {
+    ArrowColor #34495E
+    LifeLineBorderColor #7F8C8D
+    LifeLineBackgroundColor #F8F9F9
+    ParticipantBorderColor #2C3E50
+    ParticipantBackgroundColor #EAF2F8
+    ParticipantFontColor #1B2631
+    ActorBorderColor #2C3E50
+    ActorBackgroundColor #EAF2F8
+    BoxBorderColor #AAB7B8
+    BoxBackgroundColor #FDFEFE
+}
+
+actor "Usuario de mostrador" as usuario
+participant "PersonalAtencion: personalAtencion" as personalAtencion
+participant "Pedido: pedido" as pedido
+participant "ItemPedido: itemPedido" as itemPedido
+participant "Producto: producto" as producto
+participant "Personalizacion: personalizacion" as personalizacion
+participant "Cocina: cocina" as cocina
+
+usuario -> personalAtencion: iniciarModificacion(idPedido)
+personalAtencion -> pedido: buscarPorId(idPedido)
+pedido --> personalAtencion: devolverDatosPedido(pedido, estado)
+personalAtencion --> usuario: mostrarPedido(pedido, estado)
+
+usuario -> personalAtencion: solicitarCambios(cambios)
+create participant "SolicitudModificacion: solicitud" as solicitud
+personalAtencion -> solicitud: crearSolicitud(cambios)
+personalAtencion -> solicitud: obtenerCambios()
+personalAtencion -> pedido: validarModificacion(estado)
+pedido --> personalAtencion: informarResultadoValidacion(permitido, estado)
+
+alt estado != recibido
+    personalAtencion -> solicitud: registrarResultado(estado, rechazado)
+    personalAtencion --> usuario: informarRechazo(idPedido, estado)
+    destroy solicitud
+else estado == recibido
+    personalAtencion -> pedido: simularPropuestaCambios(cambios)
+    pedido -> itemPedido: calcularPropuestaItem(cambios, precioHistorico)
+
+    itemPedido -> producto: obtenerPrecio(codigoProducto, precioHistorico)
+    producto --> itemPedido: informarPrecio(precioFinal)
+    itemPedido -> producto: validarDisponibilidad(codigoProducto, cantidad)
+    producto --> itemPedido: informarDisponibilidad(disponible)
+
+    alt disponible == true
+        itemPedido -> personalizacion: obtenerDetalle(tipoPersonalizacion)
+        personalizacion --> itemPedido: informarDetalle(tipo, descripcion, precioAdicional)
+        itemPedido -> personalizacion: obtenerPrecioAdicional(tipoPersonalizacion)
+        personalizacion --> itemPedido: devolverPrecioAdicional(precioAdicional)
+        itemPedido -> personalizacion: obtenerDescripcion(tipoPersonalizacion)
+        personalizacion --> itemPedido: devolverDescripcion(descripcion)
+
+        pedido -> itemPedido: calcularSubtotalPropuesta(cantidad)
+        itemPedido --> pedido: devolverSubtotal(subtotal)
+        pedido -> pedido: calcularTotalPropuesto()
+        pedido --> personalAtencion: informarPropuestaCalculada(valido, totalNuevo)
+
+        personalAtencion --> usuario: mostrarResumen(totalAnterior, cambios, totalNuevo)
+        usuario -> personalAtencion: confirmarModificacion(idPedido, cambios)
+
+        personalAtencion -> pedido: revalidarEstado(idPedido)
+        pedido --> personalAtencion: informarEstadoActual(estadoActual)
+
+        alt estadoActual == recibido
+            personalAtencion -> pedido: persistirCambios(cambios, totalNuevo)
+            pedido --> personalAtencion: confirmarPersistencia(idPedido, totalNuevo)
+            personalAtencion -> solicitud: registrarResultado(estadoActual, totalNuevo)
+
+            personalAtencion -> cocina: notificarModificacionPedido(idPedido, cambios, totalNuevo)
+            cocina -> pedido: consultarPedidoActualizado(idPedido)
+            pedido --> cocina: entregarPedidoActualizado(pedido)
+            cocina --> personalAtencion: confirmarRecepcionActualizacion(idPedido)
+
+            personalAtencion --> usuario: confirmarModificacion(idPedido, totalNuevo)
+            destroy solicitud
+        else estadoActual != recibido
+            personalAtencion -> solicitud: registrarResultado(estadoActual, rechazado)
+            personalAtencion --> usuario: informarRechazoPorCambioDeEstado(idPedido, estadoActual)
+            destroy solicitud
+        end
+    else disponible == false
+        pedido --> personalAtencion: informarProductoNoDisponible(codigoProducto)
+        personalAtencion --> usuario: mostrarErrorDisponibilidad(codigoProducto)
+        personalAtencion -> solicitud: registrarResultado(estado, rechazadoPorFaltaStock)
+        destroy solicitud
+    end
+end
+
+@enduml

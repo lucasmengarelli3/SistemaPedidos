@@ -1,0 +1,49 @@
+@startuml
+!pragma useVerticalIf on
+skinparam shadowing false
+skinparam linetype ortho
+skinparam activity {
+  BackgroundColor #F8F9FA
+  BorderColor #2F3A4A
+  DiamondBackgroundColor #EAFBEA
+  DiamondBorderColor #2F3A4A
+}
+
+title Diagrama de actividades - Entregar pedido
+
+start
+
+partition "Usuario de mostrador" {
+  :Busca el pedido activo;
+  :Consulta estado del pedido;
+  :Verifica coincidencia de datos;
+  :Entrega el pedido al cliente;
+}
+
+partition "Cliente" {
+  :Se presenta a retirar el pedido;
+  :Informa el número y la referencia de retiro;
+  :Recibe el pedido;
+  :Confirma la entrega;
+}
+
+partition "Sistema de pedidos" {
+  :Valida el pedido por número y referencia;
+  if (¿Los datos coinciden y el estado es "listo"?) then (sí)
+    :Carga detalle del pedido validado;
+    :Autoriza la entrega;
+  else (no)
+    :Informa que no puede validar la entrega;
+    :Solicita verificación adicional;
+    :Mantiene el pedido sin cambio de estado;
+    stop
+  endif
+  :Registra responsable y fecha;
+  :Registra la entrega en historial;
+  :Actualiza el estado a "entregado";
+  :Guarda la trazabilidad final;
+  :Elimina la disponibilidad activa del pedido;
+}
+
+stop
+@enduml
