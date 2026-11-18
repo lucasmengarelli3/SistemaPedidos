@@ -49,6 +49,7 @@ loop reintentarPago [mientras el pago sea rechazado y se decida reintentar]
         sistema -> usuario: informarPagoRechazado(numeroPedido, codigoRespuesta)
         sistema -> cliente: informarPagoRechazado(estadoAutorizacion, codigoRespuesta)
         cliente -> sistema: decidirSiguientePaso(decisionCliente, formaAlternativa)
+        cliente -> sistema: seleccionarMedioPago(formaAlternativa)
     end
 end
 
